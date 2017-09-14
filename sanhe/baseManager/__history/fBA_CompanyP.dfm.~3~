@@ -1,0 +1,44 @@
+inherited fBA_Company: TfBA_Company
+  Caption = #24402#23646#20844#21496
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited ToolBar1: TToolBar
+    inherited tb_Browse: TToolButton
+      Visible = False
+      ExplicitWidth = 46
+    end
+    inherited Tb_Edit: TToolButton
+      ExplicitWidth = 39
+    end
+    inherited tb_Append: TToolButton
+      ExplicitWidth = 48
+    end
+    inherited tb_revise: TToolButton
+      Visible = False
+      ExplicitWidth = 43
+    end
+    inherited tb_Copy: TToolButton
+      Visible = False
+      ExplicitWidth = 39
+    end
+    inherited tb_Delete: TToolButton
+      ExplicitWidth = 42
+    end
+    inherited tb_Filter: TToolButton
+      Visible = False
+      ExplicitWidth = 39
+    end
+    inherited tb_Unfilter: TToolButton
+      Visible = False
+      ExplicitWidth = 46
+    end
+    inherited tbRefresh: TToolButton
+      Visible = False
+    end
+  end
+  inherited cxGrid1: TcxGrid
+    inherited cxGrid1DBTableView1: TcxGridDBTableView
+      DataController.DataSource = duPub.ds_st_company
+    end
+  end
+end

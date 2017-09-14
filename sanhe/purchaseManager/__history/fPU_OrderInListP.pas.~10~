@@ -1,0 +1,239 @@
+unit fPU_OrderInListP;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, dxSkinsCore, dxSkinBlack, dxSkinBlue,
+  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
+  dxSkinMetropolisDark, dxSkinMoneyTwins, dxSkinOffice2007Black,
+  dxSkinOffice2007Blue, dxSkinOffice2007Green, dxSkinOffice2007Pink,
+  dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue,
+  dxSkinOffice2010Silver, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinOffice2016Colorful, dxSkinOffice2016Dark,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
+  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, cxCheckBox,
+  cxDBLookupComboBox, uRODynamicRequest, uDAFields, uDADelta, uROComponent,
+  uDAScriptingProvider, uDADataTable, uDAMemDataTable, Vcl.StdCtrls,
+  Vcl.ExtCtrls, cxGridLevel, cxGridCustomTableView, cxGridTableView,uDAWhere,
+  cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid;
+
+type
+  TfPU_OrderInList = class(TForm)
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    dSource1: TDADataSource;
+    Panel1: TPanel;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    cxGrid2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridLevel1: TcxGridLevel;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button3: TButton;
+    Panel4: TPanel;
+    Label9: TLabel;
+    tbl_pu_order: TDAMemDataTable;
+    cxGridDBTableView1RecID: TcxGridDBColumn;
+    cxGridDBTableView1puOrderNum: TcxGridDBColumn;
+    cxGridDBTableView1partnerId: TcxGridDBColumn;
+    cxGridDBTableView1puStatus: TcxGridDBColumn;
+    cxGridDBTableView1puOrderDate: TcxGridDBColumn;
+    cxGridDBTableView1puOrderUser: TcxGridDBColumn;
+    cxGridDBTableView1puCreator: TcxGridDBColumn;
+    cxGridDBTableView1puCreateDate: TcxGridDBColumn;
+    cxGridDBTableView1puOutAddress: TcxGridDBColumn;
+    cxGridDBTableView1amountPay: TcxGridDBColumn;
+    cxGridDBTableView1memo: TcxGridDBColumn;
+    cxGrid1DBTableView1RecID: TcxGridDBColumn;
+    cxGrid1DBTableView1qty: TcxGridDBColumn;
+    cxGrid1DBTableView1price: TcxGridDBColumn;
+    cxGrid1DBTableView1Column1: TcxGridDBColumn;
+    cxGrid1DBTableView1productName: TcxGridDBColumn;
+    cxGrid1DBTableView1kind: TcxGridDBColumn;
+    cxGrid1DBTableView1style: TcxGridDBColumn;
+    cxGrid1DBTableView1spec: TcxGridDBColumn;
+    cxGrid1DBTableView1color: TcxGridDBColumn;
+    cxGrid1DBTableView1unit: TcxGridDBColumn;
+    cxGrid1DBTableView1puOrderNum: TcxGridDBColumn;
+    procedure FormCreate(Sender: TObject);
+    procedure cxGridDBTableView1CellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure cxGrid1DBTableView1CellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure Button1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure getOrderdtId(id : String);
+    procedure delOrderdtId(id : String);
+    procedure showOrderDtList();
+    procedure getOrderdtList();
+    var
+    firstLoad : boolean;
+  end;
+
+var
+  fPU_OrderInList: TfPU_OrderInList;
+  orderdtListID: TStringList;
+
+implementation
+
+{$R *.dfm}
+uses
+duPubP,fPU_OrderInAddP
+;
+
+procedure TFPU_OrderInList.getOrderdtId(id : String);
+begin
+    orderdtListID.Sorted := True;  //需要先指定排序
+    orderdtListID.Duplicates := dupIgnore;  //如有重复值则放弃
+    orderdtListID.Add(id+'='+id);
+end;
+
+procedure TFPU_OrderInList.delOrderdtId(id : String);
+var
+i : Integer;
+key : String;
+begin
+    for I := 0 to orderdtListID.Count - 1 do
+  begin
+       key := orderdtListID.Names[i];
+       if id = orderdtListID.Values[key] then
+       begin
+            orderdtListID.Delete(i);
+            exit;
+       end;
+  end;
+
+end;
+
+
+procedure TFPU_OrderInList.getOrderdtList();
+var
+i : Integer;
+begin
+  if orderdtListID.Count > 0 then
+   begin
+       for I := 0 to orderdtListID.Count - 1 do
+        begin
+             orderDataList.Sorted := True;  //需要先指定排序
+             orderDataList.Duplicates := dupIgnore;  //如有重复值则放弃
+             orderDataList.add(orderdtListID[i]);
+         end;
+  end;
+
+end;
+
+procedure TFPU_OrderInList.showOrderDtList();
+var
+selectList : TStringList;
+begin
+     selectList := TStringList.Create;
+     dupub.setSelectData(selectList,'status','未入库',dboEqual);
+    duPub.getSelectData(duPub.tbl_pu_orderDtProduct,selectList,'pu_orderDtProduct',dboAnd);
+end;
+
+procedure TfPU_OrderInList.Button1Click(Sender: TObject);
+var
+ row : integer;
+begin
+    getOrderdtList();
+    row := cxGridDBTableView1.DataController.FocusedRecordIndex;
+    if row < 0 then
+     exit;
+
+    fPU_OrderInAdd.partnersId := cxGridDBTableView1.DataController.Values[row,2];
+    fPU_OrderInAdd.Edit2.Text := cxGridDBTableView1.DataController.Values[row,1];
+    duPub.getDobInData(duPub.tbl_pu_orderDt,orderDataList,'pu_orderDt','id');
+
+    self.tbl_pu_order.Close;
+    duPub.tbl_pu_orderDtProduct.Close;
+    self.Close;
+end;
+
+procedure TfPU_OrderInList.Button3Click(Sender: TObject);
+begin
+     self.tbl_pu_order.Close;
+    duPub.tbl_pu_orderDtProduct.Close;
+    self.Close;
+end;
+
+procedure TfPU_OrderInList.cxGrid1DBTableView1CellClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+var
+  Row : Integer;
+begin
+  inherited;
+   Row := cxGrid1DBTableView1.DataController.FocusedRecordIndex;
+
+   if cxGrid1DBTableView1.ViewData.Records[Row].Values[1] = true then
+   begin
+       cxGrid1DBTableView1.ViewData.Records[Row].Values[1] := false;
+       delOrderdtId(duPub.tbl_pu_orderdtProduct.FieldByName('id').AsString);
+   end
+   else
+   begin
+       cxGrid1DBTableView1.ViewData.Records[Row].Values[1] := true;
+       getOrderdtId(duPub.tbl_pu_orderdtProduct.FieldByName('id').AsString);
+   end;
+
+
+end;
+
+procedure TfPU_OrderInList.cxGridDBTableView1CellClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+var
+  orderCode : String;
+begin
+    orderCode := tbl_pu_order.FieldByName('puOrderNum').AsString;
+        if orderCode <> '' then
+        begin
+            if firstLoad then
+           begin
+              duPub.tbl_pu_orderDtProduct.open;
+              firstLoad := false;
+           end;
+           if duPub.tbl_pu_orderDtProduct.Active then
+           begin
+               duPub.tbl_pu_orderDtProduct.Filter:='puOrderNum=''' + orderCode + '''';
+               duPub.tbl_pu_orderDtProduct.Filtered:=true;
+               showOrderDtList();
+//               if orderdtListID.Count > 0 then
+//                orderdtListID.Clear;
+           end;
+        end;
+end;
+
+procedure TfPU_OrderInList.FormCreate(Sender: TObject);
+var
+selectList : TStringList;
+begin
+     firstLoad := true;
+     selectList := TStringList.Create;
+     orderdtListID := TStringList.Create;
+     dupub.setSelectData(selectList,'puStatus','待收货',dboEqual);
+     duPub.getSelectData(self.tbl_pu_order,selectList,'pu_Order',dboAnd);
+     duPub.tbl_p_partners.Close;
+     duPub.tbl_p_partners.Open;
+end;
+
+end.

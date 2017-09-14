@@ -1,0 +1,61 @@
+inherited fBA_SetKind: TfBA_SetKind
+  Caption = #21830#21697#35774#32622
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Height = 59
+    Visible = True
+    ExplicitHeight = 59
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 732
+      Height = 56
+      Align = alTop
+      TabOrder = 0
+      ExplicitWidth = 348
+      object Label1: TLabel
+        Left = 7
+        Top = 20
+        Width = 52
+        Height = 13
+        Caption = #21830#21697#31867#21035':'
+      end
+      object cxDBNavigator1: TcxDBNavigator
+        Left = 68
+        Top = 16
+        Width = 180
+        Height = 25
+        Buttons.CustomButtons = <>
+        Buttons.First.Visible = False
+        Buttons.PriorPage.Visible = False
+        Buttons.Prior.Visible = False
+        Buttons.Next.Visible = False
+        Buttons.NextPage.Visible = False
+        Buttons.Last.Visible = False
+        Buttons.Insert.Visible = False
+        Buttons.Append.Hint = #28155#21152
+        Buttons.Append.Visible = True
+        Buttons.Delete.Hint = #21024#38500
+        Buttons.Delete.Visible = True
+        Buttons.Edit.Hint = #20462#25913
+        Buttons.Edit.Visible = True
+        Buttons.Post.Hint = #20445#23384
+        Buttons.Post.Visible = True
+        Buttons.Cancel.Visible = False
+        Buttons.Refresh.Visible = False
+        Buttons.SaveBookmark.Visible = False
+        Buttons.GotoBookmark.Visible = False
+        Buttons.Filter.Visible = False
+        DataSource = duPub.ds_st_kind
+        TabOrder = 0
+      end
+    end
+  end
+  inherited cxGrid1: TcxGrid
+    Top = 113
+    Height = 338
+    ExplicitHeight = 306
+  end
+end

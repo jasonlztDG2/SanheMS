@@ -1,0 +1,142 @@
+unit fPU_OrderInListP;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, dxSkinsCore, dxSkinBlack, dxSkinBlue,
+  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
+  dxSkinMetropolisDark, dxSkinMoneyTwins, dxSkinOffice2007Black,
+  dxSkinOffice2007Blue, dxSkinOffice2007Green, dxSkinOffice2007Pink,
+  dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue,
+  dxSkinOffice2010Silver, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinOffice2016Colorful, dxSkinOffice2016Dark,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
+  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, cxCheckBox,
+  cxDBLookupComboBox, uRODynamicRequest, uDAFields, uDADelta, uROComponent,
+  uDAScriptingProvider, uDADataTable, uDAMemDataTable, Vcl.StdCtrls,
+  Vcl.ExtCtrls, cxGridLevel, cxGridCustomTableView, cxGridTableView,uDAWhere,
+  cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid;
+
+type
+  TfPU_OrderInList = class(TForm)
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    dSource1: TDADataSource;
+    Panel1: TPanel;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    cxGrid2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridLevel1: TcxGridLevel;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button3: TButton;
+    Panel4: TPanel;
+    Label9: TLabel;
+    tbl_pu_order: TDAMemDataTable;
+    cxGridDBTableView1RecID: TcxGridDBColumn;
+    cxGridDBTableView1puOrderNum: TcxGridDBColumn;
+    cxGridDBTableView1partnerId: TcxGridDBColumn;
+    cxGridDBTableView1puStatus: TcxGridDBColumn;
+    cxGridDBTableView1puOrderDate: TcxGridDBColumn;
+    cxGridDBTableView1puOrderUser: TcxGridDBColumn;
+    cxGridDBTableView1puCreator: TcxGridDBColumn;
+    cxGridDBTableView1puCreateDate: TcxGridDBColumn;
+    cxGridDBTableView1puOutAddress: TcxGridDBColumn;
+    cxGridDBTableView1amountPay: TcxGridDBColumn;
+    cxGridDBTableView1memo: TcxGridDBColumn;
+    cxGrid1DBTableView1RecID: TcxGridDBColumn;
+    cxGrid1DBTableView1qty: TcxGridDBColumn;
+    cxGrid1DBTableView1price: TcxGridDBColumn;
+    cxGrid1DBTableView1inQty: TcxGridDBColumn;
+    cxGrid1DBTableView1hadInQty: TcxGridDBColumn;
+    cxGrid1DBTableView1Column1: TcxGridDBColumn;
+    cxGrid1DBTableView1productName: TcxGridDBColumn;
+    cxGrid1DBTableView1kind: TcxGridDBColumn;
+    cxGrid1DBTableView1style: TcxGridDBColumn;
+    cxGrid1DBTableView1spec: TcxGridDBColumn;
+    cxGrid1DBTableView1color: TcxGridDBColumn;
+    cxGrid1DBTableView1unit: TcxGridDBColumn;
+    cxGrid1DBTableView1puOrderNum: TcxGridDBColumn;
+    procedure FormCreate(Sender: TObject);
+    procedure cxGridDBTableView1CellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure showOrderDtList();
+    var
+    firstLoad : boolean;
+  end;
+
+var
+  fPU_OrderInList: TfPU_OrderInList;
+
+implementation
+
+{$R *.dfm}
+uses
+duPubP
+;
+
+procedure TFPU_OrderInList.showOrderDtList();
+var
+selectList : TStringList;
+begin
+     selectList := TStringList.Create;
+     dupub.setSelectData(selectList,'status','Î´Èë¿â',dboEqual);
+    duPub.getSelectData(duPub.tbl_pu_orderDtProduct,selectList,'pu_orderDtProduct',dboAnd);
+end;
+
+procedure TfPU_OrderInList.cxGridDBTableView1CellClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+var
+  orderCode : String;
+begin
+    orderCode := tbl_pu_order.FieldByName('puOrderNum').AsString;
+        if orderCode <> '' then
+        begin
+            if firstLoad then
+           begin
+              duPub.tbl_pu_orderDtProduct.open;
+              firstLoad := false;
+           end;
+           if duPub.tbl_pu_orderDtProduct.Active then
+           begin
+               duPub.tbl_pu_orderDtProduct.Filter:='puOrderNum=''' + orderCode + '''';
+               duPub.tbl_pu_orderDtProduct.Filtered:=true;
+               showOrderDtList();
+//               if orderdtListID.Count > 0 then
+//                orderdtListID.Clear;
+           end;
+        end;
+end;
+
+procedure TfPU_OrderInList.FormCreate(Sender: TObject);
+var
+selectList : TStringList;
+begin
+     firstLoad := true;
+     selectList := TStringList.Create;
+     dupub.setSelectData(selectList,'puStatus','´ýÊÕ»õ',dboEqual);
+     duPub.getSelectData(self.tbl_pu_order,selectList,'pu_Order',dboAnd);
+     duPub.tbl_p_partners.Close;
+     duPub.tbl_p_partners.Open;
+end;
+
+end.

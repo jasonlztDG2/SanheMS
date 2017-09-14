@@ -1,0 +1,45 @@
+unit fServerDataModule;
+
+{$I DataAbstract.inc}
+interface
+
+uses
+  {vcl:}SysUtils, Classes,
+  {RemObjects:} uROClient, uROClientIntf, uROServer, uROSessions, uROMessage, uROComponent, 
+  uROBaseConnection, uROBinMessage,uROIndyHTTPServer,    
+  {Data Abstract:} uDAEngine, uDADriverManager, uDAStreamableComponent, uDAConnectionManager, uDADataDictionary, 
+  uDAFireDACDriver, uROServerIntf, uROCustomRODLReader, System.TypInfo,
+  uDAServerInterfaces, uROCustomHTTPServer, uROBaseHTTPServer;
+
+type
+  TServerDataModule = class(TDataModule)
+    ConnectionManager: TDAConnectionManager;
+    DriverManager: TDADriverManager;
+    SessionManager: TROInMemorySessionManager;
+    Server: TROIndyHTTPServer;
+    Message: TROBinMessage;
+    DataDictionary: TDADataDictionary;
+    procedure ModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ServerDataModule: TServerDataModule;
+
+implementation
+
+{$IFDEF DELPHIXE2UP}
+{%CLASSGROUP 'System.Classes.TPersistent'}
+{$ENDIF}
+
+{$R *.dfm}
+
+procedure TServerDataModule.ModuleCreate(Sender: TObject);
+begin
+  Server.Active := true;
+end;
+
+end.

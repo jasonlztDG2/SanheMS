@@ -1,0 +1,25 @@
+unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Fbase1P, Data.DB, uDAFields,
+  uDADataTable, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ToolWin;
+
+type
+  Tfbase2 = class(Tfbase1)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fbase2: Tfbase2;
+
+implementation
+
+{$R *.dfm}
+
+end.

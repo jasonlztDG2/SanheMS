@@ -1,0 +1,754 @@
+object DataService: TDataService
+  OldCreateOrder = True
+  SessionManager = ServerDataModule.SessionManager
+  ServiceSchema = Schema
+  ServiceDataStreamer = DataStreamer
+  ExportedDataTables = <>
+  ScriptProvider = EcmaScriptProvider
+  Height = 212
+  Width = 216
+  object DataStreamer: TDABin2DataStreamer
+    Left = 32
+    Top = 8
+  end
+  object Schema: TDASchema
+    Datasets = <
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            TargetTable = 'p_module'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'ID'
+                TableField = 'ID'
+              end
+              item
+                DatasetField = 'actName'
+                TableField = 'actName'
+              end
+              item
+                DatasetField = 'moduleName'
+                TableField = 'moduleName'
+              end
+              item
+                DatasetField = 'parentAction'
+                TableField = 'parentAction'
+              end>
+          end>
+        Name = 'p_module'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'ID'
+            DataType = datAutoInc
+            GeneratorName = 'p_module'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'actName'
+            DataType = datWideString
+            Size = 50
+            Required = True
+          end
+          item
+            Name = 'moduleName'
+            DataType = datWideString
+            Size = 50
+            Required = True
+          end
+          item
+            Name = 'parentAction'
+            DataType = datWideString
+            Size = 50
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            TargetTable = 'p_partners'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'ID'
+                TableField = 'ID'
+              end
+              item
+                DatasetField = 'code'
+                TableField = 'code'
+              end
+              item
+                DatasetField = 'company'
+                TableField = 'company'
+              end
+              item
+                DatasetField = 'name'
+                TableField = 'name'
+              end
+              item
+                DatasetField = 'address'
+                TableField = 'address'
+              end
+              item
+                DatasetField = 'phone'
+                TableField = 'phone'
+              end
+              item
+                DatasetField = 'emailAdd'
+                TableField = 'emailAdd'
+              end
+              item
+                DatasetField = 'partnerType'
+                TableField = 'partnerType'
+              end
+              item
+                DatasetField = 'memo'
+                TableField = 'memo'
+              end>
+          end>
+        Name = 'p_partners'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'ID'
+            DataType = datAutoInc
+            GeneratorName = 'p_partners'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'code'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'company'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'name'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'address'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'phone'
+            DataType = datInteger
+          end
+          item
+            Name = 'emailAdd'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'partnerType'
+            DataType = datWideString
+            Size = 10
+            Required = True
+          end
+          item
+            Name = 'memo'
+            DataType = datWideString
+            Size = 100
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            TargetTable = 'p_user'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'ID'
+                TableField = 'ID'
+              end
+              item
+                DatasetField = 'loginName'
+                TableField = 'loginName'
+              end
+              item
+                DatasetField = 'fullName'
+                TableField = 'fullName'
+              end
+              item
+                DatasetField = 'password'
+                TableField = 'password'
+              end
+              item
+                DatasetField = 'userGroup_ID'
+                TableField = 'userGroup_ID'
+              end>
+          end>
+        Name = 'p_user'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'ID'
+            DataType = datAutoInc
+            GeneratorName = 'p_user'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'loginName'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'fullName'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'password'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'userGroup_ID'
+            DataType = datWideString
+            Size = 10
+            Required = True
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            TargetTable = 'p_usergroup'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'ID'
+                TableField = 'ID'
+              end
+              item
+                DatasetField = 'groupName'
+                TableField = 'groupName'
+              end
+              item
+                DatasetField = 'isAdmin'
+                TableField = 'isAdmin'
+              end
+              item
+                DatasetField = 'auText'
+                TableField = 'auText'
+              end>
+          end>
+        Name = 'p_usergroup'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'ID'
+            DataType = datAutoInc
+            GeneratorName = 'p_usergroup'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'groupName'
+            DataType = datWideString
+            Size = 50
+            Required = True
+          end
+          item
+            Name = 'isAdmin'
+            DataType = datBoolean
+          end
+          item
+            Name = 'auText'
+            DataType = datWideMemo
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_product'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'productCode'
+                TableField = 'productCode'
+              end
+              item
+                DatasetField = 'productName'
+                TableField = 'productName'
+              end
+              item
+                DatasetField = 'price'
+                TableField = 'price'
+              end
+              item
+                DatasetField = 'kind'
+                TableField = 'kind'
+              end
+              item
+                DatasetField = 'style'
+                TableField = 'style'
+              end
+              item
+                DatasetField = 'spec'
+                TableField = 'spec'
+              end
+              item
+                DatasetField = 'color'
+                TableField = 'color'
+              end
+              item
+                DatasetField = 'unit'
+                TableField = 'unit'
+              end
+              item
+                DatasetField = 'productType'
+                TableField = 'productType'
+              end
+              item
+                DatasetField = 'tempNum'
+                TableField = 'tempNum'
+              end>
+          end>
+        Name = 'st_product'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'productId'
+            DataType = datAutoInc
+            GeneratorName = 'st_product'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'productCode'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productName'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'price'
+            DataType = datWideString
+            Size = 20
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'kind'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'style'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'spec'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'color'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'unit'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'productType'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'tempNum'
+            DataType = datWideString
+            Size = 50
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_kind'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'KindName'
+                TableField = 'KindName'
+              end>
+          end>
+        Name = 'st_kind'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_kind'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'KindName'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_company'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'CompanyName'
+                TableField = 'CompanyName'
+              end>
+          end>
+        Name = 'st_company'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_company'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'CompanyName'
+            DataType = datWideString
+            Size = 30
+            Required = True
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_location'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'locationNum'
+                TableField = 'locationNum'
+              end
+              item
+                DatasetField = 'locationName'
+                TableField = 'locationName'
+              end>
+          end>
+        Name = 'st_location'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_location'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'locationNum'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'locationName'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_orderDt'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'puOrderNum'
+                TableField = 'puOrderNum'
+              end
+              item
+                DatasetField = 'productID'
+                TableField = 'productID'
+              end
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end
+              item
+                DatasetField = 'price'
+                TableField = 'price'
+              end
+              item
+                DatasetField = 'status'
+                TableField = 'status'
+              end
+              item
+                DatasetField = 'inQty'
+                TableField = 'inQty'
+              end
+              item
+                DatasetField = 'hadInQty'
+                TableField = 'hadInQty'
+              end
+              item
+                DatasetField = 'memo'
+                TableField = 'memo'
+              end>
+          end>
+        Name = 'pu_orderDt'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'pu_orderDt'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'puOrderNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productID'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'qty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'price'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'status'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'inQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+          end
+          item
+            Name = 'hadInQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+          end
+          item
+            Name = 'memo'
+            DataType = datWideString
+            Size = 50
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_order'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'puOrderNum'
+                TableField = 'puOrderNum'
+              end
+              item
+                DatasetField = 'partnerId'
+                TableField = 'partnerId'
+              end
+              item
+                DatasetField = 'puStatus'
+                TableField = 'puStatus'
+              end
+              item
+                DatasetField = 'puOrderDate'
+                TableField = 'puOrderDate'
+              end
+              item
+                DatasetField = 'puCreator'
+                TableField = 'puCreator'
+              end
+              item
+                DatasetField = 'puOutAddress'
+                TableField = 'puOutAddress'
+              end
+              item
+                DatasetField = 'amountPay'
+                TableField = 'amountPay'
+              end
+              item
+                DatasetField = 'memo'
+                TableField = 'memo'
+              end>
+          end>
+        Name = 'pu_order'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'pu_order'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'puOrderNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'partnerId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'puStatus'
+            DataType = datWideString
+            Size = 10
+            Required = True
+          end
+          item
+            Name = 'puOrderDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'puCreator'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'puOutAddress'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'amountPay'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'memo'
+            DataType = datWideString
+            Size = 50
+          end>
+      end>
+    JoinDataTables = <>
+    UnionDataTables = <>
+    Commands = <>
+    RelationShips = <>
+    UpdateRules = <>
+    Version = 0
+    ConnectionManager = ServerDataModule.ConnectionManager
+    DataDictionary = ServerDataModule.DataDictionary
+    Left = 32
+    Top = 56
+  end
+  object EcmaScriptProvider: TDASpiderMonkeyScriptProvider
+    Left = 88
+    Top = 8
+  end
+end

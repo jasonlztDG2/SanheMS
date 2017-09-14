@@ -1,0 +1,259 @@
+object ClientDataModule: TClientDataModule
+  OldCreateOrder = True
+  OnCreate = DataModuleCreate
+  Height = 600
+  Width = 660
+  object ClientChannel: TROWinInetHTTPChannel
+    Left = 48
+    Top = 8
+    TargetUrl = 'http://127.0.0.1:8099/bin'
+    OnLoginNeeded = ClientChannel_OnLoginNeeded
+  end
+  object Message: TROBinMessage
+    Left = 144
+    Top = 8
+  end
+  object RemoteService: TRORemoteService
+    ServiceName = 'DataService'
+    Channel = ClientChannel
+    Message = Message
+    Left = 240
+    Top = 8
+  end
+  object DataStreamer: TDABin2DataStreamer
+    Left = 336
+    Top = 8
+  end
+  object RemoteDataAdapter: TDARemoteDataAdapter
+    ReconcileProvider = ReconcileProvider
+    GetSchemaCall.RemoteService = RemoteService
+    GetDataCall.RemoteService = RemoteService
+    UpdateDataCall.RemoteService = RemoteService
+    GetScriptsCall.RemoteService = RemoteService
+    RemoteService = RemoteService
+    DataStreamer = DataStreamer
+    
+    CacheSchema = True
+    
+    Left = 432
+    Top = 8
+  end
+  object ReconcileProvider: TDAVCLReconcileProvider
+    Left = 528
+    Top = 8
+  end 
+  object tbl_p_module: TDAMemDataTable
+  ScriptingProvider = sp_tbl_p_module.Owner
+  Fields = <
+    item
+      Name = 'ID'
+      DataType = datAutoInc
+      GeneratorName = 'p_module'
+      Required = True
+      InPrimaryKey = True
+    end
+    item
+      Name = 'actName'
+      DataType = datWideString
+      Size = 50
+      Required = True
+    end
+    item
+      Name = 'moduleName'
+      DataType = datWideString
+      Size = 50
+      Required = True
+    end
+    item
+      Name = 'parentAction'
+      DataType = datWideString
+      Size = 50
+    end>
+  LogicalName = 'p_module'
+  Params = <>
+  RemoteDataAdapter = RemoteDataAdapter.Owner
+  RemoteUpdatesOptions = []
+  StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+  IndexDefs = <>
+  Left = 240
+  Top = 104
+end
+object ds_p_module: TDADataSource
+  DataSet = tbl_p_module.Dataset
+  DataTable = tbl_p_module.Owner
+  Left = 48
+  Top = 104
+end
+object sp_tbl_p_module: TDASpiderMonkeyScriptProvider
+  ScriptableComponent = tbl_p_module.Owner
+  Left = 144
+  Top = 104
+end
+object tbl_p_partners: TDAMemDataTable
+  ScriptingProvider = sp_tbl_p_partners.Owner
+  Fields = <
+    item
+      Name = 'ID'
+      DataType = datAutoInc
+      GeneratorName = 'p_partners'
+      Required = True
+      InPrimaryKey = True
+    end
+    item
+      Name = 'code'
+      DataType = datWideString
+      Size = 20
+    end
+    item
+      Name = 'company'
+      DataType = datWideString
+      Size = 20
+      Required = True
+    end
+    item
+      Name = 'name'
+      DataType = datWideString
+      Size = 20
+      Required = True
+    end
+    item
+      Name = 'address'
+      DataType = datWideString
+      Size = 50
+    end
+    item
+      Name = 'phone'
+      DataType = datInteger
+    end
+    item
+      Name = 'emailAdd'
+      DataType = datWideString
+      Size = 50
+    end
+    item
+      Name = 'partnerType'
+      DataType = datInteger
+      Required = True
+    end
+    item
+      Name = 'memo'
+      DataType = datWideString
+      Size = 100
+    end>
+  LogicalName = 'p_partners'
+  Params = <>
+  RemoteDataAdapter = RemoteDataAdapter.Owner
+  RemoteUpdatesOptions = []
+  StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+  IndexDefs = <>
+  Left = 528
+  Top = 104
+end
+object ds_p_partners: TDADataSource
+  DataSet = tbl_p_partners.Dataset
+  DataTable = tbl_p_partners.Owner
+  Left = 336
+  Top = 104
+end
+object sp_tbl_p_partners: TDASpiderMonkeyScriptProvider
+  ScriptableComponent = tbl_p_partners.Owner
+  Left = 432
+  Top = 104
+end
+object tbl_p_user: TDAMemDataTable
+  ScriptingProvider = sp_tbl_p_user.Owner
+  Fields = <
+    item
+      Name = 'ID'
+      DataType = datAutoInc
+      GeneratorName = 'p_user'
+      Required = True
+      InPrimaryKey = True
+    end
+    item
+      Name = 'loginName'
+      DataType = datWideString
+      Size = 20
+      Required = True
+    end
+    item
+      Name = 'fullName'
+      DataType = datWideString
+      Size = 20
+    end
+    item
+      Name = 'password'
+      DataType = datWideString
+      Size = 20
+    end
+    item
+      Name = 'userGroup_ID'
+      DataType = datInteger
+      Required = True
+    end>
+  LogicalName = 'p_user'
+  Params = <>
+  RemoteDataAdapter = RemoteDataAdapter.Owner
+  RemoteUpdatesOptions = []
+  StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+  IndexDefs = <>
+  Left = 240
+  Top = 152
+end
+object ds_p_user: TDADataSource
+  DataSet = tbl_p_user.Dataset
+  DataTable = tbl_p_user.Owner
+  Left = 48
+  Top = 152
+end
+object sp_tbl_p_user: TDASpiderMonkeyScriptProvider
+  ScriptableComponent = tbl_p_user.Owner
+  Left = 144
+  Top = 152
+end
+object tbl_p_usergroup: TDAMemDataTable
+  ScriptingProvider = sp_tbl_p_usergroup.Owner
+  Fields = <
+    item
+      Name = 'ID'
+      DataType = datAutoInc
+      GeneratorName = 'p_usergroup'
+      Required = True
+      InPrimaryKey = True
+    end
+    item
+      Name = 'groupName'
+      DataType = datWideString
+      Size = 50
+      Required = True
+    end
+    item
+      Name = 'isAdmin'
+      DataType = datBoolean
+    end
+    item
+      Name = 'auText'
+      DataType = datWideMemo
+    end>
+  LogicalName = 'p_usergroup'
+  Params = <>
+  RemoteDataAdapter = RemoteDataAdapter.Owner
+  RemoteUpdatesOptions = []
+  StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+  IndexDefs = <>
+  Left = 528
+  Top = 152
+end
+object ds_p_usergroup: TDADataSource
+  DataSet = tbl_p_usergroup.Dataset
+  DataTable = tbl_p_usergroup.Owner
+  Left = 336
+  Top = 152
+end
+object sp_tbl_p_usergroup: TDASpiderMonkeyScriptProvider
+  ScriptableComponent = tbl_p_usergroup.Owner
+  Left = 432
+  Top = 152
+end
+
+end

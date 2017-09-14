@@ -1,0 +1,29 @@
+<Library Name="sanhe" Namespace="sanhe" UID="{cb5d2dc4-d58b-40d6-b396-f07630c3be82}" Version="4.0">
+<Services>
+<Service Name="LoginService" UID="{75bd8a31-a868-490d-85ff-61eff1800d40}" Ancestor="SimpleLoginService">
+<Interfaces>
+<Interface Name="Default" UID="{7f0e0d54-ede8-4eda-bdc6-59f5915c300e}">
+<Operations>
+</Operations>
+</Interface>
+</Interfaces>
+</Service>
+<Service Name="DataService" UID="{7f448862-d2d9-49c5-a233-9c8151c88a3a}" Ancestor="DataAbstractService">
+<Interfaces>
+<Interface Name="Default" UID="{51a7f1f9-2b17-402d-a877-c778e7e3a593}">
+<Operations>
+</Operations>
+</Interface>
+</Interfaces>
+</Service>
+</Services>
+<Structs>
+</Structs>
+<Enums>
+</Enums>
+<Arrays>
+</Arrays>
+<Uses>
+<Use Name="DataAbstract" UID="{4420953b-4017-468d-82c4-2d60512c0090}" Rodl="$(Data Abstract for Delphi)\Source\DataAbstract4.RODL">
+</Use></Uses>
+</Library>

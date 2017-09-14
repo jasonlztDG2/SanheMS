@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="DataService_Impl.pas"/>
+    <File Path="DataService_Impl.dfm"/>
+    <File Path="fServerDataModule.pas"/>
+    <File Path="fServerDataModule.dfm"/>
+    <File Path="fServerForm.pas"/>
+    <File Path="fServerForm.dfm"/>
+    <File Path="LoginService_Impl.pas"/>
+    <File Path="LoginService_Impl.dfm"/>
+    <File Path="sanhe_Intf.pas"/>
+    <File Path="sanhe_Invk.pas"/>
+  </ProjectSortOrder>
+</BorlandProject>

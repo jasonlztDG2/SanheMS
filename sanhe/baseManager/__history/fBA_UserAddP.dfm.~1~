@@ -1,0 +1,66 @@
+object fBA_UserAdd: TfBA_UserAdd
+  Left = 0
+  Top = 0
+  Caption = #28155#21152#29992#25143
+  ClientHeight = 202
+  ClientWidth = 447
+  Color = clGradientInactiveCaption
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 91
+    Top = 28
+    Width = 39
+    Height = 13
+    Caption = ' '#30331#24405#21517
+  end
+  object Label2: TLabel
+    Left = 99
+    Top = 76
+    Width = 24
+    Height = 13
+    Caption = #20840#21517
+  end
+  object Edit2: TEdit
+    Left = 143
+    Top = 73
+    Width = 184
+    Height = 21
+    TabOrder = 0
+  end
+  object cxButton1: TcxButton
+    Left = 91
+    Top = 138
+    Width = 97
+    Height = 30
+    Caption = #30830#35748
+    Default = True
+    LookAndFeel.NativeStyle = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object cxButton2: TcxButton
+    Left = 230
+    Top = 138
+    Width = 97
+    Height = 30
+    Cancel = True
+    Caption = #21462#28040
+    ModalResult = 2
+    TabOrder = 2
+  end
+  object Edit1: TEdit
+    Left = 143
+    Top = 25
+    Width = 184
+    Height = 21
+    TabOrder = 3
+  end
+end

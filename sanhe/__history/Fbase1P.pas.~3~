@@ -1,0 +1,52 @@
+unit Fbase1P;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, uDAFields,
+  uDADataTable, Vcl.ComCtrls, Vcl.ToolWin;
+
+type
+  Tfbase1 = class(TForm)
+    ToolBar1: TToolBar;
+    tb_Browse: TToolButton;
+    Tb_Edit: TToolButton;
+    tb_Append: TToolButton;
+    tb_revise: TToolButton;
+    tb_Copy: TToolButton;
+    tb_Delete: TToolButton;
+    tb_Seperator1: TToolButton;
+    tb_Filter: TToolButton;
+    tb_Unfilter: TToolButton;
+    tb_Seperator2: TToolButton;
+    tb_Save: TToolButton;
+    tbCancel: TToolButton;
+    tb_Seperator3: TToolButton;
+    tbRefresh: TToolButton;
+    tb_Exit: TToolButton;
+    dSource1: TDADataSource;
+    ToolBar2: TToolBar;
+    nav_First: TToolButton;
+    nav_Proid: TToolButton;
+    rec_Edit: TEdit;
+    nav_Next: TToolButton;
+    nav_Last: TToolButton;
+    ToolButton2: TToolButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fbase1: Tfbase1;
+
+implementation
+
+{$R *.dfm}
+
+uses
+duPubP;
+
+end.

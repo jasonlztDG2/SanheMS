@@ -1,0 +1,129 @@
+unit Fbase1P;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Fbase0P, Vcl.ComCtrls, Vcl.ToolWin,
+  Vcl.ExtCtrls, dxBar, cxClasses, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, cxLabel, Vcl.StdCtrls, Data.DB,
+  uDAFields, uDADataTable;
+
+type
+  Tfbase1 = class(Tfbase0)
+    ToolBar1: TToolBar;
+    tb_Browse: TToolButton;
+    Tb_Edit: TToolButton;
+    ToolBar2: TToolBar;
+    nav_First: TToolButton;
+    tb_Append: TToolButton;
+    tb_revise: TToolButton;
+    tb_Copy: TToolButton;
+    tb_Delete: TToolButton;
+    tb_Filter: TToolButton;
+    tb_Seperator1: TToolButton;
+    tb_Unfilter: TToolButton;
+    tb_Seperator2: TToolButton;
+    tb_Save: TToolButton;
+    tbCancel: TToolButton;
+    tb_Seperator3: TToolButton;
+    tbRefresh: TToolButton;
+    tb_Exit: TToolButton;
+    nav_Proid: TToolButton;
+    rec_Edit: TEdit;
+    ToolButton2: TToolButton;
+    nav_Next: TToolButton;
+    nav_Last: TToolButton;
+    dSource1: TDADataSource;
+    procedure dxBarLargeButton1Click(Sender: TObject);
+    procedure tb_ExitClick(Sender: TObject);
+    procedure Tb_EditClick(Sender: TObject);
+    procedure nav_FirstClick(Sender: TObject);
+    procedure nav_ProidClick(Sender: TObject);
+    procedure nav_NextClick(Sender: TObject);
+    procedure nav_LastClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fbase1: Tfbase1;
+
+implementation
+
+{$R *.dfm}
+
+uses duPubP, fBase1PopP;
+
+procedure Tfbase1.dxBarLargeButton1Click(Sender: TObject);
+begin
+  inherited;
+  CAPTION:='TEST';
+end;
+
+procedure Tfbase1.Tb_EditClick(Sender: TObject);
+begin
+  inherited;
+//  Fbase1Pop:=TFbase1Pop.Create(application);
+//  self.ParentToClient()
+
+//  Fbase1Pop.ShowModal;
+end;
+
+procedure Tfbase1.tb_ExitClick(Sender: TObject);
+begin
+  inherited;
+  self.Close;
+end;
+
+procedure Tfbase1.nav_NextClick(Sender: TObject);
+begin
+  inherited;
+  if assigned(Dsource1.DataTable) then
+  begin
+    if Dsource1.DataTable.Active then
+    begin
+      if not  Dsource1.DataTable.EOF then
+        Dsource1.DataTable.Next;
+    end;
+  end;
+
+end;
+
+procedure Tfbase1.nav_LastClick(Sender: TObject);
+begin
+  inherited;
+     if assigned(Dsource1.DataTable) then
+  begin
+    if Dsource1.DataTable.Active then
+      Dsource1.DataTable.Last;
+  end;
+
+end;
+
+procedure Tfbase1.nav_ProidClick(Sender: TObject);
+begin
+  inherited;
+  if assigned(Dsource1.DataTable) then
+  begin
+    if Dsource1.DataTable.Active then
+    begin
+      if not  Dsource1.DataTable.BOF then
+        Dsource1.DataTable.Prior;
+    end;
+  end;
+end;
+
+procedure Tfbase1.nav_FirstClick(Sender: TObject);
+begin
+  inherited;
+  if assigned(Dsource1.DataTable) then
+  begin
+    if Dsource1.DataTable.Active then
+      Dsource1.DataTable.First;
+  end;
+end;
+
+end.

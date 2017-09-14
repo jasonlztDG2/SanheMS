@@ -1,0 +1,162 @@
+unit fPU_OrderPayListP;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, dxSkinsCore, dxSkinBlack, dxSkinBlue,
+  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
+  dxSkinMetropolisDark, dxSkinMoneyTwins, dxSkinOffice2007Black,
+  dxSkinOffice2007Blue, dxSkinOffice2007Green, dxSkinOffice2007Pink,
+  dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue,
+  dxSkinOffice2010Silver, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinOffice2016Colorful, dxSkinOffice2016Dark,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
+  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, Vcl.StdCtrls,uDAWhere,
+  Vcl.ExtCtrls, cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGrid, cxDBLookupComboBox, cxCheckBox;
+
+type
+  TfPU_OrderPayList = class(TForm)
+    Panel2: TPanel;
+    Button1: TButton;
+    Button3: TButton;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1DBTableView1RecID: TcxGridDBColumn;
+    cxGrid1DBTableView1inCode: TcxGridDBColumn;
+    cxGrid1DBTableView1productId: TcxGridDBColumn;
+    cxGrid1DBTableView1qty: TcxGridDBColumn;
+    cxGrid1DBTableView1price: TcxGridDBColumn;
+    cxGrid1DBTableView1locationId: TcxGridDBColumn;
+    cxGrid1DBTableView1companyId: TcxGridDBColumn;
+    cxGrid1DBTableView1state: TcxGridDBColumn;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1DBTableView1Column1: TcxGridDBColumn;
+    procedure FormCreate(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure cxGrid1DBTableView1CellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure getStoragedtId(id : String);
+    procedure delStoragedtId(id : String);
+    procedure getStoragedtList();
+  end;
+
+var
+  fPU_OrderPayList: TfPU_OrderPayList;
+  orderdtListID: TStringList;
+
+implementation
+
+{$R *.dfm}
+uses
+duPubP,fPU_OrderPayAddP
+;
+
+procedure TfPU_OrderPayList.getStoragedtId(id : String);
+begin
+    orderdtListID.Sorted := True;  //需要先指定排序
+    orderdtListID.Duplicates := dupIgnore;  //如有重复值则放弃
+    orderdtListID.Add(id+'='+id);
+end;
+
+procedure TfPU_OrderPayList.delStoragedtId(id : String);
+var
+i : Integer;
+key : String;
+begin
+    for I := 0 to orderdtListID.Count - 1 do
+  begin
+       key := orderdtListID.Names[i];
+       if id = orderdtListID.Values[key] then
+       begin
+            orderdtListID.Delete(i);
+            exit;
+       end;
+  end;
+
+end;
+
+procedure TfPU_OrderPayList.getStoragedtList();
+var
+i : Integer;
+begin
+  if orderdtListID.Count > 0 then
+   begin
+       for I := 0 to orderdtListID.Count - 1 do
+        begin
+            orderPayList.Sorted := True;  //需要先指定排序
+            orderPayList.Duplicates := dupIgnore;  //如有重复值则放弃
+            orderPayList.add(orderdtListID[i]);
+         end;
+  end;
+
+end;
+
+procedure TfPU_OrderPayList.Button1Click(Sender: TObject);
+var
+row : Integer;
+begin
+     row := cxGrid1DBTableView1.DataController.FocusedRecordIndex;
+      if row < 0 then
+      exit;
+     getStoragedtList();
+    duPub.getDobInData(duPub.tbl_st_instoragedt,orderPayList,'st_instoragedt','id');
+    fPU_OrderPayAdd.updatePayCount();
+    self.Close;
+end;
+
+procedure TfPU_OrderPayList.Button3Click(Sender: TObject);
+begin
+    self.Close;
+end;
+
+procedure TfPU_OrderPayList.cxGrid1DBTableView1CellClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+var
+  Row : Integer;
+begin
+  inherited;
+    Row := cxGrid1DBTableView1.DataController.FocusedRecordIndex;
+
+   if cxGrid1DBTableView1.ViewData.Records[Row].Values[1] = true then
+   begin
+       cxGrid1DBTableView1.ViewData.Records[Row].Values[1] := false;
+       delStoragedtId(duPub.tbl_st_instoragedt.FieldByName('id').AsString);
+   end
+   else
+   begin
+       cxGrid1DBTableView1.ViewData.Records[Row].Values[1] := true;
+       getStoragedtId(duPub.tbl_st_instoragedt.FieldByName('id').AsString);
+   end;
+
+end;
+
+procedure TfPU_OrderPayList.FormCreate(Sender: TObject);
+var
+selectList : TStringList;
+begin
+     selectList := TStringList.Create;
+     orderdtListID := TStringList.Create;
+     dupub.setSelectData(selectList,'state','待付款',dboEqual);
+    dupub.setSelectData(selectList,'partnersId',intToStr(partnersId),dboEqual);
+   duPub.getSelectData(duPub.tbl_st_instoragedt,selectList,'st_instoragedt',dboAnd);
+end;
+
+end.

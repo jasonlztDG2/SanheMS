@@ -1,0 +1,177 @@
+unit fPU_OrderPayAddP;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, dxSkinsCore, dxSkinBlack, dxSkinBlue,
+  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
+  dxSkinMetropolisDark, dxSkinMoneyTwins, dxSkinOffice2007Black,
+  dxSkinOffice2007Blue, dxSkinOffice2007Green, dxSkinOffice2007Pink,
+  dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue,
+  dxSkinOffice2010Silver, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinOffice2016Colorful, dxSkinOffice2016Dark,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
+  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, cxContainer,
+  Vcl.ComCtrls, dxCore, cxDateUtils, cxDBNavigator, cxTextEdit, cxMaskEdit,
+  cxDropDownEdit, cxCalendar, Vcl.StdCtrls, Vcl.ExtCtrls, cxGridLevel,
+  cxClasses, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGrid, cxDBLookupComboBox;
+
+type
+  TfPU_OrderPayAdd = class(TForm)
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    Panel1: TPanel;
+    Panel3: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label9: TLabel;
+    Label6: TLabel;
+    Edit1: TEdit;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    cxDateEdit1: TcxDateEdit;
+    ComboBox3: TComboBox;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Panel4: TPanel;
+    Label7: TLabel;
+    cxDBNavigator1: TcxDBNavigator;
+    cxGrid1DBTableView1RecID: TcxGridDBColumn;
+    cxGrid1DBTableView1inCode: TcxGridDBColumn;
+    cxGrid1DBTableView1productId: TcxGridDBColumn;
+    cxGrid1DBTableView1qty: TcxGridDBColumn;
+    cxGrid1DBTableView1price: TcxGridDBColumn;
+    cxGrid1DBTableView1locationId: TcxGridDBColumn;
+    cxGrid1DBTableView1companyId: TcxGridDBColumn;
+    cxGrid1DBTableView1state: TcxGridDBColumn;
+    procedure FormCreate(Sender: TObject);
+    procedure cxDBNavigator1ButtonsButtonClick(Sender: TObject;
+      AButtonIndex: Integer; var ADone: Boolean);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure updatePayCount();
+    procedure updateList(id : String);
+  end;
+
+var
+  fPU_OrderPayAdd: TfPU_OrderPayAdd;
+  orderPayList : TStringList;
+  partnersId : Integer;
+
+implementation
+
+{$R *.dfm}
+uses
+duPubP,fPU_OrderPayListP
+;
+
+procedure TfPU_OrderPayAdd.updateList(id : String);
+var
+i : Integer;
+key : String;
+begin
+    for I := 0 to orderPayList.Count - 1 do
+  begin
+       key := orderPayList.Names[i];
+       if id = orderPayList.Values[key] then
+       begin
+            orderPayList.Delete(i);
+            exit;
+       end;
+  end;
+
+end;
+
+procedure TfPU_OrderPayAdd.updatePayCount();
+var
+qty : double;
+price : double;
+sum : double;
+i : Integer;
+begin
+    sum := 0;
+    for I := 0 to orderPayList.Count - 1 do
+    begin
+       qty := strToFloat(cxGrid1DBTableView1.DataController.Values[i,4]);
+       price := strToFloat(cxGrid1DBTableView1.DataController.Values[i,5]);
+       sum := sum + qty * price;
+    end;
+    Edit2.Text := floattostr(sum);
+end;
+
+
+procedure TfPU_OrderPayAdd.Button2Click(Sender: TObject);
+begin
+    self.close;
+end;
+
+procedure TfPU_OrderPayAdd.cxDBNavigator1ButtonsButtonClick(Sender: TObject;
+  AButtonIndex: Integer; var ADone: Boolean);
+  var
+index : Integer;
+begin
+    case  AButtonindex of
+         NBDI_APPEND:
+         begin
+              index := ComboBox3.ItemIndex;
+              if index = -1 then
+              begin
+                showmessage('请先选择供应商');
+              end
+              else
+              begin
+                  partnersId := Integer(ComboBox1.Items.Objects[index]);
+                  fPU_OrderPayList:=TfPU_OrderPayList.Create(self);
+                  fPU_OrderPayList.ShowModal;
+              end;
+
+         end;
+         NBDI_DELETE:
+         begin
+               aDone:=true;
+               if MessageDlg('确定移除该商品?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+               begin
+                   updateList(dupub.tbl_st_instoragedt.FieldByName('id').AsString);
+                   duPub.getDobInData(dupub.tbl_st_instoragedt,orderPayList,'st_instoragedt','id');
+                   updatePayCount();
+               end;
+
+         end;
+     end;
+end;
+
+procedure TfPU_OrderPayAdd.FormCreate(Sender: TObject);
+begin
+    duPub.tbl_p_partners.Close;
+    duPub.tbl_p_partners.Open;
+    duPub.tbl_st_company.Close;
+    duPub.tbl_st_company.Open;
+    duPub.tbl_st_location.Close;
+    duPub.tbl_st_location.Open;
+    orderPayList := TStringList.Create;
+    duPub.getPartner(ComboBox1);
+    duPub.getUser(ComboBox2);
+end;
+
+end.

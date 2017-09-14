@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{4420953b-4017-468d-82c4-2d60512c0090}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <Projects Include="sanheServer.dproj">
+      <Dependencies/>
+    </Projects>
+    <Projects Include="sanhe.dproj">
+      <Dependencies/>
+    </Projects>
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality.12</Borland.Personality>
+    <Borland.ProjectType/>
+    <BorlandProject>
+      <Default.Personality/>
+    </BorlandProject>
+  </ProjectExtensions>
+  <Target Name="sanheServer">
+    <MSBuild Projects="sanheServer.dproj" Targets="" />
+  </Target>
+  <Target Name="sanheServer:Clean">
+    <MSBuild Projects="sanheServer.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="sanheServer:Make">
+    <MSBuild Projects="sanheServer.dproj" Targets="Make" />
+  </Target>
+  <Target Name="sanhe">
+    <MSBuild Projects="sanhe.dproj" Targets="" />
+  </Target>
+  <Target Name="sanhe:Clean">
+    <MSBuild Projects="sanhe.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="sanhe:Make">
+    <MSBuild Projects="sanhe.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="sanheServer;sanhe" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="sanheServer:Clean;sanhe:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="sanheServer:Make;sanhe:Make" />
+  </Target>
+  <Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+</Project>

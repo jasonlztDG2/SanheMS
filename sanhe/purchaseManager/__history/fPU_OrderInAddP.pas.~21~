@@ -1,0 +1,267 @@
+unit fPU_OrderInAddP;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, dxSkinsCore, dxSkinBlack, dxSkinBlue,
+  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
+  dxSkinMetropolisDark, dxSkinMoneyTwins, dxSkinOffice2007Black,
+  dxSkinOffice2007Blue, dxSkinOffice2007Green, dxSkinOffice2007Pink,
+  dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue,
+  dxSkinOffice2010Silver, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinOffice2016Colorful, dxSkinOffice2016Dark,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
+  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, cxDBLookupComboBox,
+  cxContainer, Vcl.ComCtrls, dxCore, cxDateUtils, cxDBNavigator, cxTextEdit,
+  cxMaskEdit, cxDropDownEdit, cxCalendar, Vcl.StdCtrls, Vcl.ExtCtrls,uDADataTable,
+  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxClasses, cxGridCustomView, cxGrid;
+
+type
+  TfPU_OrderInAdd = class(TForm)
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    Panel1: TPanel;
+    Panel3: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label9: TLabel;
+    Edit1: TEdit;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    cxDateEdit1: TcxDateEdit;
+    Panel4: TPanel;
+    Label7: TLabel;
+    cxDBNavigator1: TcxDBNavigator;
+    ComboBox3: TComboBox;
+    Edit2: TEdit;
+    cxGrid1DBTableView1RecID: TcxGridDBColumn;
+    cxGrid1DBTableView1puOrderNum: TcxGridDBColumn;
+    cxGrid1DBTableView1productID: TcxGridDBColumn;
+    cxGrid1DBTableView1qty: TcxGridDBColumn;
+    cxGrid1DBTableView1price: TcxGridDBColumn;
+    cxGrid1DBTableView1status: TcxGridDBColumn;
+    cxGrid1DBTableView1inQty: TcxGridDBColumn;
+    cxGrid1DBTableView1hadInQty: TcxGridDBColumn;
+    Label6: TLabel;
+    Edit3: TEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure cxDBNavigator1ButtonsButtonClick(Sender: TObject;
+      AButtonIndex: Integer; var ADone: Boolean);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+    var
+    partnersId : String;
+  end;
+
+var
+  fPU_OrderInAdd: TfPU_OrderInAdd;
+  orderDataList : TStringList;
+  productList : TStringList;
+
+implementation
+
+{$R *.dfm}
+uses
+duPubP,fPU_OrderInListP
+;
+
+procedure TfPU_OrderInAdd.Button1Click(Sender: TObject);
+var
+inCode : String;
+inType : String;
+locationId : String;
+companyId : String;
+inDate : DateTime;
+consigneeId : Integer;
+operatorId :Integer;
+inState : String;
+oddNo : String;
+department : String;
+memo : String;
+
+productIdStr : String;
+qtyStr : String;
+priceStr : String;
+locationIdStr : String;
+companyIdStr : String;
+stateStr : String;
+puOrderNum : String;
+orderDtIdStr : String;
+StateUpdateStr : String;
+hadInQtyStr : String;
+idCardNumStr : String;
+
+locationIndex : Integer;
+companyIndex : Integer;
+consigneeIndex : Integer;
+i : Integer;
+incount : double;
+hadInQty : double;
+remaining : double;
+buyCount : double;
+productId : String;
+price : String;
+begin
+    inCode := Edit1.Text;
+    inType := '采购入库';
+    locationIndex := ComboBox1.ItemIndex;
+    locationId := intToStr(Integer(ComboBox1.Items.Objects[locationIndex]));
+    companyIndex := ComboBox2.ItemIndex;
+    companyId := intToStr(Integer(ComboBox2.Items.Objects[companyIndex]));
+    inDate := cxDateEdit1.Date;
+    consigneeIndex := ComboBox3.ItemIndex;
+    consigneeId := Integer(ComboBox3.Items.Objects[consigneeIndex]);
+    operatorId := consigneeId;
+    inState := '待付款';
+    oddNo := Edit2.Text;
+    puOrderNum := Edit2.Text;
+    department := '';
+    memo := Edit3.Text;
+
+    for I := 0 to orderDataList.Count - 1 do
+    begin
+        if cxGrid1DBTableView1.DataController.Values[i,5] <> '' then
+            incount := strToFloat(cxGrid1DBTableView1.DataController.Values[i,5])
+         else
+            incount := 0;
+
+         if inCount = 0 then
+          continue;
+
+        buyCount := strToFloat(cxGrid1DBTableView1.DataController.Values[i,3]);
+        hadInQty := strToFloat(cxGrid1DBTableView1.DataController.Values[i,4]);
+        remaining := buyCount - hadInQty - inCount;
+
+        hadInQty := hadInQty + inCount;
+        productId := productListID.Names[i];
+        price := cxGrid1DBTableView1.DataController.Values[i,6];
+        productIdStr := productIdStr + productId + '|';
+        qtyStr := qtyStr + floatToStr(inCount) + '|';
+        priceStr := priceStr + price + '|';
+        locationIdStr := locationIdStr + locationId + '|';
+        companyIdStr := companyIdStr +  companyId + '|';
+        stateStr := stateStr + '待付款|';
+        orderDtIdStr := orderDtIdStr + orderDataList.Names[i] + '|';
+        hadInQtyStr := hadInQtyStr + floatToStr(hadInQty) + '|';
+
+        if remaining = 0 then   //当入库数量跟购买数量一致时，修改为已入库状态
+        begin
+          StateUpdateStr := StateUpdateStr + '已入库|';
+        end
+        else
+        begin
+           StateUpdateStr := StateUpdateStr + '未入库|';
+        end;
+
+        idCardNumStr := idCardNumStr + '123456|';
+    end;
+
+    showmessage(productIdStr);
+
+   with duPub.adoquery1 do
+    begin
+          close;
+          sql.Clear;
+          parameters.Clear;
+          sql.Add('exec addInstorage :@inCode,:@inType,:@locationId,:@companyId,:@inDate,'
+                  + ':@consignee,:@operator,:@inState,:@oddNo,:@department,:@memo,'
+                  + ':@partnersId,:@productIdStr,:@qtyStr,:@priceStr,:@locationIdStr,'
+                  + ':@companyIdStr,:@stateStr,:@puOrderNum,:@orderDtIdStr,'
+                  + ':@StateUpdateStr,:@hadInQtyStr,:@idCardNumStr'
+                  );//这就是调用存储过程
+          parameters.Items[0].Value := inCode;
+          parameters.Items[1].Value := inType;
+          parameters.Items[2].Value := locationId;
+          parameters.Items[3].Value := companyId;
+          parameters.Items[4].Value := inDate;
+          parameters.Items[5].Value := consigneeId;
+          parameters.Items[6].Value := operatorId;
+          parameters.Items[7].Value := inState;
+          parameters.Items[8].Value := oddNo;
+          parameters.Items[9].Value := department;
+          parameters.Items[10].Value := memo;
+          parameters.Items[11].Value := partnersId;
+          parameters.Items[12].Value := productIdStr;
+          parameters.Items[13].Value := qtyStr;
+          parameters.Items[14].Value := priceStr;
+          parameters.Items[15].Value := locationIdStr;
+          parameters.Items[16].Value := companyIdStr;
+          parameters.Items[17].Value := stateStr;
+          parameters.Items[18].Value := puOrderNum;
+          parameters.Items[19].Value := orderDtIdStr;
+          parameters.Items[20].Value := StateUpdateStr;
+          parameters.Items[21].Value := hadInQtyStr;
+          parameters.Items[22].Value := idCardNumStr;
+          execsql;
+
+     end;
+     duPub.tbl_st_instorage.ApplyUpdates(true,true);
+     self.Close;
+end;
+
+procedure TfPU_OrderInAdd.cxDBNavigator1ButtonsButtonClick(Sender: TObject;
+  AButtonIndex: Integer; var ADone: Boolean);
+begin
+
+     case  AButtonindex of
+         NBDI_APPEND:
+         begin
+              fPU_OrderInList := TfPU_OrderInList.Create(self);
+              fPU_OrderInList.ShowModal;
+         end;
+         NBDI_DELETE:
+         begin
+//               aDone:=true;
+//               if MessageDlg('确定删除该入库订单?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+//               begin
+//                   updateList(tbl_pu_orderdtProduct.FieldByName('id').AsString);
+//
+//                   duPub.getDobInData(tbl_pu_orderdtProduct,orderDataList,'pu_orderdtProduct','id');
+//               end;
+
+         end;
+     end;
+end;
+
+procedure TfPU_OrderInAdd.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    duPub.delNum(Edit1.Text);
+    dupub.tbl_pu_orderdt.Close;
+end;
+
+procedure TfPU_OrderInAdd.FormCreate(Sender: TObject);
+begin
+     duPub.tbl_st_product.Close;
+     duPub.tbl_st_product.Open;
+     duPUb.showInsertNum('instorageGetNum','SHRK',Edit1);
+     orderDataList := TStringList.create();
+     productList := TStringList.create();
+     duPub.getLocation(ComboBox1);
+     duPub.getCompany(ComboBox2);
+     duPub.getUser(ComboBox3);
+end;
+
+end.

@@ -1,0 +1,85 @@
+inherited fPU_OrderPay: TfPU_OrderPay
+  Caption = #37319#36141#20184#27454
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited ToolBar1: TToolBar
+    inherited tb_Browse: TToolButton
+      ExplicitWidth = 46
+    end
+    inherited Tb_Edit: TToolButton
+      Visible = False
+      ExplicitWidth = 39
+    end
+    inherited tb_Append: TToolButton
+      OnClick = tb_AppendClick
+      ExplicitWidth = 48
+    end
+    inherited tb_revise: TToolButton
+      Visible = False
+      ExplicitWidth = 43
+    end
+    inherited tb_Copy: TToolButton
+      Visible = False
+      ExplicitWidth = 39
+    end
+    inherited tb_Delete: TToolButton
+      Visible = False
+      ExplicitWidth = 42
+    end
+    inherited tb_Filter: TToolButton
+      ExplicitWidth = 39
+    end
+    inherited tb_Unfilter: TToolButton
+      ExplicitWidth = 46
+    end
+    inherited tb_Save: TToolButton
+      Visible = False
+    end
+    inherited tbCancel: TToolButton
+      Visible = False
+    end
+    inherited tb_Seperator3: TToolButton
+      Visible = False
+    end
+    inherited tbRefresh: TToolButton
+      Visible = False
+    end
+  end
+  inherited cxGrid1: TcxGrid
+    inherited cxGrid1DBTableView1: TcxGridDBTableView
+      DataController.DataSource = duPub.ds_pu_orderpay
+      object cxGrid1DBTableView1RecID: TcxGridDBColumn
+        DataBinding.FieldName = 'RecID'
+        Visible = False
+      end
+      object cxGrid1DBTableView1payCode: TcxGridDBColumn
+        DataBinding.FieldName = 'payCode'
+      end
+      object cxGrid1DBTableView1partnerId: TcxGridDBColumn
+        DataBinding.FieldName = 'partnerId'
+      end
+      object cxGrid1DBTableView1payUser: TcxGridDBColumn
+        DataBinding.FieldName = 'payUser'
+      end
+      object cxGrid1DBTableView1payAmount: TcxGridDBColumn
+        DataBinding.FieldName = 'payAmount'
+      end
+      object cxGrid1DBTableView1payNum: TcxGridDBColumn
+        DataBinding.FieldName = 'payNum'
+      end
+      object cxGrid1DBTableView1payDate: TcxGridDBColumn
+        DataBinding.FieldName = 'payDate'
+      end
+      object cxGrid1DBTableView1payType: TcxGridDBColumn
+        DataBinding.FieldName = 'payType'
+      end
+      object cxGrid1DBTableView1operator: TcxGridDBColumn
+        DataBinding.FieldName = 'operator'
+      end
+      object cxGrid1DBTableView1operatorDate: TcxGridDBColumn
+        DataBinding.FieldName = 'operatorDate'
+      end
+    end
+  end
+end

@@ -1,0 +1,147 @@
+unit fClientDataModule;
+
+{$I RemObjects.inc}
+{$I DataAbstract.inc}
+interface
+
+uses
+  {vcl:} SysUtils, Classes, DB, Dialogs,
+  {RemObjects:} uROChannelAwareComponent, uROMessage, uROComponent, uROBaseConnection,
+  uROTransportChannel, uROClientIntf, uRORemoteService, uROBinMessage, uROWinInetHttpChannel,
+  {Data Abstract:} uDAInterfaces, DataAbstract4_Intf, uDADataAdapter, uDARemoteDataAdapter,
+  uDAScriptingProvider, uDAEcmaScriptEngine, uDASpiderMonkeyScriptProvider,
+  uDADataStreamer, uDABin2DataStreamer, uDAFields, uDADataTable, uDAMemDataTable, uDAReconcileDialog;
+
+type
+  TClientDataModule = class(TDataModule)
+    RemoteService: TRORemoteService;
+    Message: TROBinMessage;
+    RemoteDataAdapter: TDARemoteDataAdapter;
+    ReconcileProvider: TDAVCLReconcileProvider;
+    ClientChannel: TROWinInetHTTPChannel;
+    DataStreamer: TDABin2DataStreamer;
+    tbl_p_module: TDAMemDataTable;
+    ds_p_module: TDADataSource;
+    sp_tbl_p_module: TDASpiderMonkeyScriptProvider;
+    tbl_p_partners: TDAMemDataTable;
+    ds_p_partners: TDADataSource;
+    sp_tbl_p_partners: TDASpiderMonkeyScriptProvider;
+    tbl_p_user: TDAMemDataTable;
+    ds_p_user: TDADataSource;
+    sp_tbl_p_user: TDASpiderMonkeyScriptProvider;
+    tbl_p_usergroup: TDAMemDataTable;
+    ds_p_usergroup: TDADataSource;
+    sp_tbl_p_usergroup: TDASpiderMonkeyScriptProvider;
+
+    procedure ClientChannel_OnLoginNeeded(Sender: TROTransportChannel; anException: Exception; var aRetry: Boolean);
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    fIsLoggedOn: Boolean;
+    fUserId: String;
+    fisInit:Boolean;
+    procedure InitLogin;
+    function CreateConnectionstring(aUser, aPassword: string): string;
+  protected
+    procedure Loaded; override;
+  public
+    { Public declarations }
+    function LogOn(user: String;  password: String): Boolean;
+    procedure LogOff();
+  end;
+
+var
+  ClientDataModule: TClientDataModule;
+
+implementation
+
+{$IFDEF DELPHIXE2UP}
+{%CLASSGROUP 'System.Classes.TPersistent'}
+{$ENDIF}
+
+{$R *.dfm}
+
+uses
+  fLogOnForm;
+
+var
+  gUserId: string = '';
+  gPassword: string = '';
+  gStorePassword: boolean = True;
+const
+  ConnectionString: String = 'User Id=%s;Password="%s"';
+
+procedure TClientDataModule.ClientChannel_OnLoginNeeded(Sender: TROTransportChannel; anException: Exception; var aRetry: Boolean);
+var
+  lUserId: String;
+  lPassword: String;
+  lStorePassword: Boolean;
+begin
+  // Performing login
+  if (Self.LogOn(gUserId, gPassword))  then  begin
+    aRetry := true;
+//    e.LoginSuccessful := true;
+    Exit;
+  end;
+
+  lUserId := '';
+  lPassword := '';
+  lStorePassword := gStorePassword;
+  if not Login(lUserId,lPassword, lStorePassword) then ShowMessage('Login cancelled');
+  gUserId := lUserId;
+  if lStorePassword then gPassword := lPassword else gPassword := '';
+  gStorePassword := lStorePassword;
+
+  if Self.LogOn(lUserId, lPassword)  then  begin
+    aRetry := true;
+//    e.LoginSuccessful := true;
+  end
+  else begin
+    ShowMessage('Login failed');
+  end;
+end;
+
+
+procedure TClientDataModule.LogOff;
+begin
+  if (not fIsLoggedOn) then exit;
+
+  (TBaseLoginService_Proxy.Create('LoginService',Message, ClientChannel) as IBaseLoginService).Logout;
+  fIsLoggedOn := false;
+end;
+
+function TClientDataModule.LogOn(user, password: String): Boolean;
+begin
+  Result := False;
+  if user = '' then Exit;
+  fIsLoggedOn := (TBaseLoginService_Proxy.Create('LoginService', Message, ClientChannel) as IBaseLoginService).LoginEx({$IFDEF CODEGEN4_LEGACYSTRINGS}UTF8Encode{$ENDIF}(CreateConnectionString(user,password)));
+  if fIsLoggedOn then fUserId := user;
+  Result := fIsLoggedOn;
+end;
+
+function TClientDataModule.CreateConnectionstring(aUser, aPassword: string): string;
+begin
+  Result := Format(ConnectionString, [aUser, aPassword]);
+end;
+
+procedure TClientDataModule.DataModuleCreate(Sender: TObject);
+begin
+  InitLogin;
+  inherited;
+end;
+
+procedure TClientDataModule.InitLogin;
+begin
+  if not fisInit then
+  begin
+    fisInit := True;
+    fIsLoggedOn := False;
+  end;
+end;
+
+procedure TClientDataModule.Loaded;
+begin
+  InitLogin;
+  inherited;
+end;
+
+end.

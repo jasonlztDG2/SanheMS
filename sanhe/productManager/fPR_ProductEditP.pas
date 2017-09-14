@@ -1,0 +1,151 @@
+unit fPR_ProductEditP;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
+  dxSkinBlue, dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom,
+  dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
+  dxSkinMetropolisDark, dxSkinMoneyTwins, dxSkinOffice2007Black,
+  dxSkinOffice2007Blue, dxSkinOffice2007Green, dxSkinOffice2007Pink,
+  dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue,
+  dxSkinOffice2010Silver, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinOffice2016Colorful, dxSkinOffice2016Dark,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
+  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, cxTextEdit, cxDBEdit, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
+  uRODynamicRequest, uDAFields, uDADelta, uROComponent, uDAScriptingProvider,
+  uDADataTable, uDAMemDataTable;
+
+type
+  TfPR_ProductEdit = class(TForm)
+    Panel1: TPanel;
+    Panel3: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    cxDBTextEdit1: TcxDBTextEdit;
+    cxDBTextEdit2: TcxDBTextEdit;
+    cxDBTextEdit3: TcxDBTextEdit;
+    cxDBTextEdit4: TcxDBTextEdit;
+    cxDBTextEdit5: TcxDBTextEdit;
+    cxDBTextEdit6: TcxDBTextEdit;
+    cxDBTextEdit7: TcxDBTextEdit;
+    cxDBTextEdit8: TcxDBTextEdit;
+    Label9: TLabel;
+    cxDBTextEdit9: TcxDBTextEdit;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    procedure Button2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fPR_ProductEdit: TfPR_ProductEdit;
+
+implementation
+
+{$R *.dfm}
+uses
+duPubP,fPR_ProductInfoP
+;
+
+
+
+
+procedure TfPR_ProductEdit.Button1Click(Sender: TObject);
+var
+
+  prName:String;
+  index:Integer;
+  prKind:Integer;
+  prType:String;
+  prUnitPrice:String;
+  prStyle:String;
+  prSpec:String;
+  prUnit:String;
+  prColor:String;
+begin
+
+    prName := cxDBTextEdit2.Text;
+    index := ComboBox1.ItemIndex;
+    prType := ComboBox2.Text;
+    prUnitPrice := cxDBTextEdit5.Text;
+    prStyle := cxDBTextEdit6.Text;
+    prSpec := cxDBTextEdit7.Text;
+    prUnit := cxDBTextEdit8.Text;
+    prColor := cxDBTextEdit9.Text;
+
+
+    if prName = '' then
+    begin
+      showmessage('商品名称不能为空');
+      exit;
+    end;
+    if index = -1 then
+    begin
+       showmessage('商品类型不能为空');
+      exit;
+    end;
+    if prType = '' then
+    begin
+       showmessage('商品分类不能为空');
+      exit;
+    end;
+    if prUnitPrice = '' then
+    begin
+       showmessage('商品价格不能为空');
+      exit;
+    end;
+    prKind := Integer(ComboBox1.Items.Objects[index]);
+
+    if duPub.tbl_st_product.Active then
+    begin
+        duPub.tbl_st_product.Edit;
+        duPub.tbl_st_product.fieldbyname('productName').AsString:=prName;
+        duPub.tbl_st_product.fieldbyname('price').AsString:=prUnitPrice;
+        duPub.tbl_st_product.fieldbyname('kind').AsInteger:=prKind;
+        duPub.tbl_st_product.fieldbyname('Style').AsString:=prStyle;
+        duPub.tbl_st_product.fieldbyname('spec').AsString:=prSpec;
+        duPub.tbl_st_product.fieldbyname('color').AsString:=prColor;
+        duPub.tbl_st_product.fieldbyname('unit').AsString:=prUnit;
+        duPub.tbl_st_product.fieldbyname('productType').AsString:=prType;
+        duPub.tbl_st_product.Post;
+        duPub.tbl_st_product.ApplyUpdates(true);
+    end;
+    self.Close;
+end;
+
+procedure TfPR_ProductEdit.Button2Click(Sender: TObject);
+begin
+    self.Close;
+end;
+
+procedure TfPR_ProductEdit.FormCreate(Sender: TObject);
+begin
+    duPub.getKind(ComboBox1);
+    ComboBox1.ItemIndex := strToInt(cxDBTextEdit3.Text) - 1;
+    ComboBox2.Text := cxDBTextEdit4.Text;
+end;
+
+end.

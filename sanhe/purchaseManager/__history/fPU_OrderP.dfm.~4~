@@ -1,0 +1,89 @@
+inherited fPU_Order: TfPU_Order
+  Caption = #37319#36141#35746#21333
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited ToolBar1: TToolBar
+    inherited tb_Browse: TToolButton
+      ExplicitWidth = 46
+    end
+    inherited Tb_Edit: TToolButton
+      ExplicitWidth = 39
+    end
+    inherited tb_Append: TToolButton
+      OnClick = tb_AppendClick
+      ExplicitWidth = 48
+    end
+    inherited tb_revise: TToolButton
+      ExplicitWidth = 43
+    end
+    inherited tb_Copy: TToolButton
+      ExplicitWidth = 39
+    end
+    inherited tb_Delete: TToolButton
+      ExplicitWidth = 42
+    end
+    inherited tb_Filter: TToolButton
+      ExplicitWidth = 39
+    end
+    inherited tb_Unfilter: TToolButton
+      ExplicitWidth = 46
+    end
+  end
+  inherited Panel1: TPanel
+    Height = 123
+    ExplicitHeight = 123
+  end
+  inherited cxGrid1: TcxGrid
+    Top = 177
+    Height = 274
+    inherited cxGrid1DBTableView1: TcxGridDBTableView
+      DataController.DataSource = duPub.ds_pu_order
+      object cxGrid1DBTableView1RecID: TcxGridDBColumn
+        DataBinding.FieldName = 'RecID'
+        Visible = False
+      end
+      object cxGrid1DBTableView1puOrderNum: TcxGridDBColumn
+        DataBinding.FieldName = 'puOrderNum'
+      end
+      object cxGrid1DBTableView1partnerId: TcxGridDBColumn
+        DataBinding.FieldName = 'partnerId'
+        PropertiesClassName = 'TcxLookupComboBoxProperties'
+        Properties.KeyFieldNames = 'ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'name'
+          end>
+        Properties.ListSource = duPub.ds_p_partners
+        Width = 92
+      end
+      object cxGrid1DBTableView1puStatus: TcxGridDBColumn
+        DataBinding.FieldName = 'puStatus'
+        Width = 106
+      end
+      object cxGrid1DBTableView1puOrderDate: TcxGridDBColumn
+        DataBinding.FieldName = 'puOrderDate'
+      end
+      object cxGrid1DBTableView1puCreator: TcxGridDBColumn
+        DataBinding.FieldName = 'puCreator'
+        PropertiesClassName = 'TcxLookupComboBoxProperties'
+        Properties.KeyFieldNames = 'ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'fullName'
+          end>
+        Properties.ListSource = duPub.ds_p_user
+        Width = 79
+      end
+      object cxGrid1DBTableView1puOutAddress: TcxGridDBColumn
+        DataBinding.FieldName = 'puOutAddress'
+      end
+      object cxGrid1DBTableView1amountPay: TcxGridDBColumn
+        DataBinding.FieldName = 'amountPay'
+      end
+      object cxGrid1DBTableView1memo: TcxGridDBColumn
+        DataBinding.FieldName = 'memo'
+      end
+    end
+  end
+end
