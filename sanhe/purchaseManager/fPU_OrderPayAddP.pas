@@ -176,7 +176,7 @@ begin
          oddNumStr := oddNumStr + trim(cxGrid1DBTableView1.DataController.Values[i,1]) + '|';
          qty := strToFloat(cxGrid1DBTableView1.DataController.Values[i,3]);
          price := cxGrid1DBTableView1.DataController.Values[i,4];
-         hadOutQty := strToFloat(cxGrid1DBTableView1.DataController.Values[i,3]);
+         hadOutQty := strToFloat(cxGrid1DBTableView1.DataController.Values[i,8]);
          totalAmount := (qty - hadOutQty) * price;
          qtyStr := qtyStr + floatToStr(qty - hadOutQty) + '|';
          priceStr := priceStr + floatToStr(price) + '|';
@@ -189,7 +189,7 @@ begin
 
      end;
 
-
+     Edit3.Text := qtyStr + '  ' + totalAmountStr;
 
     with duPub.adoquery1 do
     begin
@@ -289,6 +289,7 @@ end;
 procedure TfPU_OrderPayAdd.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     duPub.delNum(Edit1.Text);
+    duPub.tbl_st_instoragedt.Close;
 end;
 
 procedure TfPU_OrderPayAdd.FormCreate(Sender: TObject);

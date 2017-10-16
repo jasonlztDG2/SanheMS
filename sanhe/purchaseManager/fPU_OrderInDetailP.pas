@@ -62,8 +62,11 @@ type
     Edit3: TEdit;
     Label6: TLabel;
     cxDBTextEdit7: TcxDBTextEdit;
+    cxGrid1DBTableView1state: TcxGridDBColumn;
+    cxGrid1DBTableView1hadOutQty: TcxGridDBColumn;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -93,6 +96,12 @@ end;
 procedure TfPU_OrderInDetail.Button1Click(Sender: TObject);
 begin
     self.Close;
+end;
+
+procedure TfPU_OrderInDetail.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+    duPub.tbl_st_instoragedt.Close;
 end;
 
 procedure TfPU_OrderInDetail.FormCreate(Sender: TObject);

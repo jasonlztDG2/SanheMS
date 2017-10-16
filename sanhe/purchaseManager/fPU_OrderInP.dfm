@@ -1,7 +1,6 @@
 inherited fPU_OrderIn: TfPU_OrderIn
   Caption = #37319#36141#20837#24211
   OnCreate = FormCreate
-  ExplicitTop = -127
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
@@ -14,6 +13,7 @@ inherited fPU_OrderIn: TfPU_OrderIn
       ExplicitWidth = 39
     end
     inherited tb_Append: TToolButton
+      Visible = False
       OnClick = tb_AppendClick
       ExplicitWidth = 48
     end

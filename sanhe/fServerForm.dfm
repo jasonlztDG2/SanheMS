@@ -3,8 +3,8 @@ object ServerForm: TServerForm
   Top = 277
   BorderStyle = bsDialog
   Caption = 'Data Abstract for Delphi Server'
-  ClientHeight = 64
-  ClientWidth = 228
+  ClientHeight = 65
+  ClientWidth = 223
   Color = clBtnFace
   ParentFont = True
   OldCreateOrder = False

@@ -12,6 +12,7 @@ object fPU_OrderPayList: TfPU_OrderPayList
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -24,9 +25,6 @@ object fPU_OrderPayList: TfPU_OrderPayList
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -96
-    ExplicitTop = 270
-    ExplicitWidth = 680
     object Button1: TButton
       Left = 25
       Top = 8
@@ -65,8 +63,6 @@ object fPU_OrderPayList: TfPU_OrderPayList
     Height = 319
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 140
-    ExplicitHeight = 222
     object cxGrid1DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       OnCellClick = cxGrid1DBTableView1CellClick
@@ -74,6 +70,7 @@ object fPU_OrderPayList: TfPU_OrderPayList
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
+      OptionsSelection.CellSelect = False
       OptionsView.GroupByBox = False
       object cxGrid1DBTableView1RecID: TcxGridDBColumn
         DataBinding.FieldName = 'RecID'

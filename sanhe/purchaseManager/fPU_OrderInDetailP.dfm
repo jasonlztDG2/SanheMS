@@ -12,6 +12,7 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,8 +23,6 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
     Height = 220
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 277
-    ExplicitHeight = 179
     object cxGrid1DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = duPub.ds_st_instorageDt
@@ -84,6 +83,12 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
             FieldName = 'CompanyName'
           end>
         Properties.ListSource = duPub.ds_st_company
+      end
+      object cxGrid1DBTableView1state: TcxGridDBColumn
+        DataBinding.FieldName = 'state'
+      end
+      object cxGrid1DBTableView1hadOutQty: TcxGridDBColumn
+        DataBinding.FieldName = 'hadOutQty'
       end
     end
     object cxGrid1Level1: TcxGridLevel
@@ -393,7 +398,6 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
-    ExplicitTop = 243
     object Label7: TLabel
       Left = 28
       Top = 8

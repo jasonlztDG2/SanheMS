@@ -48,6 +48,7 @@ type
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
     procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -60,6 +61,7 @@ type
 var
   fPU_OrderPayList: TfPU_OrderPayList;
   orderdtListID: TStringList;
+  closeType : Integer;
 
 implementation
 
@@ -112,6 +114,7 @@ procedure TfPU_OrderPayList.Button1Click(Sender: TObject);
 var
 row : Integer;
 begin
+     closeType := 1;
      row := cxGrid1DBTableView1.DataController.FocusedRecordIndex;
       if row < 0 then
       exit;
@@ -123,6 +126,7 @@ end;
 
 procedure TfPU_OrderPayList.Button3Click(Sender: TObject);
 begin
+    closeType := 2;
     self.Close;
 end;
 
@@ -148,10 +152,21 @@ begin
 
 end;
 
+procedure TfPU_OrderPayList.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+     if closeType <> 1 then
+     begin
+        duPub.tbl_st_instoragedt.Close;
+     end;
+
+end;
+
 procedure TfPU_OrderPayList.FormCreate(Sender: TObject);
 var
 selectList : TStringList;
 begin
+     closeType := 0;
      selectList := TStringList.Create;
      orderdtListID := TStringList.Create;
      dupub.setSelectData(selectList,'state','´ý¸¶¿î',dboEqual);
