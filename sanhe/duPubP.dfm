@@ -219,7 +219,7 @@ object duPub: TduPub
     Left = 142
     Top = 59
     Bitmap = {
-      494C01010C004400740120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010C0044007C0120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008000000001002000000000000000
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3234,11 +3234,6 @@ object duPub: TduPub
         DecimalPrecision = 18
         DecimalScale = 4
         Required = True
-      end
-      item
-        Name = 'idCardNum'
-        DataType = datWideString
-        Size = 50
       end>
     LogicalName = 'st_repertory'
     Params = <>
@@ -3629,5 +3624,162 @@ object duPub: TduPub
     DataTable = tbl_tr_tradingProofDt
     Left = 584
     Top = 608
+  end
+  object tbl_st_outstorage: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'st_outstorage'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'outCode'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'outType'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'locationId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'companyId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'oddNo'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'outUser'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'outDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'operator'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'operatorDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'outState'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'memo'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'st_outstorage'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 32
+    Top = 680
+  end
+  object ds_st_outstorage: TDADataSource
+    DataSet = tbl_st_outstorage.Dataset
+    DataTable = tbl_st_outstorage
+    Left = 32
+    Top = 616
+  end
+  object tbl_st_outstorageDt: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'st_outstorageDt'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'outCode'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'productId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'locationId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'companyId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'qty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'price'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'status'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'hadInQty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+      end
+      item
+        Name = 'partnersId'
+        DataType = datInteger
+      end>
+    LogicalName = 'st_outstorageDt'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 128
+    Top = 688
+  end
+  object ds_st_outstorageDt: TDADataSource
+    DataSet = tbl_st_outstorageDt.Dataset
+    DataTable = tbl_st_outstorageDt
+    Left = 128
+    Top = 616
   end
 end

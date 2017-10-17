@@ -1192,10 +1192,6 @@ object DataService: TDataService
               item
                 DatasetField = 'qty'
                 TableField = 'qty'
-              end
-              item
-                DatasetField = 'idCardNum'
-                TableField = 'idCardNum'
               end>
           end>
         Name = 'st_repertory'
@@ -1230,11 +1226,6 @@ object DataService: TDataService
             DecimalPrecision = 18
             DecimalScale = 4
             Required = True
-          end
-          item
-            Name = 'idCardNum'
-            DataType = datWideString
-            Size = 50
           end>
       end
       item
@@ -1788,6 +1779,249 @@ object DataService: TDataService
             Name = 'status'
             DataType = datWideString
             Size = 20
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_outstorageDt'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'outCode'
+                TableField = 'outCode'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'locationId'
+                TableField = 'locationId'
+              end
+              item
+                DatasetField = 'companyId'
+                TableField = 'companyId'
+              end
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end
+              item
+                DatasetField = 'price'
+                TableField = 'price'
+              end
+              item
+                DatasetField = 'status'
+                TableField = 'status'
+              end
+              item
+                DatasetField = 'hadInQty'
+                TableField = 'hadInQty'
+              end
+              item
+                DatasetField = 'partnersId'
+                TableField = 'partnersId'
+              end>
+          end>
+        Name = 'st_outstorageDt'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_outstorageDt'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'outCode'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'locationId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'companyId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'qty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'price'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'status'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'hadInQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+          end
+          item
+            Name = 'partnersId'
+            DataType = datInteger
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_outstorage'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'outCode'
+                TableField = 'outCode'
+              end
+              item
+                DatasetField = 'outType'
+                TableField = 'outType'
+              end
+              item
+                DatasetField = 'locationId'
+                TableField = 'locationId'
+              end
+              item
+                DatasetField = 'companyId'
+                TableField = 'companyId'
+              end
+              item
+                DatasetField = 'oddNo'
+                TableField = 'oddNo'
+              end
+              item
+                DatasetField = 'outUser'
+                TableField = 'outUser'
+              end
+              item
+                DatasetField = 'outDate'
+                TableField = 'outDate'
+              end
+              item
+                DatasetField = 'operator'
+                TableField = 'operator'
+              end
+              item
+                DatasetField = 'operatorDate'
+                TableField = 'operatorDate'
+              end
+              item
+                DatasetField = 'outState'
+                TableField = 'outState'
+              end
+              item
+                DatasetField = 'memo'
+                TableField = 'memo'
+              end>
+          end>
+        Name = 'st_outstorage'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_outstorage'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'outCode'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'outType'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'locationId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'companyId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'oddNo'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'outUser'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'outDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'operator'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'operatorDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'outState'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'memo'
+            DataType = datWideString
+            Size = 50
           end>
       end>
     JoinDataTables = <>

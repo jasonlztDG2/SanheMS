@@ -24,7 +24,7 @@ uses
   cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, uDAFields,
   uDADataTable, cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.ComCtrls, Vcl.ToolWin;
+  Vcl.ComCtrls, Vcl.ToolWin, cxDBLookupComboBox;
 
 type
   TfST_StoageProduct = class(Tfbase1)
@@ -34,7 +34,8 @@ type
     cxGrid1DBTableView1locationId: TcxGridDBColumn;
     cxGrid1DBTableView1companyId: TcxGridDBColumn;
     cxGrid1DBTableView1qty: TcxGridDBColumn;
-    cxGrid1DBTableView1idCardNum: TcxGridDBColumn;
+    procedure FormCreate(Sender: TObject);
+    procedure tb_BrowseClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,5 +51,24 @@ implementation
 uses
 duPubP
 ;
+
+procedure TfST_StoageProduct.FormCreate(Sender: TObject);
+begin
+  inherited;
+    duPub.tbl_st_repertory.Close;
+    duPub.tbl_st_repertory.Open;
+    duPub.tbl_st_product.Close;
+    duPub.tbl_st_product.Open;
+    duPub.tbl_st_company.Close;
+    duPub.tbl_st_company.Open;
+    duPub.tbl_st_location.Close;
+    duPub.tbl_st_location.Open;
+end;
+
+procedure TfST_StoageProduct.tb_BrowseClick(Sender: TObject);
+begin
+  inherited;
+      //sdfg
+end;
 
 end.

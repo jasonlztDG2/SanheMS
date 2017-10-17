@@ -69,11 +69,11 @@ type
   end;
 
   IDataService_Async = interface(DataAbstract4_intf.IDataAbstractService_Async)
-  ['{09B19E24-4B8F-4112-A613-B5FCA7F6D55E}']
+  ['{982BEA42-AC57-4842-8555-06085E078203}']
   end;
 
   IDataService_AsyncEx = interface(DataAbstract4_intf.IDataAbstractService_AsyncEx)
-  ['{4E155D03-2C33-444A-B09E-916FD41EE64C}']
+  ['{D69C4C8F-DF0E-4D9F-9AAB-6151923EE26F}']
   end;
 
   CoDataService = class(System.TObject)
@@ -117,11 +117,11 @@ type
   end;
 
   ILoginService_Async = interface(DataAbstract4_intf.ISimpleLoginService_Async)
-  ['{83355E59-41E3-49AF-ABF8-B8C40DD4A4BF}']
+  ['{873852F5-A3A7-4990-851C-86842567CA7A}']
   end;
 
   ILoginService_AsyncEx = interface(DataAbstract4_intf.ISimpleLoginService_AsyncEx)
-  ['{4D1DFDA7-7753-444E-BCE3-4A2AF53518E5}']
+  ['{5970D2DE-135E-47AA-8BE2-0EFBD9F9F9CC}']
   end;
 
   CoLoginService = class(System.TObject)
@@ -186,7 +186,7 @@ type
   end;
 
   IAndroidService_Async = interface(IROAsyncInterface)
-  ['{B644562F-E144-4F58-8C8C-ECB4F4DC80EB}']
+  ['{983395D6-B11D-4943-9F07-0CA4492F3208}']
     procedure Invoke_sum(const a: Integer; const b: Integer);
     procedure Invoke_getNum(const proNum: UnicodeString; const intoNum: UnicodeString);
     procedure Invoke_getOrderData(const puStatus: UnicodeString);
@@ -224,7 +224,7 @@ type
   end;
 
   IAndroidService_AsyncEx = interface(IROAsyncInterfaceEx)
-  ['{FC449F01-F4DD-46F7-8DFA-C48D973F5B02}']
+  ['{8E553258-FE12-48B5-9816-8763451C756A}']
     function Beginsum(const a: Integer; const b: Integer; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetNum(const proNum: UnicodeString; const intoNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetOrderData(const puStatus: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;

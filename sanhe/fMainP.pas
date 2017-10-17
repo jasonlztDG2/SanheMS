@@ -187,6 +187,7 @@ type
     procedure actPU_OrderInExecute(Sender: TObject);
     procedure acPU_OrderPayExecute(Sender: TObject);
     procedure actST_StorageProductExecute(Sender: TObject);
+    procedure acPU_OrderRetunExecute(Sender: TObject);
     
   public
     { Public declarations }
@@ -201,7 +202,7 @@ implementation
 uses
 //  fClientDataModule,
    fPartnerP,fBA_SetKindP,fBA_CompanyP,fBA_LocationP,fPR_ProductInfoP,fPU_OrderP,
-   fBA_UserP,fPU_OrderInP,fPU_OrderPayP,fST_StoageProductP,
+   fBA_UserP,fPU_OrderInP,fPU_OrderPayP,fST_StoageProductP,fPU_OrderBackP,
    duPubP
    ;
 
@@ -234,6 +235,11 @@ end;
 procedure TfMain.acPU_OrderPayExecute(Sender: TObject);
 begin
     createChildForm(TfPU_OrderPay);
+end;
+
+procedure TfMain.acPU_OrderRetunExecute(Sender: TObject);
+begin
+     createChildForm(TfPU_OrderBack);
 end;
 
 procedure TfMain.actBA_CompanyExecute(Sender: TObject);

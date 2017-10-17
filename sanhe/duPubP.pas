@@ -72,6 +72,10 @@ type
     ds_tr_tradingProof: TDADataSource;
     tbl_tr_tradingProofDt: TDAMemDataTable;
     ds_tr_tradingProofDt: TDADataSource;
+    tbl_st_outstorage: TDAMemDataTable;
+    ds_st_outstorage: TDADataSource;
+    tbl_st_outstorageDt: TDAMemDataTable;
+    ds_st_outstorageDt: TDADataSource;
 
     procedure ClientChannel_OnLoginNeeded(Sender: TROTransportChannel; anException: Exception; var aRetry: Boolean);
     procedure DataModuleCreate(Sender: TObject);

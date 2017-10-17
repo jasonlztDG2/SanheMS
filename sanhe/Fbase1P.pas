@@ -59,6 +59,7 @@ type
     procedure tb_ExitClick(Sender: TObject);
     procedure tb_FilterClick(Sender: TObject);
     procedure tb_UnfilterClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -74,6 +75,11 @@ implementation
 
 uses
 duPubP;
+
+procedure Tfbase1.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+     action:=TcloseAction.caFree;
+end;
 
 procedure Tfbase1.tb_ExitClick(Sender: TObject);
 begin

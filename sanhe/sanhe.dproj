@@ -258,6 +258,14 @@
             <Form>fST_StoageProduct</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="purchaseManager\fPU_OrderBackP.pas">
+            <Form>fPU_OrderBack</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="purchaseManager\fPU_OrderBackDetailP.pas">
+            <Form>fPU_OrderBackDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="sanhe.remoteRODL"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

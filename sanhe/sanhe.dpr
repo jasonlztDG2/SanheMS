@@ -38,7 +38,9 @@ uses
   fPU_OrderPayAddP in 'purchaseManager\fPU_OrderPayAddP.pas' {fPU_OrderPayAdd},
   fPU_OrderPayListP in 'purchaseManager\fPU_OrderPayListP.pas' {fPU_OrderPayList},
   fPU_OrderPayDetailP in 'purchaseManager\fPU_OrderPayDetailP.pas' {fPU_OrderPayDetail},
-  fST_StoageProductP in 'stoageManager\fST_StoageProductP.pas' {fST_StoageProduct};
+  fST_StoageProductP in 'stoageManager\fST_StoageProductP.pas' {fST_StoageProduct},
+  fPU_OrderBackP in 'purchaseManager\fPU_OrderBackP.pas' {fPU_OrderBack},
+  fPU_OrderBackDetailP in 'purchaseManager\fPU_OrderBackDetailP.pas' {fPU_OrderBackDetail};
 
 {$R *.res}
 
@@ -51,8 +53,8 @@ begin
   fLogin:=TFlogin.Create(nil);
   if Flogin.ShowModal=mrOK  then
   begin
-   application.CreateForm(Tfmain,fMain);
-  fmain.Show;
+   aApplication.CreateForm(TfMain, fMain);
+  main.Show;
   Application.Run;
   end
   else
