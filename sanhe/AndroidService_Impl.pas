@@ -47,16 +47,17 @@ type
     function addInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString; const userId: UnicodeString;
                           const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString; const memo: UnicodeString; const partnersId: UnicodeString;
                           const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString;
-                          const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString;
-                          const qtyDetailAllStr: UnicodeString): string;
-    function addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
+                          const idCardNumAllStr: UnicodeString): string;
+   function addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
                           const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
-                          const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString;
-                          const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString; const repertoryIdStr: UnicodeString;
-                          const updateQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString; const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString): string;
+                          const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString;
+                           const idCardNumStr: UnicodeString;const oddDtIdStr: UnicodeString): string;
     function getInstorageData(const inState: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString): string;
     function getInstorageDt(const inCode: UnicodeString): string;
-    function getInCode(const inCode: UnicodeString): string;
+    function getInCode(const idCardNum: UnicodeString): string;
+    function getProduct: string;
+    function checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
+                     const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString): string;
 
 
     function ToUTF8Encode(str: string): string;
@@ -170,11 +171,11 @@ begin
      While Not adoquery1.Eof Do
      begin
          order := TJSONObject.Create;
-         order.AddPair( TJSONPair.Create('puOrderNum',adoquery1.FieldByName('puOrderNum').AsString));
-         order.AddPair( TJSONPair.Create('partnerId',adoquery1.FieldByName('partnerId').AsString));
-         order.AddPair( TJSONPair.Create('name',adoquery1.FieldByName('name').AsString));
-         order.AddPair( TJSONPair.Create('company',adoquery1.FieldByName('company').AsString));
-         order.AddPair( TJSONPair.Create('fullName',adoquery1.FieldByName('fullName').AsString));
+         order.AddPair( TJSONPair.Create('puOrderNum',adoquery1.FieldByName('puOrderNum').AsString.Trim));
+         order.AddPair( TJSONPair.Create('partnerId',adoquery1.FieldByName('partnerId').AsString.Trim));
+         order.AddPair( TJSONPair.Create('name',adoquery1.FieldByName('name').AsString.Trim));
+         order.AddPair( TJSONPair.Create('company',adoquery1.FieldByName('company').AsString.Trim));
+         order.AddPair( TJSONPair.Create('fullName',adoquery1.FieldByName('fullName').AsString.Trim));
          team.AddElement(order);
          adoquery1.Next;
      end;
@@ -209,12 +210,12 @@ begin
      While Not adoquery1.Eof Do
      begin
          order := TJSONObject.Create;
-         order.AddPair( TJSONPair.Create('productName',adoquery1.FieldByName('productName').AsString));
-         order.AddPair( TJSONPair.Create('qty',adoquery1.FieldByName('qty').AsString));
-         order.AddPair( TJSONPair.Create('price',adoquery1.FieldByName('price').AsString));
-         order.AddPair( TJSONPair.Create('productID',adoquery1.FieldByName('productID').AsString));
-         order.AddPair( TJSONPair.Create('id',adoquery1.FieldByName('id').AsString));
-         order.AddPair( TJSONPair.Create('hadInQty',adoquery1.FieldByName('hadInQty').AsString));
+         order.AddPair( TJSONPair.Create('productName',adoquery1.FieldByName('productName').AsString.Trim));
+         order.AddPair( TJSONPair.Create('qty',adoquery1.FieldByName('qty').AsString.Trim));
+         order.AddPair( TJSONPair.Create('price',adoquery1.FieldByName('price').AsString.Trim));
+         order.AddPair( TJSONPair.Create('productID',adoquery1.FieldByName('productID').AsString.Trim));
+         order.AddPair( TJSONPair.Create('id',adoquery1.FieldByName('id').AsString.Trim));
+         order.AddPair( TJSONPair.Create('puOrderNum',adoquery1.FieldByName('puOrderNum').AsString.Trim));
          team.AddElement(order);
          adoquery1.Next;
      end;
@@ -277,23 +278,29 @@ A : Array of String;//定义动态数组
 begin
      all := TJSONObject.Create;
     team := TJSONArray.Create();
-    all.AddPair('data',team);
+    all.AddPair('InstorageDt',team);
 
     with self.adoquery1 do
     begin
           close;
-          if inCode = '' then
-           sql.Add('SELECT *,st_repertory.id as repertoryId,st_instorageDt.qty as dtQty,'+
-               'st_repertory.qty as stQty FROM st_instorageDt,st_product,' +
-           'st_repertory where st_instorageDt.productId=st_product.productId and '+
-           'st_instorageDt.productId=st_repertory.productId  and st_instorageDt.locationId=st_repertory.locationId'+
-           ' and st_instorageDt.companyId=st_repertory.companyId')
-          else
-          sql.Add('SELECT *,st_repertory.id as repertoryId,st_instorageDt.qty as dtQty,'+
-               'st_repertory.qty as stQty FROM st_instorageDt,st_product,' +
-           'st_repertory where st_instorageDt.productId=st_product.productId and '+
-           'st_instorageDt.productId=st_repertory.productId  and st_instorageDt.locationId=st_repertory.locationId'+
-           ' and st_instorageDt.companyId=st_repertory.companyId and inCode='''+inCode+''' and state=N''待付款''');
+//          if inCode = '' then
+//           sql.Add('SELECT *,st_repertory.id as repertoryId,st_instorageDt.qty as dtQty,'+
+//               'st_repertory.qty as stQty FROM st_instorageDt,st_product,' +
+//           'st_repertory where st_instorageDt.productId=st_product.productId and '+
+//           'st_instorageDt.productId=st_repertory.productId  and st_instorageDt.locationId=st_repertory.locationId'+
+//           ' and st_instorageDt.companyId=st_repertory.companyId')
+//          else
+//          sql.Add('SELECT *,st_repertory.id as repertoryId,st_instorageDt.qty as dtQty,'+
+//               'st_repertory.qty as stQty FROM st_instorageDt,st_product,' +
+//           'st_repertory where st_instorageDt.productId=st_product.productId and '+
+//           'st_instorageDt.productId=st_repertory.productId  and st_instorageDt.locationId=st_repertory.locationId'+
+//           ' and st_instorageDt.companyId=st_repertory.companyId and inCode='''+inCode+''' and state=N''待付款''');
+             if inCode = '' then
+                 sql.Add('SELECT * FROM st_instorageDt,st_product where st_instorageDt.productId=st_product.productId')
+             else
+                 sql.Add('SELECT * FROM st_instorageDt,st_product'+
+                          ' where st_instorageDt.productId=st_product.productId' +
+                          ' and inCode=''' +inCode+''' and state=N''待付款''');
           open;
      end;
      Setlength(A,adoquery1.RecordCount);
@@ -302,24 +309,23 @@ begin
      While Not adoquery1.Eof Do
      begin
          ob := TJSONObject.Create;
-         ob.AddPair( TJSONPair.Create('productName',adoquery1.FieldByName('productName').AsString));
-         ob.AddPair( TJSONPair.Create('dtQty',adoquery1.FieldByName('dtQty').AsString));
-         ob.AddPair( TJSONPair.Create('stQty',adoquery1.FieldByName('stQty').AsString));
-         ob.AddPair( TJSONPair.Create('price',adoquery1.FieldByName('price').AsString));
-         ob.AddPair( TJSONPair.Create('productID',adoquery1.FieldByName('productID').AsString));
-         ob.AddPair( TJSONPair.Create('id',adoquery1.FieldByName('id').AsString));
-         ob.AddPair( TJSONPair.Create('hadOutQty',adoquery1.FieldByName('hadOutQty').AsString));
-         ob.AddPair( TJSONPair.Create('repertoryId',adoquery1.FieldByName('repertoryId').AsString));
-         ob.AddPair( TJSONPair.Create('partnersId',adoquery1.FieldByName('partnersId').AsString));
-         ob.AddPair( TJSONPair.Create('locationId',adoquery1.FieldByName('locationId').AsString));
-         ob.AddPair( TJSONPair.Create('companyId',adoquery1.FieldByName('companyId').AsString));
+         ob.AddPair( TJSONPair.Create('productName',adoquery1.FieldByName('productName').AsString.Trim));
+         ob.AddPair( TJSONPair.Create('qty',adoquery1.FieldByName('qty').AsString.Trim));
+         ob.AddPair( TJSONPair.Create('price',adoquery1.FieldByName('price').AsString.Trim));
+         ob.AddPair( TJSONPair.Create('productID',adoquery1.FieldByName('productID').AsString.Trim));
+         ob.AddPair( TJSONPair.Create('dtId',adoquery1.FieldByName('id').AsString.Trim));
+         ob.AddPair( TJSONPair.Create('oddDtId',adoquery1.FieldByName('oddDtId').AsString.Trim));
+         ob.AddPair( TJSONPair.Create('inCode',adoquery1.FieldByName('inCode').AsString.Trim));
+         ob.AddPair( TJSONPair.Create('partnersId',adoquery1.FieldByName('partnersId').AsString.Trim));
+         ob.AddPair( TJSONPair.Create('locationId',adoquery1.FieldByName('locationId').AsString.Trim));
+         ob.AddPair( TJSONPair.Create('companyId',adoquery1.FieldByName('companyId').AsString.Trim));
          team.AddElement(ob);
          adoquery1.Next;
      end;
      result := all.ToString;
 end;
-
-function TAndroidService.getInCode(const inCode: UnicodeString): string;
+ //获取有效的记录详情
+function TAndroidService.getInCode(const idCardNum: UnicodeString): string;
   var
 A : Array of String;//定义动态数组
   all: TJSONObject;
@@ -333,10 +339,12 @@ begin
     with self.adoquery1 do
     begin
           close;
-          if inCode = '' then
-           sql.Add('SELECT * FROM st_repertoryDetail')
+          if idCardNum = '' then
+            sql.Add('select * from st_repertoryDetail as dt where ' +
+           ' dt.idCardNum!='''' and dt.inCode!=''''')
           else
-          sql.Add('SELECT * FROM st_repertoryDetail where inCode='''+inCode+'''');
+            sql.Add('select * from st_repertoryDetail as dt where ' +
+           ' dt.idCardNum!=''' + idCardNum + '''  and dt.inCode!=''''');
           open;
      end;
      Setlength(A,adoquery1.RecordCount);
@@ -345,11 +353,15 @@ begin
      While Not adoquery1.Eof Do
      begin
          ob := TJSONObject.Create;
-         ob.AddPair( TJSONPair.Create('id',adoquery1.FieldByName('id').AsString));
-         ob.AddPair( TJSONPair.Create('repertoryId',adoquery1.FieldByName('repertoryId').AsString));
+         ob.AddPair( TJSONPair.Create('id',adoquery1.FieldByName('ID').AsString));
          ob.AddPair( TJSONPair.Create('idCardNum',adoquery1.FieldByName('idCardNum').AsString));
          ob.AddPair( TJSONPair.Create('qty',adoquery1.FieldByName('qty').AsString));
          ob.AddPair( TJSONPair.Create('inCode',adoquery1.FieldByName('incode').AsString));
+         ob.AddPair( TJSONPair.Create('dtId',adoquery1.FieldByName('dtId').AsString));
+         ob.AddPair( TJSONPair.Create('productId',adoquery1.FieldByName('productId').AsString));
+         ob.AddPair( TJSONPair.Create('locationId',adoquery1.FieldByName('locationId').AsString));
+         ob.AddPair( TJSONPair.Create('companyId',adoquery1.FieldByName('companyId').AsString));
+         ob.AddPair( TJSONPair.Create('recordType',adoquery1.FieldByName('recordType').AsString));
          team.AddElement(ob);
          adoquery1.Next;
      end;
@@ -420,6 +432,39 @@ begin
 
 end;
 
+function TAndroidService.getProduct: string;
+var
+A : Array of String;//定义动态数组
+  all: TJSONObject;
+  team: TJSONArray;
+  ob: TJSONObject;
+begin
+     all := TJSONObject.Create;
+    team := TJSONArray.Create();
+    all.AddPair('product',team);
+
+    with self.adoquery1 do
+    begin
+          close;
+          sql.Add('select * from st_product');
+//          sql.Add('select * from st_product where productType=N''材料''');
+          open;
+     end;
+     Setlength(A,adoquery1.RecordCount);
+     adoquery1.First;
+
+   While Not adoquery1.Eof Do
+     begin
+         ob := TJSONObject.Create;
+         ob.AddPair( TJSONPair.Create('productId',adoquery1.FieldByName('productId').AsString));
+         ob.AddPair( TJSONPair.Create('productName',adoquery1.FieldByName('productName').AsString));
+         team.AddElement(ob);
+         adoquery1.Next;
+     end;
+     result := all.ToString;
+
+end;
+
 function TAndroidService.getUser: string;
 var
 A : Array of String;//定义动态数组
@@ -457,8 +502,7 @@ end;
 function TAndroidService.addInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString; const userId: UnicodeString;
                           const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString; const memo: UnicodeString; const partnersId: UnicodeString;
                           const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString;
-                          const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString;
-                          const qtyDetailAllStr: UnicodeString): string;
+                          const idCardNumAllStr: UnicodeString): string;
 begin
   with self.adoquery1 do
     begin
@@ -466,10 +510,10 @@ begin
           sql.Clear;
           parameters.Clear;
           sql.Add('exec addInstorage :@inCode,:@inType,:@locationId,:@companyId,:@inDate,'
-                  + ':@consignee,:@operator,:@inState,:@oddNo,:@department,:@memo,'
-                  + ':@partnersId,:@productIdStr,:@qtyStr,:@priceStr,:@locationIdStr,'
-                  + ':@companyIdStr,:@stateStr,:@puOrderNum,:@orderDtIdStr,'
-                  + ':@StateUpdateStr,:@hadInQtyStr,:@idCardNumAllStr,:@qtyDetailAllStr,:@successResult output'
+                  + ':@consignee,:@operator,:@inState,:@department,:@memo,'
+                  + ':@partnersIdStr,:@productIdStr,:@qtyStr,:@priceStr,:@locationIdStr,'
+                  + ':@companyIdStr,:@stateStr,:@oddStr,'
+                  + ':@idCardNumAllStr,:@successResult output'
                   );//这就是调用存储过程
           parameters.Items[0].Value := inCode;
           parameters.Items[1].Value := inType;
@@ -479,79 +523,87 @@ begin
           parameters.Items[5].Value := userId;
           parameters.Items[6].Value := operatorId;
           parameters.Items[7].Value := inState;
-          parameters.Items[8].Value := oddNo;
-          parameters.Items[9].Value := department;
-          parameters.Items[10].Value := memo;
-          parameters.Items[11].Value := partnersId;
-          parameters.Items[12].Value := productIdStr;
-          parameters.Items[13].Value := qtyStr;
-          parameters.Items[14].Value := priceStr;
-          parameters.Items[15].Value := locationIdStr;
-          parameters.Items[16].Value := companyIdStr;
-          parameters.Items[17].Value := stateStr;
-          parameters.Items[18].Value := puOrderNum;
-          parameters.Items[19].Value := orderDtIdStr;
-          parameters.Items[20].Value := StateUpdateStr;
-          parameters.Items[21].Value := hadInQtyStr;
-          parameters.Items[22].Value := idCardNumAllStr;
-          parameters.Items[23].Value := qtyDetailAllStr;
+          parameters.Items[8].Value := department;
+          parameters.Items[9].Value := memo;
+          parameters.Items[10].Value := partnersId;
+          parameters.Items[11].Value := productIdStr;
+          parameters.Items[12].Value := qtyStr;
+          parameters.Items[13].Value := priceStr;
+          parameters.Items[14].Value := locationIdStr;
+          parameters.Items[15].Value := companyIdStr;
+          parameters.Items[16].Value := stateStr;
+          parameters.Items[17].Value := oddNo;
+          parameters.Items[18].Value := idCardNumAllStr;
           execsql;
-          result := parameters.Items[24].Value;
+          result := parameters.Items[19].Value;
      end;
 end;
 
 
-function TAndroidService.addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
+function TAndroidService.addOrderBack(const outCode: UnicodeString; const outType: UnicodeString;const oddNo: UnicodeString; const outUser: UnicodeString;
                           const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
-                          const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString;
-                          const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString; const repertoryIdStr: UnicodeString;
-                          const updateQtyStr: UnicodeString;  const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString; const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString): string;
-
+                          const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString;
+                           const idCardNumStr: UnicodeString;const oddDtIdStr: UnicodeString): string;
 begin
      with self.adoquery1 do
      begin
         close;
         sql.Clear;
         parameters.Clear;
-        sql.Add( 'exec addOrderBack :@outCode,:@outType,:@locationId,:@companyId,:@oddNo,'
-         + ':@outUser,:@outDate,:@operator,:@outState,:@memo,:@productIdStr,:locationIdStr,'
-        + ':@companyIdStr,:@qtyStr,:@priceStr,:@stateStr,:@hadInQtyStr,:@partnersId,:inCode,'
-        + ':@InstorageDtIdStr,:@StateUpdateStr,:@hadOutQtyStr,:@updateState,:@repertoryIdStr,'
-        + ':@updateQtyStr,:@idCardNumStr,:@detailStr,:@detailQtyStr,:@recordType,:@updateRepertoryQtyStr,:@successResult output'
+        sql.Add( 'exec addOrderBack :@outCode,:@outType,:@outUser,:@outDate,:@operator,'
+         + ':@outState,:@memo,:@productIdStr,:locationIdStr,:@companyIdStr,:@qtyStr,'
+        + ':@priceStr,:@stateStr,:@partnersId,:@oddNo,:@oddDtIdStr,:@idCardNumStr,:@successResult output'
         );
 
         parameters.Items[0].Value := outCode;
           parameters.Items[1].Value := outType;
-          parameters.Items[2].Value := locationId;
-          parameters.Items[3].Value := companyId;
-          parameters.Items[4].Value := oddNo;
-          parameters.Items[5].Value := outUser;
-          parameters.Items[6].Value := outDate;
-          parameters.Items[7].Value := operatorId;
-          parameters.Items[8].Value := outState;
-          parameters.Items[9].Value := memo;
-          parameters.Items[10].Value := productIdStr;
-          parameters.Items[11].Value := locationIdStr;
-          parameters.Items[12].Value := companyIdStr;
-          parameters.Items[13].Value := qtyStr;
-          parameters.Items[14].Value := priceStr;
-          parameters.Items[15].Value := stateStr;
-          parameters.Items[16].Value := hadInQtyStr;
-          parameters.Items[17].Value := partnersId;
-          parameters.Items[18].Value := inCode;
-          parameters.Items[19].Value := InstorageDtIdStr;
-          parameters.Items[20].Value := StateUpdateStr;
-          parameters.Items[21].Value := hadOutQtyStr;
-          parameters.Items[22].Value := updateState;
-          parameters.Items[23].Value := repertoryIdStr;
-          parameters.Items[24].Value := updateQtyStr;
-          parameters.Items[25].Value := idCardNumStr;
-          parameters.Items[26].Value := detailStr;
-          parameters.Items[27].Value := detailQtyStr;
-          parameters.Items[28].Value := recordType;
-          parameters.Items[29].Value := updateRepertoryQtyStr;
+          parameters.Items[2].Value := outUser;
+          parameters.Items[3].Value := outDate;
+          parameters.Items[4].Value := operatorId;
+          parameters.Items[5].Value := outState;
+          parameters.Items[6].Value := memo;
+          parameters.Items[7].Value := productIdStr;
+          parameters.Items[8].Value := locationIdStr;
+          parameters.Items[9].Value := companyIdStr;
+          parameters.Items[10].Value := qtyStr;
+          parameters.Items[11].Value := priceStr;
+          parameters.Items[12].Value := stateStr;
+          parameters.Items[13].Value := partnersId;
+          parameters.Items[14].Value := oddNo;
+          parameters.Items[15].Value := oddDtIdStr;
+          parameters.Items[16].Value := idCardNumStr;
           execsql;
-          result := parameters.Items[30].Value;
+          result := parameters.Items[17].Value;
+     end;
+end;
+
+function TAndroidService.checkSt(const checkNum: UnicodeString; const checkUser: Integer;
+const memo: UnicodeString; const repertoryIdStr: UnicodeString;
+const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
+const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString;
+const detailQtyStr: UnicodeString): string;
+begin
+     with self.adoquery1 do
+     begin
+        close;
+        sql.Clear;
+        parameters.Clear;
+        sql.Add( 'exec addCheck :@checkNum,:@checkUser,:@memo,:@repertoryIdStr,'
+         + ':@checkdtQtyStr,:@checkdtProfitStr,:@idCardNumStr,:recordTypeStr,'
+        + ':@repertoryQtyStr,:@successResult output'
+        );
+
+        parameters.Items[0].Value := checkNum;
+          parameters.Items[1].Value := checkUser;
+          parameters.Items[2].Value := memo;
+          parameters.Items[3].Value := repertoryIdStr;
+          parameters.Items[4].Value := checkdtQtyStr;
+          parameters.Items[5].Value := checkdtProfitStr;
+          parameters.Items[6].Value := idCardNumStr;
+          parameters.Items[7].Value := recordTypeStr;
+          parameters.Items[8].Value := detailQtyStr;
+          execsql;
+          result := parameters.Items[9].Value;
      end;
 end;
 

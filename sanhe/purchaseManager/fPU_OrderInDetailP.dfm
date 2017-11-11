@@ -18,9 +18,9 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
   TextHeight = 13
   object cxGrid1: TcxGrid
     Left = 0
-    Top = 236
+    Top = 187
     Width = 584
-    Height = 220
+    Height = 269
     Align = alClient
     TabOrder = 0
     object cxGrid1DBTableView1: TcxGridDBTableView
@@ -29,7 +29,6 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
-      OptionsSelection.CellSelect = False
       OptionsView.GroupByBox = False
       object cxGrid1DBTableView1RecID: TcxGridDBColumn
         DataBinding.FieldName = 'RecID'
@@ -37,6 +36,8 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       end
       object cxGrid1DBTableView1inCode: TcxGridDBColumn
         DataBinding.FieldName = 'inCode'
+        Options.Editing = False
+        Options.Filtering = False
       end
       object cxGrid1DBTableView1partnersId: TcxGridDBColumn
         DataBinding.FieldName = 'partnersId'
@@ -47,6 +48,8 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
             FieldName = 'name'
           end>
         Properties.ListSource = duPub.ds_p_partners
+        Options.Editing = False
+        Options.Filtering = False
       end
       object cxGrid1DBTableView1productId: TcxGridDBColumn
         DataBinding.FieldName = 'productId'
@@ -57,12 +60,21 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
             FieldName = 'productName'
           end>
         Properties.ListSource = duPub.ds_st_product
+        Options.Editing = False
+        Options.Filtering = False
       end
       object cxGrid1DBTableView1qty: TcxGridDBColumn
         DataBinding.FieldName = 'qty'
+        Options.Filtering = False
       end
       object cxGrid1DBTableView1price: TcxGridDBColumn
         DataBinding.FieldName = 'price'
+        Options.Editing = False
+        Options.Filtering = False
+      end
+      object cxGrid1DBTableView1state: TcxGridDBColumn
+        DataBinding.FieldName = 'state'
+        Options.Filtering = False
       end
       object cxGrid1DBTableView1locationId: TcxGridDBColumn
         DataBinding.FieldName = 'locationId'
@@ -73,6 +85,8 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
             FieldName = 'locationName'
           end>
         Properties.ListSource = duPub.ds_st_location
+        Options.Editing = False
+        Options.Filtering = False
       end
       object cxGrid1DBTableView1companyId: TcxGridDBColumn
         DataBinding.FieldName = 'companyId'
@@ -83,12 +97,20 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
             FieldName = 'CompanyName'
           end>
         Properties.ListSource = duPub.ds_st_company
+        Options.Editing = False
+        Options.Filtering = False
       end
-      object cxGrid1DBTableView1state: TcxGridDBColumn
-        DataBinding.FieldName = 'state'
-      end
-      object cxGrid1DBTableView1hadOutQty: TcxGridDBColumn
-        DataBinding.FieldName = 'hadOutQty'
+      object cxGrid1DBTableView1oddDtId: TcxGridDBColumn
+        DataBinding.FieldName = 'oddDtId'
+        PropertiesClassName = 'TcxLookupComboBoxProperties'
+        Properties.KeyFieldNames = 'id'
+        Properties.ListColumns = <
+          item
+            FieldName = 'puOrderNum'
+          end>
+        Properties.ListSource = duPub.ds_pu_orderDt
+        Options.Editing = False
+        Options.Filtering = False
       end
     end
     object cxGrid1Level1: TcxGridLevel
@@ -117,6 +139,36 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       Color = clGradientInactiveCaption
       ParentBackground = False
       TabOrder = 1
+      object Button2: TButton
+        Left = 125
+        Top = 16
+        Width = 75
+        Height = 25
+        Caption = #36864#36135
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = Button2Click
+      end
+      object Button3: TButton
+        Left = 221
+        Top = 16
+        Width = 75
+        Height = 25
+        Caption = #20462#25913
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = Button3Click
+      end
     end
     object Button1: TButton
       Left = 29
@@ -138,7 +190,7 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
     Left = 0
     Top = 0
     Width = 584
-    Height = 202
+    Height = 153
     Align = alTop
     Color = clGradientInactiveCaption
     ParentBackground = False
@@ -221,24 +273,11 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       Font.Style = []
       ParentFont = False
     end
-    object Label6: TLabel
-      Left = 29
-      Top = 157
-      Width = 60
-      Height = 16
-      Caption = #23545#24212#21333#21495
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
     object cxDBTextEdit1: TcxDBTextEdit
       Left = 107
       Top = 13
       DataBinding.DataField = 'inCode'
-      DataBinding.DataSource = duPub.ds_st_instorage
+      DataBinding.DataSource = fPU_OrderIn.dSource1
       Enabled = False
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
@@ -254,7 +293,7 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       Left = 387
       Top = 13
       DataBinding.DataField = 'inDate'
-      DataBinding.DataSource = duPub.ds_st_instorage
+      DataBinding.DataSource = fPU_OrderIn.dSource1
       Enabled = False
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
@@ -270,7 +309,7 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       Left = 107
       Top = 58
       DataBinding.DataField = 'locationId'
-      DataBinding.DataSource = duPub.ds_st_instorage
+      DataBinding.DataSource = fPU_OrderIn.dSource1
       Enabled = False
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
@@ -286,7 +325,7 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       Left = 387
       Top = 58
       DataBinding.DataField = 'companyId'
-      DataBinding.DataSource = duPub.ds_st_instorage
+      DataBinding.DataSource = fPU_OrderIn.dSource1
       Enabled = False
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
@@ -302,7 +341,7 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       Left = 107
       Top = 106
       DataBinding.DataField = 'consignee'
-      DataBinding.DataSource = duPub.ds_st_instorage
+      DataBinding.DataSource = fPU_OrderIn.dSource1
       Enabled = False
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
@@ -318,7 +357,7 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       Left = 387
       Top = 106
       DataBinding.DataField = 'inState'
-      DataBinding.DataSource = duPub.ds_st_instorage
+      DataBinding.DataSource = fPU_OrderIn.dSource1
       Enabled = False
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
@@ -372,26 +411,10 @@ object fPU_OrderInDetail: TfPU_OrderInDetail
       ParentFont = False
       TabOrder = 8
     end
-    object cxDBTextEdit7: TcxDBTextEdit
-      Left = 107
-      Top = 154
-      DataBinding.DataField = 'oddNo'
-      DataBinding.DataSource = duPub.ds_st_instorage
-      Enabled = False
-      ParentFont = False
-      Style.Font.Charset = DEFAULT_CHARSET
-      Style.Font.Color = clWindowText
-      Style.Font.Height = -13
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = []
-      Style.IsFontAssigned = True
-      TabOrder = 9
-      Width = 158
-    end
   end
   object Panel4: TPanel
     Left = 0
-    Top = 202
+    Top = 153
     Width = 584
     Height = 34
     Align = alTop

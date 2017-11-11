@@ -266,6 +266,102 @@
             <Form>fPU_OrderBackDetail</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="systemManager\FSY_UserManager_UserP.pas">
+            <Form>FSY_UserManager_User</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="stoageManager\fST_StoageCheckP.pas">
+            <Form>fST_StoageCheck</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="stoageManager\fST_StoageProductDetailP.pas">
+            <Form>fST_StoageProductDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="stoageManager\fST_StoageCheckDetailP.pas">
+            <Form>fST_StoageCheckDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="saleManager\fSE_OrderP.pas">
+            <Form>fSE_Order</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="saleManager\fSE_OrderAddP.pas">
+            <Form>fSE_OrderAdd</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="saleManager\fSE_ProductListP.pas">
+            <Form>fSE_ProductList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="saleManager\fSE_OrderAddDetailP.pas">
+            <Form>fSE_OrderAddDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="saleManager\fSE_OrderAddEditP.pas">
+            <Form>fSE_OrderAddEdit</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_PlanP.pas">
+            <Form>fPR_Plan</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_PlanAddP.pas">
+            <Form>fPR_PlanAdd</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\FPR_PlanListP.pas">
+            <Form>FPR_PlanList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="stoageManager\fST_StorageStatementP.pas">
+            <Form>fST_StorageStatement</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="stoageManager\fST_StorageStatementDetailP.pas">
+            <Form>fST_StorageStatementDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_ProductStructureP.pas">
+            <Form>fPR_ProductStructure</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="stoageManager\fST_StoageInP.pas">
+            <Form>fST_StoageIn</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="stoageManager\fST_StoageInDetailP.pas">
+            <Form>fST_StoageInDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="stoageManager\fST_StoageOutP.pas">
+            <Form>fST_StoageOut</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="stoageManager\fST_StoageOutDetailP.pas">
+            <Form>fST_StoageOutDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_ProductStructureAddP.pas">
+            <Form>fPR_ProductStructureAdd</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_ProductListP.pas">
+            <Form>fPR_ProductList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_ProductStructureDetailP.pas">
+            <Form>fPR_ProductStructureDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_ProductStructureListP.pas">
+            <Form>fPR_ProductStructureList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="saleManager\fSE_OrderAddListP.pas">
+            <Form>fSE_OrderAddList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="sanhe.remoteRODL"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -342,27 +438,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -741,12 +822,27 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>

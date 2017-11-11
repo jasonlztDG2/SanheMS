@@ -168,6 +168,8 @@ type
     actPR_Structure: TAction;
     barBA_User: TdxNavBarItem;
     actBA_User: TAction;
+    barST_StorageStatement: TdxNavBarItem;
+    actST_StorageStatement: TAction;
     procedure New1Click(Sender: TObject);
     procedure createChildForm(a:Tclass);
     procedure Exit1Click(Sender: TObject);
@@ -188,6 +190,14 @@ type
     procedure acPU_OrderPayExecute(Sender: TObject);
     procedure actST_StorageProductExecute(Sender: TObject);
     procedure acPU_OrderRetunExecute(Sender: TObject);
+    procedure actSY_UserManagerExecute(Sender: TObject);
+    procedure actST_StorageCheckExecute(Sender: TObject);
+    procedure acSE_ListDataExecute(Sender: TObject);
+    procedure actPR_PlanExecute(Sender: TObject);
+    procedure actST_StorageStatementExecute(Sender: TObject);
+    procedure actPR_StructureExecute(Sender: TObject);
+    procedure actST_StorageInExecute(Sender: TObject);
+    procedure actST_StorageOutExecute(Sender: TObject);
     
   public
     { Public declarations }
@@ -202,7 +212,9 @@ implementation
 uses
 //  fClientDataModule,
    fPartnerP,fBA_SetKindP,fBA_CompanyP,fBA_LocationP,fPR_ProductInfoP,fPU_OrderP,
-   fBA_UserP,fPU_OrderInP,fPU_OrderPayP,fST_StoageProductP,fPU_OrderBackP,
+   fBA_UserP,fPU_OrderInP,fPU_OrderPayP,fST_StoageProductP,fPU_OrderBackP,fSY_UserManagerP,
+   fST_StoageCheckP,fSE_OrderP,fPR_PlanP, fST_StorageStatementP,fPR_ProductStructureP,
+   fST_StoageInP,fST_StoageOutP,
    duPubP
    ;
 
@@ -217,6 +229,16 @@ begin
     createChildForm(TfPR_ProductInfo);
 end;
 
+procedure TfMain.actPR_PlanExecute(Sender: TObject);
+begin
+     createChildForm(TfPR_Plan);
+end;
+
+procedure TfMain.actPR_StructureExecute(Sender: TObject);
+begin
+    createChildForm(TfPR_ProductStructure);
+end;
+
 procedure TfMain.actPU_ListDataExecute(Sender: TObject);
 begin
      createChildForm(TfPU_Order);
@@ -227,9 +249,34 @@ begin
     createChildForm(TfPU_OrderIn);
 end;
 
+procedure TfMain.actST_StorageCheckExecute(Sender: TObject);
+begin
+    createChildForm(TfST_StoageCheck);
+end;
+
+procedure TfMain.actST_StorageInExecute(Sender: TObject);
+begin
+     createChildForm(TfST_StoageIn);
+end;
+
+procedure TfMain.actST_StorageOutExecute(Sender: TObject);
+begin
+    createChildForm(TfST_StoageOut);
+end;
+
 procedure TfMain.actST_StorageProductExecute(Sender: TObject);
 begin
     createChildForm(TfST_StoageProduct);
+end;
+
+procedure TfMain.actST_StorageStatementExecute(Sender: TObject);
+begin
+    createChildForm(TfST_StorageStatement);
+end;
+
+procedure TfMain.actSY_UserManagerExecute(Sender: TObject);
+begin
+      createChildForm(TfSY_UserManager);
 end;
 
 procedure TfMain.acPU_OrderPayExecute(Sender: TObject);
@@ -240,6 +287,11 @@ end;
 procedure TfMain.acPU_OrderRetunExecute(Sender: TObject);
 begin
      createChildForm(TfPU_OrderBack);
+end;
+
+procedure TfMain.acSE_ListDataExecute(Sender: TObject);
+begin
+    createChildForm(TfSE_Order);
 end;
 
 procedure TfMain.actBA_CompanyExecute(Sender: TObject);

@@ -25,14 +25,11 @@ uses
   uDADataTable, cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.ComCtrls, Vcl.ToolWin, cxContainer, dxCore, cxDateUtils, cxTextEdit, uDAWhere,
-  cxMaskEdit, cxDropDownEdit, cxCalendar, cxDBLookupComboBox;
+  cxMaskEdit, cxDropDownEdit, cxCalendar, cxDBLookupComboBox, uRODynamicRequest,
+  uDADelta, uROComponent, uDAScriptingProvider, uDAMemDataTable;
 
 type
   TfPU_OrderIn = class(Tfbase1)
-    Label2: TLabel;
-    ComboBox1: TComboBox;
-    Label5: TLabel;
-    ComboBox3: TComboBox;
     Button1: TButton;
     Label4: TLabel;
     Edit1: TEdit;
@@ -45,29 +42,32 @@ type
     cxGrid1DBTableView1RecID: TcxGridDBColumn;
     cxGrid1DBTableView1inCode: TcxGridDBColumn;
     cxGrid1DBTableView1inType: TcxGridDBColumn;
-    cxGrid1DBTableView1locationId: TcxGridDBColumn;
-    cxGrid1DBTableView1companyId: TcxGridDBColumn;
     cxGrid1DBTableView1inDate: TcxGridDBColumn;
     cxGrid1DBTableView1consignee: TcxGridDBColumn;
     cxGrid1DBTableView1operatorDate: TcxGridDBColumn;
     cxGrid1DBTableView1operator: TcxGridDBColumn;
     cxGrid1DBTableView1inState: TcxGridDBColumn;
-    cxGrid1DBTableView1oddNo: TcxGridDBColumn;
     cxGrid1DBTableView1department: TcxGridDBColumn;
     cxGrid1DBTableView1memo: TcxGridDBColumn;
+    tbl_st_instorage: TDAMemDataTable;
     procedure FormCreate(Sender: TObject);
     procedure tb_AppendClick(Sender: TObject);
     procedure tb_BrowseClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure tb_UnfilterClick(Sender: TObject);
+    procedure tbRefreshClick(Sender: TObject);
+    procedure tb_DeleteClick(Sender: TObject);
+    procedure Tb_EditClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    procedure reData();
   end;
 
 var
   fPU_OrderIn: TfPU_OrderIn;
+  inType : Integer;
 
 implementation
 
@@ -75,6 +75,15 @@ implementation
 uses
 duPubP,fPU_OrderInAddP,fPU_OrderInDetailP
 ;
+
+procedure TfPU_OrderIn.reData();
+var
+selectList : TStringList;
+begin
+     selectList := TStringList.Create;
+    dupub.setSelectData(selectList,'inType','采购入库',dboEqual);
+    duPub.getSelectData(self.tbl_st_instorage,selectList,'st_instorage',dboAnd);
+end;
 
 procedure TfPU_OrderIn.Button1Click(Sender: TObject);
 var
@@ -93,8 +102,7 @@ selectList : TStringList;
 begin
   inherited;
      orderNum := Edit1.Text;
-     locationIndex := ComboBox1.ItemIndex;
-     companyIndex := ComboBox3.ItemIndex;
+     
      userIndex := ComboBox4.ItemIndex;
      beginDate := datetimetostr(cxDateEdit1.Date);
      endDate := datetimetostr(cxDateEdit2.Date);
@@ -103,16 +111,7 @@ begin
      if orderNum <> '' then
         dupub.setSelectData(selectList,'inCode','%'+orderNum+'%',dboLike);
 
-     if locationIndex <> -1 then
-     begin
-         locationId := Integer(ComboBox1.Items.Objects[locationIndex]);
-         dupub.setSelectData(selectList,'locationId',intToStr(locationId),dboEqual);
-     end;
-     if companyIndex <> -1 then
-     begin
-         companyId := Integer(ComboBox3.Items.Objects[companyIndex]);
-         dupub.setSelectData(selectList,'companyId',intToStr(companyId),dboEqual);
-     end;
+     
      if userIndex <> -1 then
      begin
          userId := Integer(ComboBox4.Items.Objects[userIndex]);
@@ -128,42 +127,91 @@ begin
 
      dupub.setSelectData(selectList,'inDate',beginDate,dboGreaterOrEqual);
      dupub.setSelectData(selectList,'inDate',endDate,dboLessOrEqual);
-     duPub.getSelectData(duPub.tbl_st_instorage,selectList,'st_instorage',dboAnd);
+     dupub.setSelectData(selectList,'inType','采购入库',dboEqual);
+     duPub.getSelectData(self.tbl_st_instorage,selectList,'st_instorage',dboAnd);
 end;
 
 procedure TfPU_OrderIn.FormCreate(Sender: TObject);
+
 begin
   inherited;
-    duPub.getLocation(ComboBox1);
-    duPub.getCompany(ComboBox3);
+
     duPub.getUser(ComboBox4);
-    duPub.tbl_st_instorage.Open;
+    reData();
+end;
+
+procedure TfPU_OrderIn.tbRefreshClick(Sender: TObject);
+
+begin
+  inherited;
+    reData();
 end;
 
 procedure TfPU_OrderIn.tb_AppendClick(Sender: TObject);
 begin
   inherited;
-    fPU_OrderInAdd := TfPU_OrderInAdd.Create(self);
-    fPU_OrderInAdd.ShowModal;
+//    fPU_OrderInAdd := TfPU_OrderInAdd.Create(self);
+//    fPU_OrderInAdd.ShowModal;
 end;
 
 procedure TfPU_OrderIn.tb_BrowseClick(Sender: TObject);
 begin
   inherited;
+  inType := 0;
     fPU_OrderInDetail := TfPU_OrderInDetail.Create(self);
     fPU_OrderInDetail.ShowModal;
 end;
 
+procedure TfPU_OrderIn.tb_DeleteClick(Sender: TObject);
+var
+Num : String;
+result : String;
+row : Integer;
+begin
+  inherited;
+     row := cxGrid1DBTableView1.Controller.FocusedRowIndex;
+      Num := cxGrid1DBTableView1.DataController.Values[row,1];
+      if MessageDlg('确认删除该入库单?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      begin
+           with duPub.ADOQuery1 do
+           begin
+                close;
+                sql.Clear;
+                parameters.Clear;
+                sql.Add('exec upInstorage :@inCode,:@upType,:@result output');
+                 parameters.Items[0].Value := Num;
+                parameters.Items[1].Value := 0;
+                execsql;
+                result := parameters.Items[2].Value;
+           end;
+
+           if result = 'success' then
+           begin
+               self.tbl_st_instorage.ApplyUpdates(true,true);
+           end;
+      end;
+
+end;
+
+procedure TfPU_OrderIn.Tb_EditClick(Sender: TObject);
+begin
+  inherited;
+  inType := 1;
+     fPU_OrderInDetail := TfPU_OrderInDetail.Create(self);
+    fPU_OrderInDetail.ShowModal;
+end;
+
 procedure TfPU_OrderIn.tb_UnfilterClick(Sender: TObject);
+
 begin
   inherited;
     Edit1.Text := '';
-    ComboBox1.Text := '';
-    ComboBox3.Text := '';
+
     ComboBox4.Text := '';
+    ComboBox4.ItemIndex := -1;
     cxDateEdit1.Text := '';
     cxDateEdit2.Text := '';
-    duPub.getSelectData(duPub.tbl_st_instorage,TStringList.Create,'st_instorage',dboAnd);
+    reData();
 end;
 
 end.

@@ -36,7 +36,6 @@ type
     cxGrid1DBTableView1qty: TcxGridDBColumn;
     cxGrid1DBTableView1price: TcxGridDBColumn;
     cxGrid1DBTableView1status: TcxGridDBColumn;
-    cxGrid1DBTableView1hadInQty: TcxGridDBColumn;
     cxGrid1DBTableView1memo: TcxGridDBColumn;
     cxGrid1Level1: TcxGridLevel;
     Panel1: TPanel;
@@ -64,15 +63,19 @@ type
     Edit2: TEdit;
     Panel4: TPanel;
     Label7: TLabel;
+    Button3: TButton;
+    Button4: TButton;
     procedure FormCreate(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    procedure updateOrder(updateStatus : String);
+    procedure updateOrder(upType : integer);
     procedure initData();
   end;
 
@@ -96,24 +99,59 @@ begin
 
 end;
 
-procedure TfPU_OrderEdit.updateOrder(updateStatus : String);
-
+procedure TfPU_OrderEdit.updateOrder(upType : integer);
+var
+result : String;
 begin
-      dupub.tbl_pu_order.edit;
-      duPub.tbl_pu_order.fieldbyname('puStatus').AsString := updateStatus;
-      dupub.tbl_pu_order.post;
-      dupub.tbl_pu_order.applyupdates(true,false);
+      with duPub.adoquery1 do
+          begin
+                close;
+                sql.Clear;
+                parameters.Clear;
+                sql.Add('exec upPuOrder :@puOrderNum,:@upType,:@result output');
+                 parameters.Items[0].Value := cxDBTextEdit1.Text;
+                parameters.Items[1].Value := upType;
+                execsql;
+                result := parameters.Items[2].Value;
+           end;
+
+           if result = 'success' then
+           begin
+               duPub.tbl_pu_order.ApplyUpdates(true,true);
+           end;
+           self.Close;
 end;
 
 
 //ÉóºË¸üÐÂ¶©µ¥×´Ì¬
 procedure TfPU_OrderEdit.Button1Click(Sender: TObject);
 begin
-    updateOrder('´ýÊÕ»õ');
-    self.Close;
+    if cxDBTextEdit6.Text = '´ýÉóºË' then
+    begin
+        updateOrder(2);
+    end;
+
+
 end;
 
 procedure TfPU_OrderEdit.Button2Click(Sender: TObject);
+
+begin
+    if cxDBTextEdit6.Text = 'Î´Èë¿â' then
+    begin
+        updateOrder(1);
+    end;
+
+end;
+
+procedure TfPU_OrderEdit.Button3Click(Sender: TObject);
+
+begin
+     //self.Close;
+
+end;
+
+procedure TfPU_OrderEdit.Button4Click(Sender: TObject);
 begin
     self.Close;
 end;

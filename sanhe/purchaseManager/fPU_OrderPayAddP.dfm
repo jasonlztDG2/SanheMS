@@ -29,6 +29,7 @@ object fPU_OrderPayAdd: TfPU_OrderPayAdd
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
+      OptionsSelection.CellSelect = False
       OptionsView.GroupByBox = False
       object cxGrid1DBTableView1RecID: TcxGridDBColumn
         DataBinding.FieldName = 'RecID'
@@ -77,8 +78,8 @@ object fPU_OrderPayAdd: TfPU_OrderPayAdd
       object cxGrid1DBTableView1state: TcxGridDBColumn
         DataBinding.FieldName = 'state'
       end
-      object cxGrid1DBTableView1hadOutQty: TcxGridDBColumn
-        DataBinding.FieldName = 'hadOutQty'
+      object cxGrid1DBTableView1oddDtId: TcxGridDBColumn
+        DataBinding.FieldName = 'oddDtId'
       end
     end
     object cxGrid1Level1: TcxGridLevel
@@ -325,7 +326,6 @@ object fPU_OrderPayAdd: TfPU_OrderPayAdd
       Top = 154
       Width = 438
       Height = 24
-      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13

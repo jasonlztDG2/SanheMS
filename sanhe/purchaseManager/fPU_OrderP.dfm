@@ -6,33 +6,21 @@ inherited fPU_Order: TfPU_Order
   inherited ToolBar1: TToolBar
     inherited tb_Browse: TToolButton
       OnClick = tb_BrowseClick
-      ExplicitWidth = 46
     end
     inherited Tb_Edit: TToolButton
       OnClick = Tb_EditClick
-      ExplicitWidth = 39
     end
     inherited tb_Append: TToolButton
       OnClick = tb_AppendClick
-      ExplicitWidth = 48
     end
     inherited tb_revise: TToolButton
       Visible = False
-      ExplicitWidth = 43
     end
     inherited tb_Copy: TToolButton
       Visible = False
-      ExplicitWidth = 39
     end
     inherited tb_Delete: TToolButton
-      Visible = False
-      ExplicitWidth = 42
-    end
-    inherited tb_Filter: TToolButton
-      ExplicitWidth = 39
-    end
-    inherited tb_Unfilter: TToolButton
-      ExplicitWidth = 46
+      OnClick = tb_DeleteClick
     end
     inherited tb_Save: TToolButton
       Visible = False
@@ -141,7 +129,6 @@ inherited fPU_Order: TfPU_Order
       Items.Strings = (
         #24453#23457#26680
         #24453#25910#36135
-        #24050#36864#36135
         #24050#20837#24211)
     end
     object ComboBox1: TComboBox

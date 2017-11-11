@@ -58,10 +58,6 @@ type
     ds_st_instorage: TDADataSource;
     tbl_st_instorageDt: TDAMemDataTable;
     ds_st_instorageDt: TDADataSource;
-    tbl_st_repertory: TDAMemDataTable;
-    ds_st_repertory: TDADataSource;
-    tbl_st_repertoryDt: TDAMemDataTable;
-    ds_st_repertoryDt: TDADataSource;
     tbl_st_stock: TDAMemDataTable;
     ds_st_stock: TDADataSource;
     tbl_pu_orderpay: TDAMemDataTable;
@@ -76,6 +72,32 @@ type
     ds_st_outstorage: TDADataSource;
     tbl_st_outstorageDt: TDAMemDataTable;
     ds_st_outstorageDt: TDADataSource;
+    tbl_st_repertoryDetail: TDAMemDataTable;
+    ds_st_repertoryDetail: TDADataSource;
+    tbl_st_check: TDAMemDataTable;
+    ds_st_check: TDADataSource;
+    tbl_st_checkdt: TDAMemDataTable;
+    ds_st_checkdt: TDADataSource;
+    tbl_pu_seOrder: TDAMemDataTable;
+    ds_pu_seOrder: TDADataSource;
+    tbl_pu_seOrderDt: TDAMemDataTable;
+    ds_pu_seOrderDt: TDADataSource;
+    tbl_pr_plan: TDAMemDataTable;
+    ds_pr_plan: TDADataSource;
+    tbl_st_repertoryMonth: TDAMemDataTable;
+    ds_st_repertoryMonth: TDADataSource;
+    tbl_st_structure: TDAMemDataTable;
+    ds_st_structure: TDADataSource;
+    tbl_st_structureDt: TDAMemDataTable;
+    ds_st_structureDt: TDADataSource;
+    tbl_st_structureProduct: TDAMemDataTable;
+    ds_st_structureProduct: TDADataSource;
+    tbl_pu_orderDetail: TDAMemDataTable;
+    ds_pu_orderDetail: TDADataSource;
+    tbl_pu_seOrderPr: TDAMemDataTable;
+    ds_pu_seOrderPr: TDADataSource;
+    tbl_pu_seOrderPrBe: TDAMemDataTable;
+    ds_pu_seOrderPrBe: TDADataSource;
 
     procedure ClientChannel_OnLoginNeeded(Sender: TROTransportChannel; anException: Exception; var aRetry: Boolean);
     procedure DataModuleCreate(Sender: TObject);
@@ -96,14 +118,16 @@ type
     procedure getSelectData(table : TDAMemDataTable;dataList : TStringList;tableName : String;anOp : TDABinaryOperator);
     procedure setSelectData(selectList : TStringList;fieldName : String;aValue : String;anOp : TDABinaryOperator);
     procedure getKind(box : TComboBox);
-    procedure getPartner(box : TComboBox);
+    procedure getPartner(box : TComboBox; userType : String);
     procedure getLocation(box : TComboBox);
     procedure getCompany(box : TComboBox);
     procedure getUser(box : TComboBox);
+    procedure getProduct(box : TComboBox; productType : String);
     function showUser(id : String) : String;
     function showPartner(id : String) : String;
     function showLocation(id : String) : String;
     function showCompany(id : String) : String;
+    function showProduct(id : String) : String;
     procedure showInsertNum(proName : String;getNum : String;editText : TEdit);
   end;
 
@@ -348,11 +372,37 @@ begin
   end;
 end;
 
-//获取合作伙伴的名称
-procedure TduPub.getPartner(box : TComboBox);
+procedure TduPub.getProduct(box : TComboBox; productType : String);
+var
+ List : TStringList;
 begin
-  duPub.tbl_p_partners.Close;
-  duPub.tbl_p_partners.Open;
+   List := TStringList.Create;
+  dupub.setSelectData(List,'productType',productType,dboEqual);
+  duPub.getSelectData(duPub.DAMemDataTable1,List,'st_product',dboAnd);
+
+    box.Clear;
+  duPub.DAMemDataTable1.First;
+  if duPub.DAMemDataTable1.RecordCount > 0 then
+  begin
+    while  not  duPub.DAMemDataTable1.EOF do
+    begin
+      box.Items.AddObject(duPub.DAMemDataTable1.fieldByName('productName').AsString,
+      TObject(duPub.DAMemDataTable1.fieldByName('productId').AsInteger));
+
+      duPub.DAMemDataTable1.next;
+    end;
+  end;
+end;
+
+//获取合作伙伴的名称
+procedure TduPub.getPartner(box : TComboBox; userType : String);
+var
+ List : TStringList;
+begin
+  List := TStringList.Create;
+  dupub.setSelectData(List,'partnerType',userType,dboEqual);
+  duPub.getSelectData(duPub.tbl_p_partners,List,'p_partners',dboAnd);
+  
   box.Clear;
   duPub.tbl_p_partners.First;
   if duPub.tbl_p_partners.RecordCount > 0 then
@@ -485,4 +535,20 @@ begin
          duPub.tbl_st_company.Filtered := false;
      end;
 end;
+
+function TduPub.showProduct(id : String) : String;
+begin
+     if id = '' then
+      exit;
+     duPub.tbl_st_product.Close;
+     duPub.tbl_st_product.Open;
+     if duPub.tbl_st_product.Active then
+     begin
+         duPub.tbl_st_product.Filter:='productId='+id;
+         duPub.tbl_st_product.Filtered := true;
+         result := duPub.tbl_st_product.fieldByName('productName').AsString;
+         duPub.tbl_st_product.Filtered := false;
+     end;
+end;
+
 end.

@@ -61,9 +61,16 @@ type
     cxGrid1DBTableView1productID: TcxGridDBColumn;
     cxGrid1DBTableView1qty: TcxGridDBColumn;
     cxGrid1DBTableView1price: TcxGridDBColumn;
-    cxGrid1DBTableView1status: TcxGridDBColumn;
-    cxGrid1DBTableView1hadInQty: TcxGridDBColumn;
-    cxGrid1DBTableView1memo: TcxGridDBColumn;
+    cxGrid1DBTableView1inQty: TcxGridDBColumn;
+    cxGrid2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridDBColumn1: TcxGridDBColumn;
+    cxGridDBColumn2: TcxGridDBColumn;
+    cxGridDBColumn3: TcxGridDBColumn;
+    cxGridDBColumn4: TcxGridDBColumn;
+    cxGridDBColumn5: TcxGridDBColumn;
+    cxGridDBColumn6: TcxGridDBColumn;
+    cxGridLevel1: TcxGridLevel;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -89,7 +96,18 @@ dataList : TStringList;
 begin
     dataList := TStringList.Create;
    dupub.setSelectData(dataList,'puOrderNum',cxDBTextEdit1.Text,dboEqual);
-   duPub.getSelectData(duPub.tbl_pu_orderDt,dataList,'pu_orderDt',dboAnd);
+
+   if cxDBTextEdit6.Text = 'ÒÑÈë¿â' then
+   begin
+       cxGrid2.Visible := false;
+       duPub.getSelectData(duPub.tbl_pu_orderDetail,dataList,'pu_orderDetail',dboAnd);
+   end
+   else
+   begin
+       cxGrid2.Visible := true;
+       duPub.getSelectData(duPub.tbl_pu_orderdt,dataList,'pu_orderdt',dboAnd);
+   end;
+
 
 end;
 

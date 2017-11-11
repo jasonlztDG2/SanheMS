@@ -40,31 +40,55 @@ uses
   fPU_OrderPayDetailP in 'purchaseManager\fPU_OrderPayDetailP.pas' {fPU_OrderPayDetail},
   fST_StoageProductP in 'stoageManager\fST_StoageProductP.pas' {fST_StoageProduct},
   fPU_OrderBackP in 'purchaseManager\fPU_OrderBackP.pas' {fPU_OrderBack},
-  fPU_OrderBackDetailP in 'purchaseManager\fPU_OrderBackDetailP.pas' {fPU_OrderBackDetail};
+  fPU_OrderBackDetailP in 'purchaseManager\fPU_OrderBackDetailP.pas' {fPU_OrderBackDetail},
+  FSY_UserManager_UserP in 'systemManager\FSY_UserManager_UserP.pas' {FSY_UserManager_User},
+  fST_StoageCheckP in 'stoageManager\fST_StoageCheckP.pas' {fST_StoageCheck},
+  fST_StoageProductDetailP in 'stoageManager\fST_StoageProductDetailP.pas' {fST_StoageProductDetail},
+  fST_StoageCheckDetailP in 'stoageManager\fST_StoageCheckDetailP.pas' {fST_StoageCheckDetail},
+  fSE_OrderP in 'saleManager\fSE_OrderP.pas' {fSE_Order},
+  fSE_OrderAddP in 'saleManager\fSE_OrderAddP.pas' {fSE_OrderAdd},
+  fSE_ProductListP in 'saleManager\fSE_ProductListP.pas' {fSE_ProductList},
+  fSE_OrderAddDetailP in 'saleManager\fSE_OrderAddDetailP.pas' {fSE_OrderAddDetail},
+  fSE_OrderAddEditP in 'saleManager\fSE_OrderAddEditP.pas' {fSE_OrderAddEdit},
+  fPR_PlanP in 'productionPlanManager\fPR_PlanP.pas' {fPR_Plan},
+  fPR_PlanAddP in 'productionPlanManager\fPR_PlanAddP.pas' {fPR_PlanAdd},
+  FPR_PlanListP in 'productionPlanManager\FPR_PlanListP.pas' {FPR_PlanList},
+  fST_StorageStatementP in 'stoageManager\fST_StorageStatementP.pas' {fST_StorageStatement},
+  fST_StorageStatementDetailP in 'stoageManager\fST_StorageStatementDetailP.pas' {fST_StorageStatementDetail},
+  fPR_ProductStructureP in 'productionPlanManager\fPR_ProductStructureP.pas' {fPR_ProductStructure},
+  fST_StoageInP in 'stoageManager\fST_StoageInP.pas' {fST_StoageIn},
+  fST_StoageInDetailP in 'stoageManager\fST_StoageInDetailP.pas' {fST_StoageInDetail},
+  fST_StoageOutP in 'stoageManager\fST_StoageOutP.pas' {fST_StoageOut},
+  fST_StoageOutDetailP in 'stoageManager\fST_StoageOutDetailP.pas' {fST_StoageOutDetail},
+  fPR_ProductStructureAddP in 'productionPlanManager\fPR_ProductStructureAddP.pas' {fPR_ProductStructureAdd},
+  fPR_ProductListP in 'productionPlanManager\fPR_ProductListP.pas' {fPR_ProductList},
+  fPR_ProductStructureDetailP in 'productionPlanManager\fPR_ProductStructureDetailP.pas' {fPR_ProductStructureDetail},
+  fPR_ProductStructureListP in 'productionPlanManager\fPR_ProductStructureListP.pas' {fPR_ProductStructureList},
+  fSE_OrderAddListP in 'saleManager\fSE_OrderAddListP.pas' {fSE_OrderAddList};
 
 {$R *.res}
 
 begin
 
+Application.Initialize;
+Application.CreateForm(TduPub, duPub);
+  {$IFDEF ShowLogin}               //{$
+fLogin:=TFlogin.Create(nil);
+if Flogin.ShowModal=mrOK  then
+begin
+Application.CreateForm(TfMain, fMain);
+  fmain.Show;
+  application.Run;
+end
+else
+begin
+dupub.Free;
+application.Terminate;
+end;
+{$ELSE}
+application.CreateForm(Tfmain,fMain);
+fmain.Show;
+application.Run;
+{$ENDIF}
 
-  Application.Initialize;
-  Application.CreateForm(TduPub, duPub);
-  {$IFDEF ShowLogin}
-  fLogin:=TFlogin.Create(nil);
-  if Flogin.ShowModal=mrOK  then
-  begin
-   aApplication.CreateForm(TfMain, fMain);
-  main.Show;
-  Application.Run;
-  end
-  else
-  begin
-    dupub.Free;
-  application.Terminate;
-  end;
-  {$ELSE}
-   application.CreateForm(Tfmain,fMain);
-   fmain.Show;
-   application.Run;
-  {$ENDIF}
 end.

@@ -498,14 +498,6 @@ object DataService: TDataService
                 TableField = 'status'
               end
               item
-                DatasetField = 'inQty'
-                TableField = 'inQty'
-              end
-              item
-                DatasetField = 'hadInQty'
-                TableField = 'hadInQty'
-              end
-              item
                 DatasetField = 'memo'
                 TableField = 'memo'
               end>
@@ -549,19 +541,7 @@ object DataService: TDataService
           item
             Name = 'status'
             DataType = datWideString
-            Size = 10
-          end
-          item
-            Name = 'inQty'
-            DataType = datDecimal
-            DecimalPrecision = 18
-            DecimalScale = 4
-          end
-          item
-            Name = 'hadInQty'
-            DataType = datDecimal
-            DecimalPrecision = 18
-            DecimalScale = 4
+            Size = 20
           end
           item
             Name = 'memo'
@@ -761,11 +741,11 @@ object DataService: TDataService
             ConnectionType = 'MSSQL'
             Default = True
             SQL = 
-              'SELECT '#9#10#9'[id],[puOrderNum],pu_orderdt.[productID],[qty],[hadInQ' +
-              'ty],[inQty],'#10#9'pu_orderdt.[price],[status],'#10#9'[productName],[kind]' +
-              ',[style],[spec],[color],[unit],st_product.[productId]'#10'FROM '#10#9'[pu' +
-              '_orderDt] left join [st_product] '#10#9'on pu_orderdt.productID=st_pr' +
-              'oduct.productId'#10'WHERE '#10#9'{WHERE} '
+              'SELECT '#9#10#9'[id],[puOrderNum],pu_orderdt.[productID],[qty],'#10#9'pu_or' +
+              'derdt.[price],[status],'#10#9'[productName],[kind],[style],[spec],[co' +
+              'lor],[unit],st_product.[productId]'#10'FROM '#10#9'[pu_orderDt] left join' +
+              ' [st_product] '#10#9'on pu_orderdt.productID=st_product.productId'#10'WHE' +
+              'RE '#10#9'{WHERE} '
             StatementType = stSQL
             ColumnMappings = <
               item
@@ -783,14 +763,6 @@ object DataService: TDataService
               item
                 DatasetField = 'qty'
                 TableField = 'qty'
-              end
-              item
-                DatasetField = 'hadInQty'
-                TableField = 'hadInQty'
-              end
-              item
-                DatasetField = 'inQty'
-                TableField = 'inQty'
               end
               item
                 DatasetField = 'price'
@@ -848,32 +820,20 @@ object DataService: TDataService
           end
           item
             Name = 'qty'
-            DataType = datDecimal
-            DecimalPrecision = 12
-            DecimalScale = 4
-          end
-          item
-            Name = 'hadInQty'
-            DataType = datDecimal
-            DecimalPrecision = 12
-            DecimalScale = 4
-          end
-          item
-            Name = 'inQty'
-            DataType = datDecimal
+            DataType = datCurrency
             DecimalPrecision = 12
             DecimalScale = 4
           end
           item
             Name = 'price'
-            DataType = datDecimal
+            DataType = datCurrency
             DecimalPrecision = 12
             DecimalScale = 4
           end
           item
             Name = 'status'
             DataType = datWideString
-            Size = 10
+            Size = 20
           end
           item
             Name = 'productName'
@@ -956,8 +916,8 @@ object DataService: TDataService
                 TableField = 'state'
               end
               item
-                DatasetField = 'hadOutQty'
-                TableField = 'hadOutQty'
+                DatasetField = 'oddDtId'
+                TableField = 'oddDtId'
               end>
           end>
         Name = 'st_instorageDt'
@@ -1019,10 +979,9 @@ object DataService: TDataService
             Required = True
           end
           item
-            Name = 'hadOutQty'
-            DataType = datDecimal
-            DecimalPrecision = 18
-            DecimalScale = 4
+            Name = 'oddDtId'
+            DataType = datWideString
+            Size = 20
           end>
       end
       item
@@ -1074,10 +1033,6 @@ object DataService: TDataService
               item
                 DatasetField = 'inState'
                 TableField = 'inState'
-              end
-              item
-                DatasetField = 'oddNo'
-                TableField = 'oddNo'
               end
               item
                 DatasetField = 'department'
@@ -1148,11 +1103,6 @@ object DataService: TDataService
             Required = True
           end
           item
-            Name = 'oddNo'
-            DataType = datWideString
-            Size = 20
-          end
-          item
             Name = 'department'
             DataType = datFixedWideChar
             Size = 10
@@ -1161,145 +1111,6 @@ object DataService: TDataService
             Name = 'memo'
             DataType = datWideString
             Size = 50
-          end>
-      end
-      item
-        Params = <>
-        Statements = <
-          item
-            Connection = 'Connection to sanhe'
-            ConnectionType = 'MSSQL'
-            Default = True
-            TargetTable = 'st_repertory'
-            StatementType = stAutoSQL
-            ColumnMappings = <
-              item
-                DatasetField = 'id'
-                TableField = 'id'
-              end
-              item
-                DatasetField = 'productId'
-                TableField = 'productId'
-              end
-              item
-                DatasetField = 'locationId'
-                TableField = 'locationId'
-              end
-              item
-                DatasetField = 'companyId'
-                TableField = 'companyId'
-              end
-              item
-                DatasetField = 'qty'
-                TableField = 'qty'
-              end>
-          end>
-        Name = 'st_repertory'
-        BusinessRulesClient.CompileOnServer = False
-        BusinessRulesClient.RunOnClientAndServer = False
-        Fields = <
-          item
-            Name = 'id'
-            DataType = datAutoInc
-            GeneratorName = 'st_repertory'
-            Required = True
-            InPrimaryKey = True
-          end
-          item
-            Name = 'productId'
-            DataType = datInteger
-            Required = True
-          end
-          item
-            Name = 'locationId'
-            DataType = datInteger
-            Required = True
-          end
-          item
-            Name = 'companyId'
-            DataType = datInteger
-            Required = True
-          end
-          item
-            Name = 'qty'
-            DataType = datDecimal
-            DecimalPrecision = 18
-            DecimalScale = 4
-            Required = True
-          end>
-      end
-      item
-        Params = <>
-        Statements = <
-          item
-            Connection = 'Connection to sanhe'
-            ConnectionType = 'MSSQL'
-            Default = True
-            TargetTable = 'st_repertoryDt'
-            StatementType = stAutoSQL
-            ColumnMappings = <
-              item
-                DatasetField = 'id'
-                TableField = 'id'
-              end
-              item
-                DatasetField = 'repertoryId'
-                TableField = 'repertoryId'
-              end
-              item
-                DatasetField = 'qty'
-                TableField = 'qty'
-              end
-              item
-                DatasetField = 'recordDate'
-                TableField = 'recordDate'
-              end
-              item
-                DatasetField = 'recordUser'
-                TableField = 'recordUser'
-              end
-              item
-                DatasetField = 'recordType'
-                TableField = 'recordType'
-              end>
-          end>
-        Name = 'st_repertoryDt'
-        BusinessRulesClient.CompileOnServer = False
-        BusinessRulesClient.RunOnClientAndServer = False
-        Fields = <
-          item
-            Name = 'id'
-            DataType = datAutoInc
-            GeneratorName = 'st_repertoryDt'
-            Required = True
-            InPrimaryKey = True
-          end
-          item
-            Name = 'repertoryId'
-            DataType = datInteger
-            Required = True
-          end
-          item
-            Name = 'qty'
-            DataType = datDecimal
-            DecimalPrecision = 18
-            DecimalScale = 4
-            Required = True
-          end
-          item
-            Name = 'recordDate'
-            DataType = datDateTime
-            Required = True
-          end
-          item
-            Name = 'recordUser'
-            DataType = datInteger
-            Required = True
-          end
-          item
-            Name = 'recordType'
-            DataType = datWideString
-            Size = 10
           end>
       end
       item
@@ -1824,12 +1635,12 @@ object DataService: TDataService
                 TableField = 'status'
               end
               item
-                DatasetField = 'hadInQty'
-                TableField = 'hadInQty'
-              end
-              item
                 DatasetField = 'partnersId'
                 TableField = 'partnersId'
+              end
+              item
+                DatasetField = 'oddDtId'
+                TableField = 'oddDtId'
               end>
           end>
         Name = 'st_outstorageDt'
@@ -1866,7 +1677,8 @@ object DataService: TDataService
           end
           item
             Name = 'qty'
-            DataType = datDecimal
+            DataType = datWideString
+            Size = 50
             DecimalPrecision = 18
             DecimalScale = 4
             Required = True
@@ -1885,14 +1697,13 @@ object DataService: TDataService
             Required = True
           end
           item
-            Name = 'hadInQty'
-            DataType = datDecimal
-            DecimalPrecision = 18
-            DecimalScale = 4
-          end
-          item
             Name = 'partnersId'
             DataType = datInteger
+          end
+          item
+            Name = 'oddDtId'
+            DataType = datWideString
+            Size = 20
           end>
       end
       item
@@ -1916,18 +1727,6 @@ object DataService: TDataService
               item
                 DatasetField = 'outType'
                 TableField = 'outType'
-              end
-              item
-                DatasetField = 'locationId'
-                TableField = 'locationId'
-              end
-              item
-                DatasetField = 'companyId'
-                TableField = 'companyId'
-              end
-              item
-                DatasetField = 'oddNo'
-                TableField = 'oddNo'
               end
               item
                 DatasetField = 'outUser'
@@ -1978,21 +1777,6 @@ object DataService: TDataService
             Required = True
           end
           item
-            Name = 'locationId'
-            DataType = datInteger
-            Required = True
-          end
-          item
-            Name = 'companyId'
-            DataType = datInteger
-            Required = True
-          end
-          item
-            Name = 'oddNo'
-            DataType = datWideString
-            Size = 20
-          end
-          item
             Name = 'outUser'
             DataType = datInteger
             Required = True
@@ -2022,6 +1806,1196 @@ object DataService: TDataService
             Name = 'memo'
             DataType = datWideString
             Size = 50
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_repertoryDetail'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'locationId'
+                TableField = 'locationId'
+              end
+              item
+                DatasetField = 'companyId'
+                TableField = 'companyId'
+              end
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end
+              item
+                DatasetField = 'recordDate'
+                TableField = 'recordDate'
+              end
+              item
+                DatasetField = 'recordUser'
+                TableField = 'recordUser'
+              end
+              item
+                DatasetField = 'recordType'
+                TableField = 'recordType'
+              end
+              item
+                DatasetField = 'idCardNum'
+                TableField = 'idCardNum'
+              end
+              item
+                DatasetField = 'incode'
+                TableField = 'incode'
+              end
+              item
+                DatasetField = 'dtId'
+                TableField = 'dtId'
+              end>
+          end>
+        Name = 'st_repertoryDetail'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_repertoryDetail'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'locationId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'companyId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'qty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'recordDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'recordUser'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'recordType'
+            DataType = datWideString
+            Size = 10
+            Required = True
+          end
+          item
+            Name = 'idCardNum'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'incode'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'dtId'
+            DataType = datInteger
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_check'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'checkNum'
+                TableField = 'checkNum'
+              end
+              item
+                DatasetField = 'checkDate'
+                TableField = 'checkDate'
+              end
+              item
+                DatasetField = 'checkUser'
+                TableField = 'checkUser'
+              end
+              item
+                DatasetField = 'memo'
+                TableField = 'memo'
+              end>
+          end>
+        Name = 'st_check'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_check'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'checkNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'checkDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'checkUser'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'memo'
+            DataType = datWideString
+            Size = 50
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_checkdt'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'checkNum'
+                TableField = 'checkNum'
+              end
+              item
+                DatasetField = 'repertoryId'
+                TableField = 'repertoryId'
+              end
+              item
+                DatasetField = 'checkdtQty'
+                TableField = 'checkdtQty'
+              end
+              item
+                DatasetField = 'checkdtProfit'
+                TableField = 'checkdtProfit'
+              end
+              item
+                DatasetField = 'repertoryQty'
+                TableField = 'repertoryQty'
+              end>
+          end>
+        Name = 'st_checkdt'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_checkdt'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'checkNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'repertoryId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'checkdtQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'checkdtProfit'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'repertoryQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_seOrder'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'seOrderNum'
+                TableField = 'seOrderNum'
+              end
+              item
+                DatasetField = 'partnersId'
+                TableField = 'partnersId'
+              end
+              item
+                DatasetField = 'structureNum'
+                TableField = 'structureNum'
+              end
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'seOrderDate'
+                TableField = 'seOrderDate'
+              end
+              item
+                DatasetField = 'seDeliveryDate'
+                TableField = 'seDeliveryDate'
+              end
+              item
+                DatasetField = 'seStatus'
+                TableField = 'seStatus'
+              end
+              item
+                DatasetField = 'seCreator'
+                TableField = 'seCreator'
+              end
+              item
+                DatasetField = 'seAddress'
+                TableField = 'seAddress'
+              end
+              item
+                DatasetField = 'sePayment'
+                TableField = 'sePayment'
+              end
+              item
+                DatasetField = 'seSalesman'
+                TableField = 'seSalesman'
+              end
+              item
+                DatasetField = 'memo'
+                TableField = 'memo'
+              end>
+          end>
+        Name = 'pu_seOrder'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'pu_seOrder'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'seOrderNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'partnersId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'structureNum'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'qty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'seOrderDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'seDeliveryDate'
+            DataType = datDateTime
+          end
+          item
+            Name = 'seStatus'
+            DataType = datWideString
+            Size = 10
+            Required = True
+          end
+          item
+            Name = 'seCreator'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'seAddress'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'sePayment'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'seSalesman'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'memo'
+            DataType = datWideString
+            Size = 150
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_seOrderDt'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'seOrderNum'
+                TableField = 'seOrderNum'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'seOrderPrice'
+                TableField = 'seOrderPrice'
+              end
+              item
+                DatasetField = 'seOrderQty'
+                TableField = 'seOrderQty'
+              end
+              item
+                DatasetField = 'seNoDeliveryQty'
+                TableField = 'seNoDeliveryQty'
+              end
+              item
+                DatasetField = 'seStatus'
+                TableField = 'seStatus'
+              end>
+          end>
+        Name = 'pu_seOrderDt'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datInteger
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'seOrderNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'seOrderPrice'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'seOrderQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'seNoDeliveryQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+          end
+          item
+            Name = 'seStatus'
+            DataType = datWideString
+            Size = 10
+            Required = True
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pr_plan'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'planNum'
+                TableField = 'planNum'
+              end
+              item
+                DatasetField = 'seOrderNum'
+                TableField = 'seOrderNum'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'orderQty'
+                TableField = 'orderQty'
+              end
+              item
+                DatasetField = 'orderFinishQty'
+                TableField = 'orderFinishQty'
+              end
+              item
+                DatasetField = 'orderDate'
+                TableField = 'orderDate'
+              end
+              item
+                DatasetField = 'beginOrderDate'
+                TableField = 'beginOrderDate'
+              end
+              item
+                DatasetField = 'finishOrderDate'
+                TableField = 'finishOrderDate'
+              end
+              item
+                DatasetField = 'orderState'
+                TableField = 'orderState'
+              end
+              item
+                DatasetField = 'orderUser'
+                TableField = 'orderUser'
+              end
+              item
+                DatasetField = 'memo'
+                TableField = 'memo'
+              end>
+          end>
+        Name = 'pr_plan'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'pr_plan'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'planNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'seOrderNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'orderQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'orderFinishQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'orderDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'beginOrderDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'finishOrderDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'orderState'
+            DataType = datWideString
+            Size = 10
+            Required = True
+          end
+          item
+            Name = 'orderUser'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'memo'
+            DataType = datWideString
+            Size = 150
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            SQL = 
+              'select SUM(st.qty) as qty,st.productId from st_repertoryDetail a' +
+              's st group by st.productId'#10
+            StatementType = stSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end>
+          end>
+        Name = 'st_repertoryMonth'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'qty'
+            DataType = datDecimal
+            DecimalPrecision = 38
+            DecimalScale = 4
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_structure'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'structureNum'
+                TableField = 'structureNum'
+              end
+              item
+                DatasetField = 'structureName'
+                TableField = 'structureName'
+              end
+              item
+                DatasetField = 'structureDes'
+                TableField = 'structureDes'
+              end>
+          end>
+        Name = 'st_structure'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'structureNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'structureName'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'structureDes'
+            DataType = datWideString
+            Size = 50
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'st_structureDt'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'structureNum'
+                TableField = 'structureNum'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end>
+          end>
+        Name = 'st_structureDt'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_structureDt'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'structureNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'qty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            SQL = 
+              'select * from st_structuredt as st left join st_product as pr on' +
+              ' st.productId=pr.productId'#10'WHERE '#10#9'{WHERE} '
+            StatementType = stSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'structureNum'
+                TableField = 'structureNum'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end
+              item
+                DatasetField = 'productId_1'
+                TableField = 'productId_1'
+              end
+              item
+                DatasetField = 'productCode'
+                TableField = 'productCode'
+              end
+              item
+                DatasetField = 'productName'
+                TableField = 'productName'
+              end
+              item
+                DatasetField = 'price'
+                TableField = 'price'
+              end
+              item
+                DatasetField = 'kind'
+                TableField = 'kind'
+              end
+              item
+                DatasetField = 'style'
+                TableField = 'style'
+              end
+              item
+                DatasetField = 'spec'
+                TableField = 'spec'
+              end
+              item
+                DatasetField = 'color'
+                TableField = 'color'
+              end
+              item
+                DatasetField = 'unit'
+                TableField = 'unit'
+              end
+              item
+                DatasetField = 'productType'
+                TableField = 'productType'
+              end
+              item
+                DatasetField = 'tempNum'
+                TableField = 'tempNum'
+              end>
+          end>
+        Name = 'st_structureProduct'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'st_structureDt'
+            Required = True
+            InPrimaryKey = True
+          end
+          item
+            Name = 'structureNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'qty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+          end
+          item
+            Name = 'productId_1'
+            DataType = datAutoInc
+          end
+          item
+            Name = 'productCode'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'productName'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'price'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+          end
+          item
+            Name = 'kind'
+            DataType = datInteger
+          end
+          item
+            Name = 'style'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'spec'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'color'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'unit'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'productType'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'tempNum'
+            DataType = datWideString
+            Size = 50
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            SQL = 
+              'select * from'#10'(select pu.puOrderNum,pu.productID,pu.qty,pu.price' +
+              ',SUM(st.qty) as inQty '#10'from pu_orderDt as pu right join st_insto' +
+              'rageDt as st on pu.id=st.oddDtId'#10'group by pu.id,pu.productID,pu.' +
+              'qty,pu.price,pu.puOrderNum) as t'#10'WHERE '#10#9'{WHERE} '#10
+            StatementType = stSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'puOrderNum'
+                TableField = 'puOrderNum'
+              end
+              item
+                DatasetField = 'productID'
+                TableField = 'productID'
+              end
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end
+              item
+                DatasetField = 'price'
+                TableField = 'price'
+              end
+              item
+                DatasetField = 'inQty'
+                TableField = 'inQty'
+              end>
+          end>
+        Name = 'pu_orderDetail'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'puOrderNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productID'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'qty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'price'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'inQty'
+            DataType = datDecimal
+            DecimalPrecision = 38
+            DecimalScale = 4
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            SQL = 
+              'select * from pu_seOrderPr left join st_product on pu_seOrderPr.' +
+              'productId=st_product.productId'#10'WHERE '#10#9'{WHERE} '
+            StatementType = stSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'seOrderNum'
+                TableField = 'seOrderNum'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end
+              item
+                DatasetField = 'productId_1'
+                SQLOrigin = 'productId_1'
+              end
+              item
+                DatasetField = 'productCode'
+                SQLOrigin = 'productCode'
+              end
+              item
+                DatasetField = 'productName'
+                SQLOrigin = 'productName'
+              end
+              item
+                DatasetField = 'price'
+                SQLOrigin = 'price'
+              end
+              item
+                DatasetField = 'kind'
+                SQLOrigin = 'kind'
+              end
+              item
+                DatasetField = 'style'
+                SQLOrigin = 'style'
+              end
+              item
+                DatasetField = 'spec'
+                SQLOrigin = 'spec'
+              end
+              item
+                DatasetField = 'color'
+                SQLOrigin = 'color'
+              end
+              item
+                DatasetField = 'unit'
+                SQLOrigin = 'unit'
+              end
+              item
+                DatasetField = 'productType'
+                SQLOrigin = 'productType'
+              end
+              item
+                DatasetField = 'tempNum'
+                SQLOrigin = 'tempNum'
+              end>
+          end>
+        Name = 'pu_seOrderPr'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'seOrderNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'qty'
+            DataType = datWideString
+            Size = 20
+            DecimalPrecision = 18
+            DecimalScale = 4
+          end
+          item
+            Name = 'productId_1'
+            DataType = datAutoInc
+          end
+          item
+            Name = 'productCode'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'productName'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'price'
+            DataType = datWideString
+            Size = 20
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'kind'
+            DataType = datInteger
+          end
+          item
+            Name = 'style'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'spec'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'color'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'unit'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'productType'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'tempNum'
+            DataType = datWideString
+            Size = 50
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'Connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_seOrderPr'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'seOrderNum'
+                TableField = 'seOrderNum'
+              end
+              item
+                DatasetField = 'productId'
+                TableField = 'productId'
+              end
+              item
+                DatasetField = 'qty'
+                TableField = 'qty'
+              end>
+          end>
+        Name = 'pu_seOrderPrBe'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'seOrderNum'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'qty'
+            DataType = datWideString
+            Size = 20
+            Required = True
           end>
       end>
     JoinDataTables = <>

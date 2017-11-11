@@ -69,11 +69,11 @@ type
   end;
 
   IDataService_Async = interface(DataAbstract4_intf.IDataAbstractService_Async)
-  ['{982BEA42-AC57-4842-8555-06085E078203}']
+  ['{7ED110BA-B97C-4A74-9BFF-08FB4337015F}']
   end;
 
   IDataService_AsyncEx = interface(DataAbstract4_intf.IDataAbstractService_AsyncEx)
-  ['{D69C4C8F-DF0E-4D9F-9AAB-6151923EE26F}']
+  ['{9A9E022A-A3A7-4C25-A31E-3CC6F9798EFE}']
   end;
 
   CoDataService = class(System.TObject)
@@ -117,11 +117,11 @@ type
   end;
 
   ILoginService_Async = interface(DataAbstract4_intf.ISimpleLoginService_Async)
-  ['{873852F5-A3A7-4990-851C-86842567CA7A}']
+  ['{8546AD8C-18FD-4106-8903-CF8F2CE3DAD9}']
   end;
 
   ILoginService_AsyncEx = interface(DataAbstract4_intf.ISimpleLoginService_AsyncEx)
-  ['{5970D2DE-135E-47AA-8BE2-0EFBD9F9F9CC}']
+  ['{35BB40DC-1022-47F1-B4E3-6A2784D54835}']
   end;
 
   CoLoginService = class(System.TObject)
@@ -173,20 +173,20 @@ type
     function addInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString; const userId: UnicodeString;
                           const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString; const memo: UnicodeString; const partnersId: UnicodeString;
                           const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString;
-                          const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString;
-                          const qtyDetailAllStr: UnicodeString): string;
-    function addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
-                          const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
-                          const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString;
-                          const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString; const repertoryIdStr: UnicodeString;
-                          const updateQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString; const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString): string;
+                          const idCardNumAllStr: UnicodeString): string;
+    function addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString; const outDate: UnicodeString; const operatorId: UnicodeString;
+                          const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString;
+                          const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString; const idCardNumStr: UnicodeString; const oddDtIdStr: UnicodeString): string;
     function getInstorageData(const inState: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString): string;
     function getInstorageDt(const inCode: UnicodeString): string;
-    function getInCode(const inCode: UnicodeString): string;
+    function getInCode(const idCardNum: UnicodeString): string;
+    function getProduct: string;
+    function checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
+                     const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString): string;
   end;
 
   IAndroidService_Async = interface(IROAsyncInterface)
-  ['{983395D6-B11D-4943-9F07-0CA4492F3208}']
+  ['{92EDBA4C-127A-4501-9EFB-5D79CB1E1920}']
     procedure Invoke_sum(const a: Integer; const b: Integer);
     procedure Invoke_getNum(const proNum: UnicodeString; const intoNum: UnicodeString);
     procedure Invoke_getOrderData(const puStatus: UnicodeString);
@@ -198,17 +198,16 @@ type
     procedure Invoke_addInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString; const userId: UnicodeString;
                                   const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString; const memo: UnicodeString; const partnersId: UnicodeString;
                                   const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString;
-                                  const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString;
-                                  const qtyDetailAllStr: UnicodeString);
-    procedure Invoke_addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
-                                  const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
-                                  const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString;
-                                  const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString;
-                                  const repertoryIdStr: UnicodeString; const updateQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString;
-                                  const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString);
+                                  const idCardNumAllStr: UnicodeString);
+    procedure Invoke_addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString; const outDate: UnicodeString; const operatorId: UnicodeString;
+                                  const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString;
+                                  const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString; const idCardNumStr: UnicodeString; const oddDtIdStr: UnicodeString);
     procedure Invoke_getInstorageData(const inState: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString);
     procedure Invoke_getInstorageDt(const inCode: UnicodeString);
-    procedure Invoke_getInCode(const inCode: UnicodeString);
+    procedure Invoke_getInCode(const idCardNum: UnicodeString);
+    procedure Invoke_getProduct;
+    procedure Invoke_checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
+                             const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString);
     function Retrieve_sum: Integer;
     function Retrieve_getNum: string;
     function Retrieve_getOrderData: string;
@@ -221,10 +220,12 @@ type
     function Retrieve_getInstorageData: string;
     function Retrieve_getInstorageDt: string;
     function Retrieve_getInCode: string;
+    function Retrieve_getProduct: string;
+    function Retrieve_checkSt: string;
   end;
 
   IAndroidService_AsyncEx = interface(IROAsyncInterfaceEx)
-  ['{8E553258-FE12-48B5-9816-8763451C756A}']
+  ['{A09875E1-3391-44BC-952A-58B0960F509B}']
     function Beginsum(const a: Integer; const b: Integer; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetNum(const proNum: UnicodeString; const intoNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetOrderData(const puStatus: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
@@ -236,17 +237,17 @@ type
     function BeginaddInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString; const userId: UnicodeString;
                                const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString; const memo: UnicodeString; const partnersId: UnicodeString;
                                const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString;
-                               const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString;
-                               const qtyDetailAllStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
-    function BeginaddOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
-                               const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
-                               const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString;
-                               const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString;
-                               const repertoryIdStr: UnicodeString; const updateQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString;
-                               const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+                               const idCardNumAllStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BeginaddOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString; const outDate: UnicodeString; const operatorId: UnicodeString;
+                               const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString;
+                               const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString; const idCardNumStr: UnicodeString; const oddDtIdStr: UnicodeString; const aCallback: TROAsyncCallback;
+                               const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetInstorageData(const inState: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetInstorageDt(const inCode: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
-    function BegingetInCode(const inCode: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetInCode(const idCardNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetProduct(const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegincheckSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
+                          const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function Endsum(const aRequest: IROAsyncRequest): Integer;
     function EndgetNum(const aRequest: IROAsyncRequest): string;
     function EndgetOrderData(const aRequest: IROAsyncRequest): string;
@@ -260,6 +261,8 @@ type
     function EndgetInstorageData(const aRequest: IROAsyncRequest): string;
     function EndgetInstorageDt(const aRequest: IROAsyncRequest): string;
     function EndgetInCode(const aRequest: IROAsyncRequest): string;
+    function EndgetProduct(const aRequest: IROAsyncRequest): string;
+    function EndcheckSt(const aRequest: IROAsyncRequest): string;
   end;
 
   CoAndroidService = class(System.TObject)
@@ -297,16 +300,16 @@ type
     function addInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString; const userId: UnicodeString;
                           const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString; const memo: UnicodeString; const partnersId: UnicodeString;
                           const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString;
-                          const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString;
-                          const qtyDetailAllStr: UnicodeString): string;
-    function addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
-                          const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
-                          const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString;
-                          const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString; const repertoryIdStr: UnicodeString;
-                          const updateQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString; const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString): string;
+                          const idCardNumAllStr: UnicodeString): string;
+    function addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString; const outDate: UnicodeString; const operatorId: UnicodeString;
+                          const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString;
+                          const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString; const idCardNumStr: UnicodeString; const oddDtIdStr: UnicodeString): string;
     function getInstorageData(const inState: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString): string;
     function getInstorageDt(const inCode: UnicodeString): string;
-    function getInCode(const inCode: UnicodeString): string;
+    function getInCode(const idCardNum: UnicodeString): string;
+    function getProduct: string;
+    function checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
+                     const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString): string;
   end;
 
   TAndroidService_AsyncProxy = class(TROAsyncProxy, IAndroidService_Async)
@@ -323,17 +326,16 @@ type
     procedure Invoke_addInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString; const userId: UnicodeString;
                                   const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString; const memo: UnicodeString; const partnersId: UnicodeString;
                                   const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString;
-                                  const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString;
-                                  const qtyDetailAllStr: UnicodeString);
-    procedure Invoke_addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
-                                  const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
-                                  const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString;
-                                  const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString;
-                                  const repertoryIdStr: UnicodeString; const updateQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString;
-                                  const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString);
+                                  const idCardNumAllStr: UnicodeString);
+    procedure Invoke_addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString; const outDate: UnicodeString; const operatorId: UnicodeString;
+                                  const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString;
+                                  const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString; const idCardNumStr: UnicodeString; const oddDtIdStr: UnicodeString);
     procedure Invoke_getInstorageData(const inState: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString);
     procedure Invoke_getInstorageDt(const inCode: UnicodeString);
-    procedure Invoke_getInCode(const inCode: UnicodeString);
+    procedure Invoke_getInCode(const idCardNum: UnicodeString);
+    procedure Invoke_getProduct;
+    procedure Invoke_checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
+                             const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString);
     function Retrieve_sum: Integer;
     function Retrieve_getNum: string;
     function Retrieve_getOrderData: string;
@@ -346,6 +348,8 @@ type
     function Retrieve_getInstorageData: string;
     function Retrieve_getInstorageDt: string;
     function Retrieve_getInCode: string;
+    function Retrieve_getProduct: string;
+    function Retrieve_checkSt: string;
   end;
 
   TAndroidService_AsyncProxyEx = class(TROAsyncProxyEx, IAndroidService_AsyncEx)
@@ -362,17 +366,17 @@ type
     function BeginaddInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString; const userId: UnicodeString;
                                const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString; const memo: UnicodeString; const partnersId: UnicodeString;
                                const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString;
-                               const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString;
-                               const qtyDetailAllStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
-    function BeginaddOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
-                               const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
-                               const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString;
-                               const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString;
-                               const repertoryIdStr: UnicodeString; const updateQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString;
-                               const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+                               const idCardNumAllStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BeginaddOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString; const outDate: UnicodeString; const operatorId: UnicodeString;
+                               const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString;
+                               const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString; const idCardNumStr: UnicodeString; const oddDtIdStr: UnicodeString; const aCallback: TROAsyncCallback;
+                               const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetInstorageData(const inState: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetInstorageDt(const inCode: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
-    function BegingetInCode(const inCode: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetInCode(const idCardNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetProduct(const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegincheckSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
+                          const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function Endsum(const aRequest: IROAsyncRequest): Integer;
     function EndgetNum(const aRequest: IROAsyncRequest): string;
     function EndgetOrderData(const aRequest: IROAsyncRequest): string;
@@ -386,6 +390,8 @@ type
     function EndgetInstorageData(const aRequest: IROAsyncRequest): string;
     function EndgetInstorageDt(const aRequest: IROAsyncRequest): string;
     function EndgetInCode(const aRequest: IROAsyncRequest): string;
+    function EndgetProduct(const aRequest: IROAsyncRequest): string;
+    function EndcheckSt(const aRequest: IROAsyncRequest): string;
   end;
 
 function DefaultNamespaces: String;
@@ -832,8 +838,7 @@ end;
 function TAndroidService_Proxy.addInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString; const userId: UnicodeString;
                                             const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString; const memo: UnicodeString; const partnersId: UnicodeString;
                                             const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
-                                            const stateStr: UnicodeString; const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString;
-                                            const idCardNumAllStr: UnicodeString; const qtyDetailAllStr: UnicodeString): string;
+                                            const stateStr: UnicodeString; const idCardNumAllStr: UnicodeString): string;
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -862,12 +867,7 @@ begin
     lMessage.Write('locationIdStr', System.TypeInfo(UnicodeString), locationIdStr, []);
     lMessage.Write('companyIdStr', System.TypeInfo(UnicodeString), companyIdStr, []);
     lMessage.Write('stateStr', System.TypeInfo(UnicodeString), stateStr, []);
-    lMessage.Write('puOrderNum', System.TypeInfo(UnicodeString), puOrderNum, []);
-    lMessage.Write('orderDtIdStr', System.TypeInfo(UnicodeString), orderDtIdStr, []);
-    lMessage.Write('StateUpdateStr', System.TypeInfo(UnicodeString), StateUpdateStr, []);
-    lMessage.Write('hadInQtyStr', System.TypeInfo(UnicodeString), hadInQtyStr, []);
     lMessage.Write('idCardNumAllStr', System.TypeInfo(UnicodeString), idCardNumAllStr, []);
-    lMessage.Write('qtyDetailAllStr', System.TypeInfo(UnicodeString), qtyDetailAllStr, []);
     lMessage.Finalize();
 
     lTransportChannel.Dispatch(lMessage);
@@ -883,12 +883,10 @@ begin
   exit;
 end;
 
-function TAndroidService_Proxy.addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString;
-                                            const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
-                                            const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const hadInQtyStr: UnicodeString;
-                                            const partnersId: UnicodeString; const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString; const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString;
-                                            const updateState: UnicodeString; const repertoryIdStr: UnicodeString; const updateQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const detailStr: UnicodeString;
-                                            const detailQtyStr: UnicodeString; const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString): string;
+function TAndroidService_Proxy.addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString; const outDate: UnicodeString; const operatorId: UnicodeString;
+                                            const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                                            const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString; const idCardNumStr: UnicodeString;
+                                            const oddDtIdStr: UnicodeString): string;
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -901,8 +899,6 @@ begin
     lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'addOrderBack');
     lMessage.Write('outCode', System.TypeInfo(UnicodeString), outCode, []);
     lMessage.Write('outType', System.TypeInfo(UnicodeString), outType, []);
-    lMessage.Write('locationId', System.TypeInfo(UnicodeString), locationId, []);
-    lMessage.Write('companyId', System.TypeInfo(UnicodeString), companyId, []);
     lMessage.Write('oddNo', System.TypeInfo(UnicodeString), oddNo, []);
     lMessage.Write('outUser', System.TypeInfo(UnicodeString), outUser, []);
     lMessage.Write('outDate', System.TypeInfo(UnicodeString), outDate, []);
@@ -915,20 +911,9 @@ begin
     lMessage.Write('qtyStr', System.TypeInfo(UnicodeString), qtyStr, []);
     lMessage.Write('priceStr', System.TypeInfo(UnicodeString), priceStr, []);
     lMessage.Write('stateStr', System.TypeInfo(UnicodeString), stateStr, []);
-    lMessage.Write('hadInQtyStr', System.TypeInfo(UnicodeString), hadInQtyStr, []);
     lMessage.Write('partnersId', System.TypeInfo(UnicodeString), partnersId, []);
-    lMessage.Write('inCode', System.TypeInfo(UnicodeString), inCode, []);
-    lMessage.Write('InstorageDtIdStr', System.TypeInfo(UnicodeString), InstorageDtIdStr, []);
-    lMessage.Write('StateUpdateStr', System.TypeInfo(UnicodeString), StateUpdateStr, []);
-    lMessage.Write('hadOutQtyStr', System.TypeInfo(UnicodeString), hadOutQtyStr, []);
-    lMessage.Write('updateState', System.TypeInfo(UnicodeString), updateState, []);
-    lMessage.Write('repertoryIdStr', System.TypeInfo(UnicodeString), repertoryIdStr, []);
-    lMessage.Write('updateQtyStr', System.TypeInfo(UnicodeString), updateQtyStr, []);
     lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
-    lMessage.Write('detailStr', System.TypeInfo(UnicodeString), detailStr, []);
-    lMessage.Write('detailQtyStr', System.TypeInfo(UnicodeString), detailQtyStr, []);
-    lMessage.Write('recordType', System.TypeInfo(UnicodeString), recordType, []);
-    lMessage.Write('updateRepertoryQtyStr', System.TypeInfo(UnicodeString), updateRepertoryQtyStr, []);
+    lMessage.Write('oddDtIdStr', System.TypeInfo(UnicodeString), oddDtIdStr, []);
     lMessage.Finalize();
 
     lTransportChannel.Dispatch(lMessage);
@@ -1000,7 +985,7 @@ begin
   exit;
 end;
 
-function TAndroidService_Proxy.getInCode(const inCode: UnicodeString): string;
+function TAndroidService_Proxy.getInCode(const idCardNum: UnicodeString): string;
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -1011,7 +996,69 @@ begin
   lTransportChannel := __TransportChannel;
   try
     lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getInCode');
-    lMessage.Write('inCode', System.TypeInfo(UnicodeString), inCode, []);
+    lMessage.Write('idCardNum', System.TypeInfo(UnicodeString), idCardNum, []);
+    lMessage.Finalize();
+
+    lTransportChannel.Dispatch(lMessage);
+
+    lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage.FreeStream();
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_Proxy.getProduct: string;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getProduct');
+    lMessage.Finalize();
+
+    lTransportChannel.Dispatch(lMessage);
+
+    lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage.FreeStream();
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_Proxy.checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
+                                       const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString): string;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'checkSt');
+    lMessage.Write('checkNum', System.TypeInfo(UnicodeString), checkNum, []);
+    lMessage.Write('checkUser', System.TypeInfo(Integer), checkUser, []);
+    lMessage.Write('memo', System.TypeInfo(UnicodeString), memo, []);
+    lMessage.Write('repertoryIdStr', System.TypeInfo(UnicodeString), repertoryIdStr, []);
+    lMessage.Write('checkdtQtyStr', System.TypeInfo(UnicodeString), checkdtQtyStr, []);
+    lMessage.Write('checkdtProfitStr', System.TypeInfo(UnicodeString), checkdtProfitStr, []);
+    lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
+    lMessage.Write('recordTypeStr', System.TypeInfo(UnicodeString), recordTypeStr, []);
+    lMessage.Write('detailQtyStr', System.TypeInfo(UnicodeString), detailQtyStr, []);
     lMessage.Finalize();
 
     lTransportChannel.Dispatch(lMessage);
@@ -1203,8 +1250,7 @@ end;
 procedure TAndroidService_AsyncProxy.Invoke_addInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString;
                                                          const userId: UnicodeString; const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString;
                                                          const memo: UnicodeString; const partnersId: UnicodeString; const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString;
-                                                         const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString; const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString;
-                                                         const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString; const qtyDetailAllStr: UnicodeString);
+                                                         const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString; const idCardNumAllStr: UnicodeString);
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -1234,12 +1280,7 @@ begin
     lMessage.Write('locationIdStr', System.TypeInfo(UnicodeString), locationIdStr, []);
     lMessage.Write('companyIdStr', System.TypeInfo(UnicodeString), companyIdStr, []);
     lMessage.Write('stateStr', System.TypeInfo(UnicodeString), stateStr, []);
-    lMessage.Write('puOrderNum', System.TypeInfo(UnicodeString), puOrderNum, []);
-    lMessage.Write('orderDtIdStr', System.TypeInfo(UnicodeString), orderDtIdStr, []);
-    lMessage.Write('StateUpdateStr', System.TypeInfo(UnicodeString), StateUpdateStr, []);
-    lMessage.Write('hadInQtyStr', System.TypeInfo(UnicodeString), hadInQtyStr, []);
     lMessage.Write('idCardNumAllStr', System.TypeInfo(UnicodeString), idCardNumAllStr, []);
-    lMessage.Write('qtyDetailAllStr', System.TypeInfo(UnicodeString), qtyDetailAllStr, []);
     __DispatchAsyncRequest('addInstorage', lMessage);
   finally
     lMessage.UnsetAttributes(lTransportChannel);
@@ -1248,12 +1289,10 @@ begin
   end;
 end;
 
-procedure TAndroidService_AsyncProxy.Invoke_addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString;
-                                                         const outUser: UnicodeString; const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
-                                                         const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString;
-                                                         const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString; const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString;
-                                                         const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString; const repertoryIdStr: UnicodeString; const updateQtyStr: UnicodeString;
-                                                         const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString; const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString);
+procedure TAndroidService_AsyncProxy.Invoke_addOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString; const outDate: UnicodeString;
+                                                         const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
+                                                         const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString;
+                                                         const idCardNumStr: UnicodeString; const oddDtIdStr: UnicodeString);
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -1267,8 +1306,6 @@ begin
     lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'addOrderBack');
     lMessage.Write('outCode', System.TypeInfo(UnicodeString), outCode, []);
     lMessage.Write('outType', System.TypeInfo(UnicodeString), outType, []);
-    lMessage.Write('locationId', System.TypeInfo(UnicodeString), locationId, []);
-    lMessage.Write('companyId', System.TypeInfo(UnicodeString), companyId, []);
     lMessage.Write('oddNo', System.TypeInfo(UnicodeString), oddNo, []);
     lMessage.Write('outUser', System.TypeInfo(UnicodeString), outUser, []);
     lMessage.Write('outDate', System.TypeInfo(UnicodeString), outDate, []);
@@ -1281,20 +1318,9 @@ begin
     lMessage.Write('qtyStr', System.TypeInfo(UnicodeString), qtyStr, []);
     lMessage.Write('priceStr', System.TypeInfo(UnicodeString), priceStr, []);
     lMessage.Write('stateStr', System.TypeInfo(UnicodeString), stateStr, []);
-    lMessage.Write('hadInQtyStr', System.TypeInfo(UnicodeString), hadInQtyStr, []);
     lMessage.Write('partnersId', System.TypeInfo(UnicodeString), partnersId, []);
-    lMessage.Write('inCode', System.TypeInfo(UnicodeString), inCode, []);
-    lMessage.Write('InstorageDtIdStr', System.TypeInfo(UnicodeString), InstorageDtIdStr, []);
-    lMessage.Write('StateUpdateStr', System.TypeInfo(UnicodeString), StateUpdateStr, []);
-    lMessage.Write('hadOutQtyStr', System.TypeInfo(UnicodeString), hadOutQtyStr, []);
-    lMessage.Write('updateState', System.TypeInfo(UnicodeString), updateState, []);
-    lMessage.Write('repertoryIdStr', System.TypeInfo(UnicodeString), repertoryIdStr, []);
-    lMessage.Write('updateQtyStr', System.TypeInfo(UnicodeString), updateQtyStr, []);
     lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
-    lMessage.Write('detailStr', System.TypeInfo(UnicodeString), detailStr, []);
-    lMessage.Write('detailQtyStr', System.TypeInfo(UnicodeString), detailQtyStr, []);
-    lMessage.Write('recordType', System.TypeInfo(UnicodeString), recordType, []);
-    lMessage.Write('updateRepertoryQtyStr', System.TypeInfo(UnicodeString), updateRepertoryQtyStr, []);
+    lMessage.Write('oddDtIdStr', System.TypeInfo(UnicodeString), oddDtIdStr, []);
     __DispatchAsyncRequest('addOrderBack', lMessage);
   finally
     lMessage.UnsetAttributes(lTransportChannel);
@@ -1347,7 +1373,7 @@ begin
   end;
 end;
 
-procedure TAndroidService_AsyncProxy.Invoke_getInCode(const inCode: UnicodeString);
+procedure TAndroidService_AsyncProxy.Invoke_getInCode(const idCardNum: UnicodeString);
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -1359,8 +1385,58 @@ begin
     __AssertProxyNotBusy('getInCode');
 
     lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getInCode');
-    lMessage.Write('inCode', System.TypeInfo(UnicodeString), inCode, []);
+    lMessage.Write('idCardNum', System.TypeInfo(UnicodeString), idCardNum, []);
     __DispatchAsyncRequest('getInCode', lMessage);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+end;
+
+procedure TAndroidService_AsyncProxy.Invoke_getProduct;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    __AssertProxyNotBusy('getProduct');
+
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getProduct');
+    __DispatchAsyncRequest('getProduct', lMessage);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+end;
+
+procedure TAndroidService_AsyncProxy.Invoke_checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString;
+                                                    const checkdtProfitStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString);
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    __AssertProxyNotBusy('checkSt');
+
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'checkSt');
+    lMessage.Write('checkNum', System.TypeInfo(UnicodeString), checkNum, []);
+    lMessage.Write('checkUser', System.TypeInfo(Integer), checkUser, []);
+    lMessage.Write('memo', System.TypeInfo(UnicodeString), memo, []);
+    lMessage.Write('repertoryIdStr', System.TypeInfo(UnicodeString), repertoryIdStr, []);
+    lMessage.Write('checkdtQtyStr', System.TypeInfo(UnicodeString), checkdtQtyStr, []);
+    lMessage.Write('checkdtProfitStr', System.TypeInfo(UnicodeString), checkdtProfitStr, []);
+    lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
+    lMessage.Write('recordTypeStr', System.TypeInfo(UnicodeString), recordTypeStr, []);
+    lMessage.Write('detailQtyStr', System.TypeInfo(UnicodeString), detailQtyStr, []);
+    __DispatchAsyncRequest('checkSt', lMessage);
   finally
     lMessage.UnsetAttributes(lTransportChannel);
     lMessage := nil;
@@ -2016,6 +2092,114 @@ begin
   exit;
 end;
 
+function TAndroidService_AsyncProxy.Retrieve_getProduct: string;
+var
+  __response: TStream;
+  tc: TMyTransportChannel;
+  lRetry: Boolean;
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lFreeStream: Boolean;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  lFreeStream := false;
+  try
+    __response := __RetrieveAsyncResponse('getProduct');
+    try
+      try
+        try
+          lMessage.ReadFromStream(__response, lFreeStream);
+        except
+          on E: Exception do begin
+            lFreeStream := true;
+            raise;
+          end;
+        end;
+
+        lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+      except
+        on E: EROSessionNotFound do begin
+          tc := TMyTransportChannel(lTransportChannel.GetTransportObject());
+          lRetry := false;
+          tc.DoLoginNeeded(lMessage, E, lRetry);
+          if not lRetry then begin
+            raise;
+          end;
+        end;
+        on E: Exception do begin
+          raise;
+        end;
+      end;
+    finally
+      if lFreeStream then begin
+        __response.Free();
+      end;
+    end;
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxy.Retrieve_checkSt: string;
+var
+  __response: TStream;
+  tc: TMyTransportChannel;
+  lRetry: Boolean;
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lFreeStream: Boolean;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  lFreeStream := false;
+  try
+    __response := __RetrieveAsyncResponse('checkSt');
+    try
+      try
+        try
+          lMessage.ReadFromStream(__response, lFreeStream);
+        except
+          on E: Exception do begin
+            lFreeStream := true;
+            raise;
+          end;
+        end;
+
+        lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+      except
+        on E: EROSessionNotFound do begin
+          tc := TMyTransportChannel(lTransportChannel.GetTransportObject());
+          lRetry := false;
+          tc.DoLoginNeeded(lMessage, E, lRetry);
+          if not lRetry then begin
+            raise;
+          end;
+        end;
+        on E: Exception do begin
+          raise;
+        end;
+      end;
+    finally
+      if lFreeStream then begin
+        __response.Free();
+      end;
+    end;
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
 function TAndroidService_AsyncProxyEx.__GetInterfaceName: String;
 begin
   result := 'AndroidService';
@@ -2192,9 +2376,8 @@ end;
 function TAndroidService_AsyncProxyEx.BeginaddInstorage(const inCode: UnicodeString; const inType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const inDate: UnicodeString;
                                                         const userId: UnicodeString; const operatorId: UnicodeString; const inState: UnicodeString; const oddNo: UnicodeString; const department: UnicodeString;
                                                         const memo: UnicodeString; const partnersId: UnicodeString; const productIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString;
-                                                        const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString; const puOrderNum: UnicodeString; const orderDtIdStr: UnicodeString;
-                                                        const StateUpdateStr: UnicodeString; const hadInQtyStr: UnicodeString; const idCardNumAllStr: UnicodeString; const qtyDetailAllStr: UnicodeString;
-                                                        const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+                                                        const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const stateStr: UnicodeString; const idCardNumAllStr: UnicodeString; const aCallback: TROAsyncCallback;
+                                                        const aUserData: Pointer = nil): IROAsyncRequest;
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -2223,12 +2406,7 @@ begin
     lMessage.Write('locationIdStr', System.TypeInfo(UnicodeString), locationIdStr, []);
     lMessage.Write('companyIdStr', System.TypeInfo(UnicodeString), companyIdStr, []);
     lMessage.Write('stateStr', System.TypeInfo(UnicodeString), stateStr, []);
-    lMessage.Write('puOrderNum', System.TypeInfo(UnicodeString), puOrderNum, []);
-    lMessage.Write('orderDtIdStr', System.TypeInfo(UnicodeString), orderDtIdStr, []);
-    lMessage.Write('StateUpdateStr', System.TypeInfo(UnicodeString), StateUpdateStr, []);
-    lMessage.Write('hadInQtyStr', System.TypeInfo(UnicodeString), hadInQtyStr, []);
     lMessage.Write('idCardNumAllStr', System.TypeInfo(UnicodeString), idCardNumAllStr, []);
-    lMessage.Write('qtyDetailAllStr', System.TypeInfo(UnicodeString), qtyDetailAllStr, []);
     lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
   finally
     lMessage := nil;
@@ -2238,13 +2416,10 @@ begin
   exit;
 end;
 
-function TAndroidService_AsyncProxyEx.BeginaddOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const locationId: UnicodeString; const companyId: UnicodeString; const oddNo: UnicodeString;
-                                                        const outUser: UnicodeString; const outDate: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
-                                                        const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString;
-                                                        const stateStr: UnicodeString; const hadInQtyStr: UnicodeString; const partnersId: UnicodeString; const inCode: UnicodeString; const InstorageDtIdStr: UnicodeString;
-                                                        const StateUpdateStr: UnicodeString; const hadOutQtyStr: UnicodeString; const updateState: UnicodeString; const repertoryIdStr: UnicodeString; const updateQtyStr: UnicodeString;
-                                                        const idCardNumStr: UnicodeString; const detailStr: UnicodeString; const detailQtyStr: UnicodeString; const recordType: UnicodeString; const updateRepertoryQtyStr: UnicodeString;
-                                                        const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+function TAndroidService_AsyncProxyEx.BeginaddOrderBack(const outCode: UnicodeString; const outType: UnicodeString; const oddNo: UnicodeString; const outUser: UnicodeString; const outDate: UnicodeString;
+                                                        const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
+                                                        const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString;
+                                                        const idCardNumStr: UnicodeString; const oddDtIdStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -2257,8 +2432,6 @@ begin
     lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'addOrderBack');
     lMessage.Write('outCode', System.TypeInfo(UnicodeString), outCode, []);
     lMessage.Write('outType', System.TypeInfo(UnicodeString), outType, []);
-    lMessage.Write('locationId', System.TypeInfo(UnicodeString), locationId, []);
-    lMessage.Write('companyId', System.TypeInfo(UnicodeString), companyId, []);
     lMessage.Write('oddNo', System.TypeInfo(UnicodeString), oddNo, []);
     lMessage.Write('outUser', System.TypeInfo(UnicodeString), outUser, []);
     lMessage.Write('outDate', System.TypeInfo(UnicodeString), outDate, []);
@@ -2271,20 +2444,9 @@ begin
     lMessage.Write('qtyStr', System.TypeInfo(UnicodeString), qtyStr, []);
     lMessage.Write('priceStr', System.TypeInfo(UnicodeString), priceStr, []);
     lMessage.Write('stateStr', System.TypeInfo(UnicodeString), stateStr, []);
-    lMessage.Write('hadInQtyStr', System.TypeInfo(UnicodeString), hadInQtyStr, []);
     lMessage.Write('partnersId', System.TypeInfo(UnicodeString), partnersId, []);
-    lMessage.Write('inCode', System.TypeInfo(UnicodeString), inCode, []);
-    lMessage.Write('InstorageDtIdStr', System.TypeInfo(UnicodeString), InstorageDtIdStr, []);
-    lMessage.Write('StateUpdateStr', System.TypeInfo(UnicodeString), StateUpdateStr, []);
-    lMessage.Write('hadOutQtyStr', System.TypeInfo(UnicodeString), hadOutQtyStr, []);
-    lMessage.Write('updateState', System.TypeInfo(UnicodeString), updateState, []);
-    lMessage.Write('repertoryIdStr', System.TypeInfo(UnicodeString), repertoryIdStr, []);
-    lMessage.Write('updateQtyStr', System.TypeInfo(UnicodeString), updateQtyStr, []);
     lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
-    lMessage.Write('detailStr', System.TypeInfo(UnicodeString), detailStr, []);
-    lMessage.Write('detailQtyStr', System.TypeInfo(UnicodeString), detailQtyStr, []);
-    lMessage.Write('recordType', System.TypeInfo(UnicodeString), recordType, []);
-    lMessage.Write('updateRepertoryQtyStr', System.TypeInfo(UnicodeString), updateRepertoryQtyStr, []);
+    lMessage.Write('oddDtIdStr', System.TypeInfo(UnicodeString), oddDtIdStr, []);
     lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
   finally
     lMessage := nil;
@@ -2338,7 +2500,7 @@ begin
   exit;
 end;
 
-function TAndroidService_AsyncProxyEx.BegingetInCode(const inCode: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+function TAndroidService_AsyncProxyEx.BegingetInCode(const idCardNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -2349,7 +2511,58 @@ begin
   lTransportChannel := __TransportChannel;
   try
     lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getInCode');
-    lMessage.Write('inCode', System.TypeInfo(UnicodeString), inCode, []);
+    lMessage.Write('idCardNum', System.TypeInfo(UnicodeString), idCardNum, []);
+    lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.BegingetProduct(const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: IROAsyncRequest;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getProduct');
+    lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.BegincheckSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString;
+                                                   const checkdtProfitStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString; const aCallback: TROAsyncCallback;
+                                                   const aUserData: Pointer = nil): IROAsyncRequest;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: IROAsyncRequest;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'checkSt');
+    lMessage.Write('checkNum', System.TypeInfo(UnicodeString), checkNum, []);
+    lMessage.Write('checkUser', System.TypeInfo(Integer), checkUser, []);
+    lMessage.Write('memo', System.TypeInfo(UnicodeString), memo, []);
+    lMessage.Write('repertoryIdStr', System.TypeInfo(UnicodeString), repertoryIdStr, []);
+    lMessage.Write('checkdtQtyStr', System.TypeInfo(UnicodeString), checkdtQtyStr, []);
+    lMessage.Write('checkdtProfitStr', System.TypeInfo(UnicodeString), checkdtProfitStr, []);
+    lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
+    lMessage.Write('recordTypeStr', System.TypeInfo(UnicodeString), recordTypeStr, []);
+    lMessage.Write('detailQtyStr', System.TypeInfo(UnicodeString), detailQtyStr, []);
     lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
   finally
     lMessage := nil;
@@ -2487,6 +2700,28 @@ begin
 end;
 
 function TAndroidService_AsyncProxyEx.EndgetInCode(const aRequest: IROAsyncRequest): string;
+var
+  lResult: string;
+begin
+  aRequest.ReadResponse();
+  aRequest.Message.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  aRequest.Message.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.EndgetProduct(const aRequest: IROAsyncRequest): string;
+var
+  lResult: string;
+begin
+  aRequest.ReadResponse();
+  aRequest.Message.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  aRequest.Message.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.EndcheckSt(const aRequest: IROAsyncRequest): string;
 var
   lResult: string;
 begin

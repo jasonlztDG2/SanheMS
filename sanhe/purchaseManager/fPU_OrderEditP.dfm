@@ -62,10 +62,6 @@ object fPU_OrderEdit: TfPU_OrderEdit
         Caption = #35746#21333#29366#24577
         DataBinding.FieldName = 'status'
       end
-      object cxGrid1DBTableView1hadInQty: TcxGridDBColumn
-        Caption = #24050#20837#24211#25968#37327
-        DataBinding.FieldName = 'hadInQty'
-      end
       object cxGrid1DBTableView1memo: TcxGridDBColumn
         Caption = #22791#27880
         DataBinding.FieldName = 'memo'
@@ -97,6 +93,36 @@ object fPU_OrderEdit: TfPU_OrderEdit
       Color = clGradientInactiveCaption
       ParentBackground = False
       TabOrder = 2
+      object Button3: TButton
+        Left = 245
+        Top = 14
+        Width = 75
+        Height = 25
+        Caption = #20462#25913
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = Button3Click
+      end
+      object Button4: TButton
+        Left = 349
+        Top = 14
+        Width = 75
+        Height = 25
+        Caption = #21462#28040
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = Button4Click
+      end
     end
     object Button1: TButton
       Left = 29
@@ -114,11 +140,11 @@ object fPU_OrderEdit: TfPU_OrderEdit
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 133
+      Left = 135
       Top = 16
       Width = 75
       Height = 25
-      Caption = #21462#28040
+      Caption = #20837#24211
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13

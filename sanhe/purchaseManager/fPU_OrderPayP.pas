@@ -122,7 +122,7 @@ begin
   inherited;
     duPub.tbl_pu_orderpay.Close;
     duPub.tbl_pu_orderpay.Open;
-    duPub.getPartner(ComboBox1);
+    duPub.getPartner(ComboBox1,'π©”¶…Ã');
     duPub.getUser(ComboBox2);
 end;
 
@@ -146,6 +146,8 @@ begin
     Edit1.Text := '';
     ComboBox1.Text := '';
     ComboBox2.Text := '';
+    ComboBox1.ItemIndex := -1;
+    ComboBox2.ItemIndex := -1;
     cxDateEdit1.Text := '';
     cxDateEdit2.Text := '';
     duPub.getSelectData(duPub.tbl_pu_orderpay,TStringList.Create,'pu_orderpay',dboAnd);

@@ -146,7 +146,6 @@ memo : String;
 productIDStr : String;
 QtyStr : String;
 PriceStr : String;
-HadInQtyStr : String;
 StateStr : String;
 memoStr : String;
 i : Integer;
@@ -160,7 +159,6 @@ begin
      puStatus := '待审核';
      address := Edit5.Text;
      memo := Edit6.Text;
-     HadInQtyStr := '';
      StateStr := '';
      memoStr := '';
 
@@ -201,7 +199,6 @@ begin
            exit;
          end;
 
-         HadInQtyStr := HadInQtyStr + '0|';
          StateStr := StateStr + '未入库|'
     end;
 
@@ -214,7 +211,7 @@ begin
           parameters.Clear;
           sql.Add('exec addPuOrder :@puOrderNum,:@partnerId,:@puStatus,'
           +':@puOrderUser,:@puOrderDate,:@puCreator,:@address,:@amountPay,:@memo,'
-          +':@productIDStr,:@QtyStr,:@PriceStr,:@HadInQtyStr,:@StateStr,:@memoStr');//这就是调用存储过程
+          +':@productIDStr,:@QtyStr,:@PriceStr,:@StateStr,:@memoStr');//这就是调用存储过程
           parameters.Items[0].Value := puOrderNum;
           parameters.Items[1].Value := partnerId;
           parameters.Items[2].Value := puStatus;
@@ -227,9 +224,8 @@ begin
           parameters.Items[9].Value := productIDStr;
           parameters.Items[10].Value := QtyStr;
           parameters.Items[11].Value := PriceStr;
-          parameters.Items[12].Value := HadInQtyStr;
-          parameters.Items[13].Value := StateStr;
-          parameters.Items[14].Value := memoStr;
+          parameters.Items[12].Value := StateStr;
+          parameters.Items[13].Value := memoStr;
           execsql;
      end;
      duPub.tbl_pu_order.ApplyUpdates(true,true);
@@ -314,7 +310,7 @@ procedure TfPU_OrderAdd.FormCreate(Sender: TObject);
 begin
     duPUb.tbl_st_kind.Close;
     duPub.tbl_st_kind.Open;
-    duPub.getPartner(ComboBox1);
+    duPub.getPartner(ComboBox1,'供应商');
     duPub.getUser(ComboBox2);
     addList := TStringList.Create;
     initData();

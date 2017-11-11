@@ -57,6 +57,7 @@ type
     procedure tb_BrowseClick(Sender: TObject);
     procedure Tb_EditClick(Sender: TObject);
     procedure tb_UnfilterClick(Sender: TObject);
+    procedure tb_DeleteClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -127,7 +128,7 @@ begin
 //    duPub.tbl_pu_order.Close;
 //    duPub.tbl_pu_order.Open;
     duPub.getSelectData(duPub.tbl_pu_order,TStringList.Create,'pu_order',dboAnd);
-    duPub.getPartner(Combobox1);
+    duPub.getPartner(Combobox1,'供应商');
     duPub.getUser(Combobox3);
     duPub.tbl_st_product.Close;
     duPub.tbl_st_product.open;
@@ -147,15 +148,45 @@ begin
     fPU_OrderDetail.ShowModal;
 end;
 
+procedure TfPU_Order.tb_DeleteClick(Sender: TObject);
+var
+puOrderNum : String;
+result : String;
+row : Integer;
+begin
+  inherited;
+      row := cxGrid1DBTableView1.Controller.FocusedRowIndex;
+      puOrderNum := cxGrid1DBTableView1.DataController.Values[row,1];
+     if MessageDlg('确认删除该入库单?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      begin
+           with duPub.adoquery1 do
+          begin
+                close;
+                sql.Clear;
+                parameters.Clear;
+                sql.Add('exec upPuOrder :@puOrderNum,:@upType,:@result output');
+                 parameters.Items[0].Value := puOrderNum;
+                parameters.Items[1].Value := 0;
+                execsql;
+                result := parameters.Items[2].Value;
+           end;
+
+           if result = 'success' then
+           begin
+               duPub.getSelectData(duPub.tbl_pu_order,TStringList.Create,'pu_order',dboAnd);
+           end;
+       end;
+end;
+
 procedure TfPU_Order.Tb_EditClick(Sender: TObject);
 var
 state : String;
 begin
   inherited;
     state := cxGrid1DBTableView1.DataController.Values[cxGrid1DBTableView1.Controller.FocusedRowIndex,3];
-    if state <> '待审核' then
+    if state = '已入库' then
     begin
-      showmessage('请选择需要审核的记录');
+      showmessage('已入库的记录不能修改');
       exit;
     end;
     fPU_OrderEdit:=TfPU_OrderEdit.Create(self);
@@ -169,6 +200,8 @@ begin
     ComboBox1.Text := '';
     ComboBox2.Text := '';
     ComboBox3.Text := '';
+    ComboBox1.ItemIndex := -1;
+    ComboBox3.ItemIndex := -1;
     cxDateEdit1.Text := '';
     cxDateEdit2.Text := '';
     duPub.getSelectData(duPub.tbl_pu_order,TStringList.Create,'pu_order',dboAnd);

@@ -1,14 +1,15 @@
 inherited fSY_UserManager: TfSY_UserManager
   Caption = #29992#25143#26435#38480#31649#29702
-  ClientHeight = 515
+  ClientHeight = 564
   ClientWidth = 984
-  ExplicitTop = -16
+  OnCreate = FormCreate
   ExplicitWidth = 1000
-  ExplicitHeight = 553
+  ExplicitHeight = 602
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 984
+    ExplicitWidth = 984
     inherited tb_Browse: TToolButton
       ExplicitWidth = 46
     end
@@ -35,8 +36,10 @@ inherited fSY_UserManager: TfSY_UserManager
     end
   end
   inherited ToolBar2: TToolBar
-    Top = 493
+    Top = 542
     Width = 984
+    ExplicitTop = 493
+    ExplicitWidth = 984
     inherited rec_Edit: TEdit
       Align = alClient
     end
@@ -44,40 +47,37 @@ inherited fSY_UserManager: TfSY_UserManager
   inherited Panel1: TPanel
     Width = 649
     Align = alNone
+    Visible = True
     ExplicitWidth = 649
   end
   inherited cxGrid1: TcxGrid
     Width = 649
+    Height = 35
     Align = alNone
     Visible = False
     ExplicitWidth = 649
+    ExplicitHeight = 35
   end
   object Panel2: TPanel [4]
     Left = 0
     Top = 54
     Width = 984
-    Height = 439
+    Height = 488
     Align = alClient
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 4
-    Visible = False
-    ExplicitLeft = 8
-    ExplicitTop = 62
-    ExplicitWidth = 649
-    ExplicitHeight = 91
+    ExplicitHeight = 439
     object Panel3: TPanel
       Left = 377
       Top = 1
       Width = 606
-      Height = 437
+      Height = 486
       Align = alClient
       Color = clGradientInactiveCaption
       ParentBackground = False
       TabOrder = 0
-      Visible = False
-      ExplicitLeft = 1
-      ExplicitWidth = 392
+      ExplicitHeight = 437
       object Panel5: TPanel
         AlignWithMargins = True
         Left = 4
@@ -89,7 +89,6 @@ inherited fSY_UserManager: TfSY_UserManager
         BevelOuter = bvNone
         Caption = #32452#21035#26435#38480':'
         TabOrder = 0
-        ExplicitWidth = 554
         object Button1: TButton
           Left = 212
           Top = 7
@@ -97,6 +96,7 @@ inherited fSY_UserManager: TfSY_UserManager
           Height = 24
           Caption = #20445#23384
           TabOrder = 0
+          OnClick = Button1Click
         end
         object Button2: TButton
           Left = 87
@@ -105,6 +105,7 @@ inherited fSY_UserManager: TfSY_UserManager
           Height = 25
           Caption = #32534#36753#26435#38480
           TabOrder = 1
+          OnClick = Button2Click
         end
         object Button3: TButton
           Left = 292
@@ -113,13 +114,14 @@ inherited fSY_UserManager: TfSY_UserManager
           Height = 25
           Caption = #21462#28040
           TabOrder = 2
+          OnClick = Button3Click
         end
       end
       object tree1: TcxTreeList
         Left = 1
         Top = 45
         Width = 604
-        Height = 391
+        Height = 440
         Align = alClient
         Bands = <
           item
@@ -129,8 +131,9 @@ inherited fSY_UserManager: TfSY_UserManager
         OptionsData.Deleting = False
         OptionsSelection.InvertSelect = False
         TabOrder = 1
-        ExplicitWidth = 560
-        ExplicitHeight = 497
+        OnCustomDrawDataCell = tree1CustomDrawDataCell
+        OnFocusedNodeChanged = tree1FocusedNodeChanged
+        ExplicitHeight = 391
         object aColumn: TcxTreeListColumn
           Caption.Text = #27169#22359
           DataBinding.ValueType = 'String'
@@ -236,17 +239,25 @@ inherited fSY_UserManager: TfSY_UserManager
           Summary.GroupFooterSummaryItems = <>
         end
       end
+      object Memo1: TMemo
+        Left = 6
+        Top = 192
+        Width = 392
+        Height = 253
+        TabOrder = 2
+        Visible = False
+      end
     end
     object Panel4: TPanel
       Left = 1
       Top = 1
       Width = 376
-      Height = 437
+      Height = 486
       Align = alLeft
       Color = clGradientInactiveCaption
       ParentBackground = False
       TabOrder = 1
-      Visible = False
+      ExplicitHeight = 437
       object Panel6: TPanel
         Left = 1
         Top = 1
@@ -256,9 +267,6 @@ inherited fSY_UserManager: TfSY_UserManager
         Alignment = taLeftJustify
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitLeft = 2
-        ExplicitTop = 9
-        ExplicitWidth = 390
         object cxLabel2: TcxLabel
           AlignWithMargins = True
           Left = 3
@@ -273,6 +281,7 @@ inherited fSY_UserManager: TfSY_UserManager
           Top = 10
           Width = 210
           Height = 25
+          Buttons.OnButtonClick = cxDBNavigator1ButtonsButtonClick
           Buttons.CustomButtons = <>
           Buttons.First.Visible = False
           Buttons.PriorPage.Enabled = False
@@ -301,7 +310,7 @@ inherited fSY_UserManager: TfSY_UserManager
           Buttons.GotoBookmark.Visible = False
           Buttons.Filter.Enabled = False
           Buttons.Filter.Visible = False
-          DataSource = dSource1
+          DataSource = DADataSource1
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
@@ -311,11 +320,10 @@ inherited fSY_UserManager: TfSY_UserManager
         Left = 1
         Top = 42
         Width = 374
-        Height = 244
+        Height = 215
         Align = alTop
         TabOrder = 1
         LookAndFeel.NativeStyle = False
-        ExplicitWidth = 417
         object cxGrid2DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           Navigator.Buttons.First.Visible = True
@@ -336,9 +344,10 @@ inherited fSY_UserManager: TfSY_UserManager
           Navigator.Buttons.Filter.Visible = True
           FilterBox.CustomizeDialog = False
           FilterBox.Visible = fvNever
+          OnCanFocusRecord = cxGrid2DBTableView1CanFocusRecord
           DataController.DataModeController.GridMode = True
           DataController.DataModeController.SyncMode = False
-          DataController.DataSource = dSource1
+          DataController.DataSource = DADataSource1
           DataController.KeyFieldNames = 'ID'
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -354,6 +363,7 @@ inherited fSY_UserManager: TfSY_UserManager
           OptionsData.DeletingConfirmation = False
           OptionsData.Editing = False
           OptionsData.Inserting = False
+          OptionsView.ColumnAutoWidth = True
           OptionsView.GroupByBox = False
           OptionsView.Indicator = True
           object cxGrid2DBTableView1GroupName: TcxGridDBColumn
@@ -382,29 +392,32 @@ inherited fSY_UserManager: TfSY_UserManager
       end
       object cxGrid3: TcxGrid
         Left = 1
-        Top = 286
+        Top = 298
         Width = 374
-        Height = 200
+        Height = 197
         Align = alTop
         TabOrder = 2
         LookAndFeel.NativeStyle = False
-        ExplicitTop = 237
-        ExplicitWidth = 390
+        ExplicitTop = 253
         object cxGridDBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataModeController.GridMode = True
+          DataController.DataSource = dSP_User
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
           OptionsView.GroupByBox = False
-          object cxGrid1DBTableView1UserID: TcxGridDBColumn
+          object cxGridDBTableView1loginName: TcxGridDBColumn
             Caption = #30331#24405#21517
-            DataBinding.FieldName = 'UserID'
-            Width = 147
+            DataBinding.FieldName = 'loginName'
           end
           object cxGrid1DBTableView1FullName: TcxGridDBColumn
             Caption = #20840#21517
             DataBinding.FieldName = 'FullName'
+          end
+          object cxGridDBTableView1RecID: TcxGridDBColumn
+            DataBinding.FieldName = 'RecID'
+            Visible = False
           end
         end
         object cxGridLevel1: TcxGridLevel
@@ -413,15 +426,15 @@ inherited fSY_UserManager: TfSY_UserManager
       end
       object Panel7: TPanel
         Left = 1
-        Top = 486
+        Top = 257
         Width = 374
         Height = 41
         Align = alTop
         Alignment = taLeftJustify
         BevelOuter = bvNone
         TabOrder = 3
-        ExplicitTop = 396
-        ExplicitWidth = 390
+        ExplicitLeft = 2
+        ExplicitTop = 289
         object cxLabel1: TcxLabel
           AlignWithMargins = True
           Left = 3
@@ -436,6 +449,7 @@ inherited fSY_UserManager: TfSY_UserManager
           Top = 10
           Width = 126
           Height = 25
+          Buttons.OnButtonClick = cxDBNavigator2ButtonsButtonClick
           Buttons.CustomButtons = <>
           Buttons.First.Visible = False
           Buttons.PriorPage.Enabled = False
@@ -467,11 +481,138 @@ inherited fSY_UserManager: TfSY_UserManager
           Buttons.GotoBookmark.Visible = False
           Buttons.Filter.Enabled = False
           Buttons.Filter.Visible = False
+          DataSource = dSP_User
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
         end
       end
     end
+  end
+  object DADataSource1: TDADataSource
+    DataSet = tbl_p_usergroup.Dataset
+    DataTable = tbl_p_usergroup
+    Left = 456
+    Top = 213
+  end
+  object tbl_p_usergroup: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'ID'
+        DataType = datAutoInc
+        GeneratorName = 'p_usergroup'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'groupName'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'isAdmin'
+        DataType = datBoolean
+      end
+      item
+        Name = 'auText'
+        DataType = datWideMemo
+      end>
+    LogicalName = 'p_usergroup'
+    Params = <>
+    RemoteDataAdapter = duPub.RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    OnAfterScroll = tbl_p_usergroupAfterScroll
+    AfterScroll = tbl_p_usergroupAfterScroll
+    IndexDefs = <>
+    Left = 561
+    Top = 212
+  end
+  object dsP_Module: TDADataSource
+    DataSet = tbl_p_module.Dataset
+    DataTable = tbl_p_module
+    Left = 455
+    Top = 290
+  end
+  object tbl_p_module: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'ID'
+        DataType = datAutoInc
+        GeneratorName = 'p_module'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'actName'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'moduleName'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'parentAction'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'p_module'
+    Params = <>
+    RemoteDataAdapter = duPub.RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 585
+    Top = 286
+  end
+  object dSP_User: TDADataSource
+    DataSet = tbl_p_user.Dataset
+    DataTable = tbl_p_user
+    Left = 459
+    Top = 352
+  end
+  object tbl_p_user: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'ID'
+        DataType = datAutoInc
+        GeneratorName = 'p_user'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'loginName'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'fullName'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'password'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'userGroup_ID'
+        DataType = datWideString
+        Size = 10
+      end>
+    LogicalName = 'p_user'
+    Params = <>
+    RemoteDataAdapter = duPub.RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 553
+    Top = 356
   end
 end

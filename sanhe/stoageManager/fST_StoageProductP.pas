@@ -24,7 +24,7 @@ uses
   cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, uDAFields,
   uDADataTable, cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.ComCtrls, Vcl.ToolWin, cxDBLookupComboBox;
+  Vcl.ComCtrls, Vcl.ToolWin, cxDBLookupComboBox, Data.Win.ADODB;
 
 type
   TfST_StoageProduct = class(Tfbase1)
@@ -49,26 +49,29 @@ implementation
 
 {$R *.dfm}
 uses
-duPubP
+duPubP,fST_StoageProductDetailP
 ;
+
+
 
 procedure TfST_StoageProduct.FormCreate(Sender: TObject);
 begin
   inherited;
-    duPub.tbl_st_repertory.Close;
-    duPub.tbl_st_repertory.Open;
     duPub.tbl_st_product.Close;
     duPub.tbl_st_product.Open;
     duPub.tbl_st_company.Close;
     duPub.tbl_st_company.Open;
     duPub.tbl_st_location.Close;
     duPub.tbl_st_location.Open;
+
+
 end;
 
 procedure TfST_StoageProduct.tb_BrowseClick(Sender: TObject);
 begin
   inherited;
-      //sdfg
+      fST_StoageProductDetail:=TfST_StoageProductDetail.Create(self);
+    fST_StoageProductDetail.ShowModal;
 end;
 
 end.

@@ -60,13 +60,15 @@ type
     cxGrid1DBTableView1locationId: TcxGridDBColumn;
     cxGrid1DBTableView1companyId: TcxGridDBColumn;
     Edit3: TEdit;
-    Label6: TLabel;
-    cxDBTextEdit7: TcxDBTextEdit;
     cxGrid1DBTableView1state: TcxGridDBColumn;
-    cxGrid1DBTableView1hadOutQty: TcxGridDBColumn;
+    cxGrid1DBTableView1oddDtId: TcxGridDBColumn;
+    Button2: TButton;
+    Button3: TButton;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -81,7 +83,7 @@ implementation
 
 {$R *.dfm}
 uses
-duPubP
+duPubP,fPU_OrderInP
 ;
 
 procedure TfPU_OrderInDetail.initData();
@@ -96,6 +98,38 @@ end;
 procedure TfPU_OrderInDetail.Button1Click(Sender: TObject);
 begin
     self.Close;
+end;
+
+procedure TfPU_OrderInDetail.Button2Click(Sender: TObject);
+var
+result : String;
+begin
+      with duPub.ADOQuery1 do
+           begin
+                close;
+                sql.Clear;
+                parameters.Clear;
+                sql.Add('exec upInstorage :@inCode,:@upType,:@result output');
+                 parameters.Items[0].Value := cxDBTextEdit1.Text;
+                parameters.Items[1].Value := 1;
+                execsql;
+                result := parameters.Items[2].Value;
+           end;
+
+           if result = 'success' then
+           begin
+//               fPU_OrderIn.tbl_st_instorage.ApplyUpdates(true,true);
+//                duPub.getSelectData(fPU_OrderIn.tbl_st_instorage,TStringList.Create,'st_instorage',dboAnd);
+               self.Close;
+           end;
+end;
+
+procedure TfPU_OrderInDetail.Button3Click(Sender: TObject);
+begin
+      duPub.tbl_st_instorageDt.DisableControls;
+      cxGrid1DBTableView1.DataController.UpdateData;
+      duPub.tbl_st_instorageDt.ApplyUpdates(false,true);
+      duPub.tbl_st_instorageDt.EnableControls;
 end;
 
 procedure TfPU_OrderInDetail.FormClose(Sender: TObject;
@@ -114,7 +148,20 @@ begin
     duPub.tbl_p_partners.Open;
     duPub.tbl_st_product.Close;
     duPub.tbl_st_product.Open;
+    duPub.tbl_pu_orderDt.Close;
+    duPub.tbl_pu_orderDt.Open;
      initData();
+
+     if inType = 0 then
+      begin
+         Button2.Visible := false;
+         Button3.Visible := false;
+      end
+      else  if inType = 1 then
+      begin
+          Button2.Visible := true;
+          Button3.Visible := true;
+      end;
 end;
 
 end.

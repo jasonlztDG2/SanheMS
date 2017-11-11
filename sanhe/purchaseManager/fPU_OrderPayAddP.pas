@@ -62,7 +62,7 @@ type
     cxGrid1DBTableView1locationId: TcxGridDBColumn;
     cxGrid1DBTableView1companyId: TcxGridDBColumn;
     cxGrid1DBTableView1state: TcxGridDBColumn;
-    cxGrid1DBTableView1hadOutQty: TcxGridDBColumn;
+    cxGrid1DBTableView1oddDtId: TcxGridDBColumn;
     procedure FormCreate(Sender: TObject);
     procedure cxDBNavigator1ButtonsButtonClick(Sender: TObject;
       AButtonIndex: Integer; var ADone: Boolean);
@@ -88,7 +88,7 @@ implementation
 
 {$R *.dfm}
 uses
-duPubP,fPU_OrderPayListP
+duPubP,fPU_OrderPayListP,fPU_OrderInP
 ;
 
 procedure TfPU_OrderPayAdd.updateList(id : String);
@@ -145,17 +145,15 @@ totalAmountStr : String;
 stateStr : String;
 status : String;
 memo : String;
-inCodeStr : String;
-InstorageDtIdStr : String;
-StateUpdateStr : String;
-hadOutQtyStr : String;
-updateState : String;
-hadOutQty : double;
+oddDtStr : String;
+
 
 i : Integer;
 qty : double;
 price : double;
 totalAmount : double;
+
+result : String;
 begin
      payCode := trim(Edit1.Text);
      partnerIndex := ComboBox1.ItemIndex;
@@ -165,31 +163,30 @@ begin
      payAmount := Edit2.Text;
      payNum := ComboBox3.Text;
      PayDate := cxDateEdit1.Date;
-     payType := '付款';
+     payType := '采购付款';
      operatorId := 1;
      status := '已付款';
      memo := '';
-     updateState := '已付款';
 
      for I := 0 to orderPayList.Count - 1 do
      begin
+//         inDtStr := oddDtStr + orderPayList.Names[i] + '|';
          oddNumStr := oddNumStr + trim(cxGrid1DBTableView1.DataController.Values[i,1]) + '|';
          qty := strToFloat(cxGrid1DBTableView1.DataController.Values[i,3]);
-         price := cxGrid1DBTableView1.DataController.Values[i,4];
-         hadOutQty := strToFloat(cxGrid1DBTableView1.DataController.Values[i,8]);
-         totalAmount := (qty - hadOutQty) * price;
-         qtyStr := qtyStr + floatToStr(qty - hadOutQty) + '|';
+         price := strToFloat(cxGrid1DBTableView1.DataController.Values[i,4]);
          priceStr := priceStr + floatToStr(price) + '|';
+         totalAmount :=  qty * price;
          totalAmountStr := totalAmountStr + floatToStr(totalAmount) + '|';
          stateStr := stateStr + '已付款|';
-         inCodeStr := oddNumStr;
-         InstorageDtIdStr := InstorageDtIdStr + orderPayList.Names[i] + '|';
-         StateUpdateStr := StateUpdateStr + '已付款|';
-         hadOutQtyStr := '';
-
+         oddDtStr := oddDtStr + trim(cxGrid1DBTableView1.DataController.Values[i,8]) + '|';
+         qtyStr := qtyStr + floatToStr(qty) + '|';
      end;
+//      showmessage( payCode + #13#10 + partnerId + #13#10 + payUserId + #13#10 + payAmount + #13#10 +
+//            payNum + #13#10 + datetimeToStr(payDate) + #13#10 + payType + #13#10 + intToStr(operatorId) + #13#10 +
+//            oddNumStr + #13#10 + qtyStr + #13#10 + priceStr + #13#10 +  totalAmountStr + #13#10 +
+//            stateStr + #13#10 + status + #13#10 + memo + #13#10 + inDtStr + #13#10);
 
-     Edit3.Text := qtyStr + '  ' + totalAmountStr;
+
 
     with duPub.adoquery1 do
     begin
@@ -198,8 +195,7 @@ begin
           parameters.Clear;
           sql.Add('exec addOrderPay :@payCode,:@partnerId,:@payUser,:@payAmount,'
            + ':@payNum,:@payDate,:@payType,:@operator,:@oddNumStr,:@qtyStr,:@priceStr,'
-           + ':@totalAmountStr,:@stateStr,:@status,:@memo,:@inCodeStr,:@InstorageDtIdStr,'
-           + ':@StateUpdateStr,:@hadOutQtyStr,:@updateState');//这就是调用存储过程
+           + ':@totalAmountStr,:@stateStr,:@status,:@memo,:@oddDtStr,:@successResult output');//这就是调用存储过程
 
           parameters.Items[0].Value := payCode;
           parameters.Items[1].Value := partnerId;
@@ -216,18 +212,19 @@ begin
           parameters.Items[12].Value := stateStr;
           parameters.Items[13].Value := status;
           parameters.Items[14].Value := memo;
-          parameters.Items[15].Value := inCodeStr;
-          parameters.Items[16].Value := InstorageDtIdStr;
-          parameters.Items[17].Value := StateUpdateStr;
-          parameters.Items[18].Value := hadOutQtyStr;
-          parameters.Items[19].Value := updateState;
+          parameters.Items[15].Value := oddDtStr;
 
 
           execsql;
-
+          result := parameters.Items[16].Value;
      end;
-     duPub.tbl_pu_orderpay.ApplyUpdates(true,true);
-     self.Close;
+
+     if result = 'success' then
+      begin
+          duPub.tbl_pu_orderpay.ApplyUpdates(true,true);
+          self.Close;
+      end;
+
 end;
 
 procedure TfPU_OrderPayAdd.Button2Click(Sender: TObject);
@@ -303,7 +300,7 @@ begin
     duPub.tbl_st_product.Close;
     duPub.tbl_st_product.Open;
     orderPayList := TStringList.Create;
-    duPub.getPartner(ComboBox1);
+    duPub.getPartner(ComboBox1,'供应商');
     duPub.getUser(ComboBox2);
     duPub.showInsertNum('puOrderPayGetNum','SHFK',Edit1);
 end;

@@ -6,21 +6,35 @@ inherited fST_StoageProduct: TfST_StoageProduct
   inherited ToolBar1: TToolBar
     inherited tb_Browse: TToolButton
       OnClick = tb_BrowseClick
+      ExplicitWidth = 46
     end
     inherited Tb_Edit: TToolButton
       Visible = False
+      ExplicitWidth = 39
     end
     inherited tb_Append: TToolButton
       Visible = False
+      ExplicitWidth = 48
     end
     inherited tb_revise: TToolButton
       Visible = False
+      ExplicitWidth = 43
     end
     inherited tb_Copy: TToolButton
       Visible = False
+      ExplicitWidth = 39
     end
     inherited tb_Delete: TToolButton
       Visible = False
+      ExplicitWidth = 42
+    end
+    inherited tb_Filter: TToolButton
+      Visible = False
+      ExplicitWidth = 39
+    end
+    inherited tb_Unfilter: TToolButton
+      Visible = False
+      ExplicitWidth = 46
     end
     inherited tb_Save: TToolButton
       Visible = False
@@ -35,9 +49,16 @@ inherited fST_StoageProduct: TfST_StoageProduct
       Visible = False
     end
   end
+  inherited Panel1: TPanel
+    Height = 83
+    ExplicitHeight = 83
+  end
   inherited cxGrid1: TcxGrid
+    Top = 137
+    Height = 314
+    ExplicitTop = 137
+    ExplicitHeight = 314
     inherited cxGrid1DBTableView1: TcxGridDBTableView
-      DataController.DataSource = duPub.ds_st_repertory
       object cxGrid1DBTableView1RecID: TcxGridDBColumn
         DataBinding.FieldName = 'RecID'
         Visible = False

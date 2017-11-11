@@ -9,7 +9,7 @@ inherited fPU_OrderIn: TfPU_OrderIn
       ExplicitWidth = 46
     end
     inherited Tb_Edit: TToolButton
-      Visible = False
+      OnClick = Tb_EditClick
       ExplicitWidth = 39
     end
     inherited tb_Append: TToolButton
@@ -26,7 +26,7 @@ inherited fPU_OrderIn: TfPU_OrderIn
       ExplicitWidth = 39
     end
     inherited tb_Delete: TToolButton
-      Visible = False
+      OnClick = tb_DeleteClick
       ExplicitWidth = 42
     end
     inherited tb_Filter: TToolButton
@@ -44,36 +44,13 @@ inherited fPU_OrderIn: TfPU_OrderIn
     inherited tb_Seperator3: TToolButton
       Visible = False
     end
+    inherited tbRefresh: TToolButton
+      OnClick = tbRefreshClick
+    end
   end
   inherited Panel1: TPanel
-    Height = 139
-    ExplicitHeight = 139
-    object Label2: TLabel
-      Left = 25
-      Top = 57
-      Width = 60
-      Height = 16
-      Caption = #20179#24211#32534#21495
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label5: TLabel
-      Left = 304
-      Top = 57
-      Width = 60
-      Height = 16
-      Caption = #24402#23646#20844#21496
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
+    Height = 99
+    ExplicitHeight = 99
     object Label4: TLabel
       Left = 25
       Top = 17
@@ -89,7 +66,7 @@ inherited fPU_OrderIn: TfPU_OrderIn
     end
     object Label3: TLabel
       Left = 25
-      Top = 97
+      Top = 61
       Width = 60
       Height = 16
       Caption = #20837#24211#26102#38388
@@ -102,7 +79,7 @@ inherited fPU_OrderIn: TfPU_OrderIn
     end
     object Label6: TLabel
       Left = 215
-      Top = 97
+      Top = 61
       Width = 12
       Height = 16
       Caption = #8212
@@ -126,23 +103,6 @@ inherited fPU_OrderIn: TfPU_OrderIn
       Font.Style = []
       ParentFont = False
     end
-    object ComboBox1: TComboBox
-      Left = 99
-      Top = 56
-      Width = 145
-      Height = 21
-      TabOrder = 0
-    end
-    object ComboBox3: TComboBox
-      Left = 378
-      Top = 56
-      Width = 145
-      Height = 21
-      TabOrder = 1
-      Items.Strings = (
-        #26448#26009
-        #25104#21697)
-    end
     object Button1: TButton
       Left = 584
       Top = 14
@@ -155,7 +115,7 @@ inherited fPU_OrderIn: TfPU_OrderIn
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 0
       OnClick = Button1Click
     end
     object Edit1: TEdit
@@ -163,11 +123,11 @@ inherited fPU_OrderIn: TfPU_OrderIn
       Top = 16
       Width = 145
       Height = 21
-      TabOrder = 3
+      TabOrder = 1
     end
     object cxDateEdit1: TcxDateEdit
       Left = 99
-      Top = 97
+      Top = 61
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clWindowText
@@ -175,12 +135,12 @@ inherited fPU_OrderIn: TfPU_OrderIn
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.IsFontAssigned = True
-      TabOrder = 4
+      TabOrder = 2
       Width = 110
     end
     object cxDateEdit2: TcxDateEdit
       Left = 233
-      Top = 97
+      Top = 61
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clWindowText
@@ -188,7 +148,7 @@ inherited fPU_OrderIn: TfPU_OrderIn
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.IsFontAssigned = True
-      TabOrder = 5
+      TabOrder = 3
       Width = 110
     end
     object ComboBox4: TComboBox
@@ -196,19 +156,20 @@ inherited fPU_OrderIn: TfPU_OrderIn
       Top = 16
       Width = 145
       Height = 21
-      TabOrder = 6
+      TabOrder = 4
       Items.Strings = (
         #26448#26009
         #25104#21697)
     end
   end
   inherited cxGrid1: TcxGrid
-    Top = 193
-    Height = 258
-    ExplicitTop = 193
-    ExplicitHeight = 258
+    Top = 153
+    Height = 298
+    ExplicitTop = 153
+    ExplicitHeight = 298
     inherited cxGrid1DBTableView1: TcxGridDBTableView
-      DataController.DataSource = duPub.ds_st_instorage
+      DataController.DataSource = dSource1
+      OptionsView.ColumnAutoWidth = True
       object cxGrid1DBTableView1RecID: TcxGridDBColumn
         DataBinding.FieldName = 'RecID'
         Visible = False
@@ -218,26 +179,6 @@ inherited fPU_OrderIn: TfPU_OrderIn
       end
       object cxGrid1DBTableView1inType: TcxGridDBColumn
         DataBinding.FieldName = 'inType'
-      end
-      object cxGrid1DBTableView1locationId: TcxGridDBColumn
-        DataBinding.FieldName = 'locationId'
-        PropertiesClassName = 'TcxLookupComboBoxProperties'
-        Properties.KeyFieldNames = 'id'
-        Properties.ListColumns = <
-          item
-            FieldName = 'locationName'
-          end>
-        Properties.ListSource = duPub.ds_st_location
-      end
-      object cxGrid1DBTableView1companyId: TcxGridDBColumn
-        DataBinding.FieldName = 'companyId'
-        PropertiesClassName = 'TcxLookupComboBoxProperties'
-        Properties.KeyFieldNames = 'id'
-        Properties.ListColumns = <
-          item
-            FieldName = 'CompanyName'
-          end>
-        Properties.ListSource = duPub.ds_st_company
       end
       object cxGrid1DBTableView1inDate: TcxGridDBColumn
         DataBinding.FieldName = 'inDate'
@@ -268,9 +209,6 @@ inherited fPU_OrderIn: TfPU_OrderIn
       object cxGrid1DBTableView1inState: TcxGridDBColumn
         DataBinding.FieldName = 'inState'
       end
-      object cxGrid1DBTableView1oddNo: TcxGridDBColumn
-        DataBinding.FieldName = 'oddNo'
-      end
       object cxGrid1DBTableView1department: TcxGridDBColumn
         DataBinding.FieldName = 'department'
       end
@@ -278,5 +216,85 @@ inherited fPU_OrderIn: TfPU_OrderIn
         DataBinding.FieldName = 'memo'
       end
     end
+  end
+  inherited dSource1: TDADataSource
+    DataSet = tbl_st_instorage.Dataset
+    DataTable = tbl_st_instorage
+  end
+  object tbl_st_instorage: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'st_instorage'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'inCode'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'inType'
+        DataType = datWideString
+        Size = 10
+        Required = True
+      end
+      item
+        Name = 'locationId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'companyId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'inDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'consignee'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'operatorDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'operator'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'inState'
+        DataType = datWideString
+        Size = 10
+        Required = True
+      end
+      item
+        Name = 'department'
+        DataType = datFixedWideChar
+        Size = 10
+      end
+      item
+        Name = 'memo'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'st_instorage'
+    Params = <>
+    RemoteDataAdapter = duPub.RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 488
+    Top = 117
   end
 end

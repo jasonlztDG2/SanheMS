@@ -44,6 +44,7 @@ object fMain: TfMain
       Caption = #37319#36141#31649#29702
       SelectedLinkIndex = -1
       TopVisibleLinkIndex = 0
+      OptionsExpansion.Expanded = False
       Links = <
         item
           Item = barPU_ListData
@@ -75,13 +76,15 @@ object fMain: TfMain
         end
         item
           Item = barST_StorageProduct
+        end
+        item
+          Item = barST_StorageStatement
         end>
     end
     object dxNavBar1Group4: TdxNavBarGroup
       Caption = #29983#20135#31649#29702
       SelectedLinkIndex = -1
       TopVisibleLinkIndex = 0
-      OptionsExpansion.Expanded = False
       Links = <
         item
           Item = barPR_Plan
@@ -97,6 +100,9 @@ object fMain: TfMain
         end
         item
           Item = barPR_ProduceIn
+        end
+        item
+          Item = barPR_Structure
         end>
     end
     object dxNavBar1Group3: TdxNavBarGroup
@@ -130,9 +136,6 @@ object fMain: TfMain
         end
         item
           Item = barLS_supplier
-        end
-        item
-          Item = barPR_Structure
         end>
     end
     object dxNavBar1Group6: TdxNavBarGroup
@@ -257,6 +260,9 @@ object fMain: TfMain
     end
     object barBA_User: TdxNavBarItem
       Action = actBA_User
+    end
+    object barST_StorageStatement: TdxNavBarItem
+      Action = actST_StorageStatement
     end
     object dxNavBar1StyleItem1: TdxNavBarStyleItem
       Style.BackColor = 14012886
@@ -587,16 +593,19 @@ object fMain: TfMain
       Category = 'Storage'
       Caption = #20837#20179#31649#29702
       ImageIndex = 13
+      OnExecute = actST_StorageInExecute
     end
     object actST_StorageOut: TAction
       Category = 'Storage'
       Caption = #20986#20179#31649#29702
       ImageIndex = 14
+      OnExecute = actST_StorageOutExecute
     end
     object actST_StorageCheck: TAction
       Category = 'Storage'
       Caption = #20179#24211#30424#28857
       ImageIndex = 15
+      OnExecute = actST_StorageCheckExecute
     end
     object actSY_Mysettgins: TAction
       Category = 'System'
@@ -606,6 +615,7 @@ object fMain: TfMain
       Category = 'System'
       Caption = #29992#25143#26435#38480#31649#29702
       ImageIndex = 0
+      OnExecute = actSY_UserManagerExecute
     end
     object actSY_ListData: TAction
       Category = 'System'
@@ -654,6 +664,7 @@ object fMain: TfMain
       Category = 'Sale'
       Caption = #38144#21806#35746#21333
       ImageIndex = 11
+      OnExecute = acSE_ListDataExecute
     end
     object acSE_OrderOut: TAction
       Category = 'Sale'
@@ -685,6 +696,7 @@ object fMain: TfMain
       Category = 'Produce'
       Caption = #29983#20135#35745#21010
       ImageIndex = 16
+      OnExecute = actPR_PlanExecute
     end
     object actPR_WorkSheet: TAction
       Category = 'Produce'
@@ -707,21 +719,27 @@ object fMain: TfMain
       ImageIndex = 20
     end
     object actPR_Structure: TAction
-      Category = 'Product'
+      Category = 'Produce'
       Caption = #25104#21697#32467#26500#28165#21333
       ImageIndex = 21
+      OnExecute = actPR_StructureExecute
     end
     object actBA_User: TAction
       Category = 'Base'
       Caption = #29992#25143#20449#24687
       OnExecute = actBA_UserExecute
     end
+    object actST_StorageStatement: TAction
+      Category = 'Storage'
+      Caption = #26376#32467
+      OnExecute = actST_StorageStatementExecute
+    end
   end
   object ModuleIcon: TImageList
     Left = 639
     Top = 245
     Bitmap = {
-      494C01011600D8001C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011600D800400110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000301010108010101090101
       0109010101090101010901010109010101090101010901010109010101090101
