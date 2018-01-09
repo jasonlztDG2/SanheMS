@@ -1,7 +1,7 @@
 object duPub: TduPub
   OldCreateOrder = True
   OnCreate = DataModuleCreate
-  Height = 1507
+  Height = 1654
   Width = 660
   object ClientChannel: TROWinInetHTTPChannel
     UserAgent = 'Remoting SDK'
@@ -38,8 +38,8 @@ object duPub: TduPub
     RemoteService = RemoteService
     CacheSchema = True
     DataStreamer = DataStreamer
-    Left = 432
-    Top = 8
+    Left = 480
+    Top = 808
   end
   object ReconcileProvider: TDAVCLReconcileProvider
     Left = 528
@@ -219,7 +219,7 @@ object duPub: TduPub
     Left = 142
     Top = 59
     Bitmap = {
-      494C01010C004400B40120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010C004400E80120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008000000001002000000000000000
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2883,13 +2883,13 @@ object duPub: TduPub
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
     Left = 344
-    Top = 552
+    Top = 344
   end
   object DADataSource1: TDADataSource
     DataSet = DAMemDataTable1.Dataset
     DataTable = DAMemDataTable1
     Left = 344
-    Top = 488
+    Top = 288
   end
   object tbl_p_user: TDAMemDataTable
     Fields = <
@@ -3101,14 +3101,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 472
-    Top = 544
+    Left = 456
+    Top = 368
   end
   object ds_st_instorage: TDADataSource
     DataSet = tbl_st_instorage.Dataset
     DataTable = tbl_st_instorage
-    Left = 464
-    Top = 472
+    Left = 432
+    Top = 312
   end
   object tbl_st_instorageDt: TDAMemDataTable
     Fields = <
@@ -3170,6 +3170,17 @@ object duPub: TduPub
         Name = 'oddDtId'
         DataType = datWideString
         Size = 20
+      end
+      item
+        Name = 'idCardNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'instorageDate'
+        DataType = datDateTime
+        Required = True
       end>
     LogicalName = 'st_instorageDt'
     Params = <>
@@ -3312,14 +3323,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 224
-    Top = 680
+    Left = 240
+    Top = 480
   end
   object ds_pu_orderpay: TDADataSource
     DataSet = tbl_pu_orderpay.Dataset
     DataTable = tbl_pu_orderpay
-    Left = 224
-    Top = 608
+    Left = 240
+    Top = 424
   end
   object tbl_pu_orderpaydt: TDAMemDataTable
     Fields = <
@@ -3375,14 +3386,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 328
-    Top = 680
+    Left = 352
+    Top = 480
   end
   object ds_pu_orderpaydt: TDADataSource
     DataSet = tbl_pu_orderpaydt.Dataset
     DataTable = tbl_pu_orderpaydt
-    Left = 336
-    Top = 608
+    Left = 344
+    Top = 424
   end
   object tbl_tr_tradingProof: TDAMemDataTable
     Fields = <
@@ -3441,14 +3452,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 448
-    Top = 672
+    Left = 456
+    Top = 480
   end
   object ds_tr_tradingProof: TDADataSource
     DataSet = tbl_tr_tradingProof.Dataset
     DataTable = tbl_tr_tradingProof
     Left = 456
-    Top = 608
+    Top = 432
   end
   object tbl_tr_tradingProofDt: TDAMemDataTable
     Fields = <
@@ -3719,14 +3730,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 232
-    Top = 544
+    Left = 240
+    Top = 360
   end
   object ds_st_repertoryDetail: TDADataSource
     DataSet = tbl_st_repertoryDetail.Dataset
     DataTable = tbl_st_repertoryDetail
     Left = 232
-    Top = 488
+    Top = 296
   end
   object tbl_st_check: TDAMemDataTable
     Fields = <
@@ -3764,14 +3775,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 496
-    Top = 808
+    Left = 488
+    Top = 728
   end
   object ds_st_check: TDADataSource
     DataSet = tbl_st_check.Dataset
     DataTable = tbl_st_check
-    Left = 488
-    Top = 736
+    Left = 480
+    Top = 680
   end
   object tbl_st_checkdt: TDAMemDataTable
     Fields = <
@@ -3789,7 +3800,17 @@ object duPub: TduPub
         Required = True
       end
       item
-        Name = 'repertoryId'
+        Name = 'productId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'locationId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'companyId'
         DataType = datInteger
         Required = True
       end
@@ -3914,14 +3935,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 304
-    Top = 808
+    Left = 240
+    Top = 624
   end
   object ds_pu_seOrder: TDADataSource
     DataSet = tbl_pu_seOrder.Dataset
     DataTable = tbl_pu_seOrder
-    Left = 304
-    Top = 744
+    Left = 240
+    Top = 552
   end
   object tbl_pu_seOrderDt: TDAMemDataTable
     Fields = <
@@ -3974,14 +3995,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 392
-    Top = 808
+    Left = 360
+    Top = 600
   end
   object ds_pu_seOrderDt: TDADataSource
     DataSet = tbl_pu_seOrderDt.Dataset
     DataTable = tbl_pu_seOrderDt
-    Left = 392
-    Top = 744
+    Left = 368
+    Top = 544
   end
   object tbl_pr_plan: TDAMemDataTable
     Fields = <
@@ -4060,14 +4081,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 216
-    Top = 808
+    Left = 480
+    Top = 616
   end
   object ds_pr_plan: TDADataSource
     DataSet = tbl_pr_plan.Dataset
     DataTable = tbl_pr_plan
-    Left = 208
-    Top = 752
+    Left = 480
+    Top = 544
   end
   object tbl_st_repertoryMonth: TDAMemDataTable
     Fields = <
@@ -4092,8 +4113,8 @@ object duPub: TduPub
     Top = 824
   end
   object ds_st_repertoryMonth: TDADataSource
-    DataSet = tbl_st_repertoryMonth.Dataset
-    DataTable = tbl_st_repertoryMonth
+    DataSet = tbl_st_repertoryDetail.Dataset
+    DataTable = tbl_st_repertoryDetail
     Left = 128
     Top = 760
   end
@@ -4122,14 +4143,14 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 480
-    Top = 952
+    Left = 224
+    Top = 760
   end
   object ds_st_structure: TDADataSource
     DataSet = tbl_st_structure.Dataset
     DataTable = tbl_st_structure
-    Left = 480
-    Top = 888
+    Left = 224
+    Top = 696
   end
   object tbl_st_structureDt: TDAMemDataTable
     Fields = <
@@ -4259,17 +4280,21 @@ object duPub: TduPub
     RemoteUpdatesOptions = []
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
-    Left = 376
+    Left = 480
     Top = 952
   end
   object ds_st_structureProduct: TDADataSource
     DataSet = tbl_st_structureProduct.Dataset
     DataTable = tbl_st_structureProduct
-    Left = 384
+    Left = 472
     Top = 888
   end
   object tbl_pu_orderDetail: TDAMemDataTable
     Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+      end
       item
         Name = 'puOrderNum'
         DataType = datWideString
@@ -4308,7 +4333,7 @@ object duPub: TduPub
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
     Left = 352
-    Top = 216
+    Top = 224
   end
   object ds_pu_orderDetail: TDADataSource
     DataSet = tbl_pu_orderDetail.Dataset
@@ -4318,6 +4343,10 @@ object duPub: TduPub
   end
   object tbl_pu_seOrderPr: TDAMemDataTable
     Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+      end
       item
         Name = 'seOrderNum'
         DataType = datWideString
@@ -4337,6 +4366,11 @@ object duPub: TduPub
         DecimalScale = 4
       end
       item
+        Name = 'status'
+        DataType = datWideString
+        Size = 20
+      end
+      item
         Name = 'productId_1'
         DataType = datAutoInc
       end
@@ -4352,9 +4386,8 @@ object duPub: TduPub
       end
       item
         Name = 'price'
-        DataType = datWideString
-        Size = 20
-        DecimalPrecision = 18
+        DataType = datCurrency
+        DecimalPrecision = 20
         DecimalScale = 4
         Required = True
       end
@@ -4399,17 +4432,24 @@ object duPub: TduPub
     StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
     IndexDefs = <>
     AutoCompactRecords = True
-    Left = 264
-    Top = 952
+    Left = 240
+    Top = 872
   end
   object ds_pu_seOrderPr: TDADataSource
     DataSet = tbl_pu_seOrderPr.Dataset
     DataTable = tbl_pu_seOrderPr
-    Left = 264
-    Top = 888
+    Left = 224
+    Top = 816
   end
   object tbl_pu_seOrderPrBe: TDAMemDataTable
     Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'pu_seOrderPr'
+        Required = True
+        InPrimaryKey = True
+      end
       item
         Name = 'seOrderNum'
         DataType = datWideString
@@ -4423,6 +4463,12 @@ object duPub: TduPub
       end
       item
         Name = 'qty'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'status'
         DataType = datWideString
         Size = 20
         Required = True
@@ -4441,5 +4487,764 @@ object duPub: TduPub
     DataTable = tbl_pu_seOrderPrBe
     Left = 160
     Top = 888
+  end
+  object tbl_pu_orderState: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'orderDtId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'insertCode'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'productId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'qty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'state'
+        DataType = datWideString
+        Size = 10
+        Required = True
+      end>
+    LogicalName = 'pu_orderState'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 128
+    Top = 552
+  end
+  object ds_pu_orderState: TDADataSource
+    DataSet = tbl_pu_orderState.Dataset
+    DataTable = tbl_pu_orderState
+    Left = 128
+    Top = 480
+  end
+  object tbl_st_repertory: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'qty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'productId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'locationId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'companyId'
+        DataType = datInteger
+        Required = True
+      end>
+    LogicalName = 'st_repertory'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 48
+    Top = 800
+  end
+  object ds_st_repertory: TDADataSource
+    DataSet = tbl_st_repertory.Dataset
+    DataTable = tbl_st_repertory
+    Left = 40
+    Top = 744
+  end
+  object tbl_pu_material: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'materialNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'materialDate'
+        DataType = datDateTime
+        Required = True
+      end>
+    LogicalName = 'pu_material'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 40
+    Top = 1064
+  end
+  object ds_pu_material: TDADataSource
+    DataSet = tbl_pu_material.Dataset
+    DataTable = tbl_pu_material
+    Left = 48
+    Top = 1008
+  end
+  object tbl_pu_materialDt: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datInteger
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'materialNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'orderNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'productId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'needQty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'receiveQty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+      end>
+    LogicalName = 'pu_materialDt'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 56
+    Top = 952
+  end
+  object ds_pu_materialDt: TDADataSource
+    DataSet = tbl_pu_materialDt.Dataset
+    DataTable = tbl_pu_materialDt
+    Left = 64
+    Top = 896
+  end
+  object tbl_pu_materialDtPr: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'pu_materialDt'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'materialNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'orderNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'productId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'needQty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'receiveQty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+      end
+      item
+        Name = 'status'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'productId_1'
+        DataType = datAutoInc
+      end
+      item
+        Name = 'productCode'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'productName'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'price'
+        DataType = datCurrency
+      end
+      item
+        Name = 'kind'
+        DataType = datInteger
+      end
+      item
+        Name = 'style'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'spec'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'color'
+        DataType = datWideString
+        Size = 10
+      end
+      item
+        Name = 'unit'
+        DataType = datWideString
+        Size = 10
+      end
+      item
+        Name = 'productType'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'tempNum'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'pu_materialDtPr'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 152
+    Top = 1056
+  end
+  object ds_pu_materialDtPr: TDADataSource
+    DataSet = tbl_pu_materialDtPr.Dataset
+    DataTable = tbl_pu_materialDtPr
+    Left = 160
+    Top = 1000
+  end
+  object tbl_pr_order: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'prOrderNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'ylNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'partnerNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'qty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'department'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'inDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'outDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'memo'
+        DataType = datWideString
+        Size = 500
+      end>
+    LogicalName = 'pr_order'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 480
+    Top = 1072
+  end
+  object ds_pr_order: TDADataSource
+    DataSet = tbl_pr_order.Dataset
+    DataTable = tbl_pr_order
+    Left = 480
+    Top = 1016
+  end
+  object tbl_pr_partsClassified: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'pr_partsClassified'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'prOrderNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'part1'
+        DataType = datWideString
+        Size = 200
+      end
+      item
+        Name = 'part2'
+        DataType = datWideString
+        Size = 200
+      end
+      item
+        Name = 'part3'
+        DataType = datWideString
+        Size = 200
+      end
+      item
+        Name = 'part4'
+        DataType = datWideString
+        Size = 200
+      end
+      item
+        Name = 'part5'
+        DataType = datWideString
+        Size = 200
+      end
+      item
+        Name = 'part6'
+        DataType = datWideString
+        Size = 200
+      end>
+    LogicalName = 'pr_partsClassified'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 32
+    Top = 1176
+  end
+  object ds_pr_partsClassified: TDADataSource
+    DataSet = tbl_pr_partsClassified.Dataset
+    DataTable = tbl_pr_partsClassified
+    Left = 40
+    Top = 1128
+  end
+  object tbl_pr_partsList: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'pr_partsList'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'partName'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end>
+    LogicalName = 'pr_partsList'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 576
+    Top = 1072
+  end
+  object ds_pr_partsList: TDADataSource
+    DataSet = tbl_pr_partsList.Dataset
+    DataTable = tbl_pr_partsList
+    Left = 576
+    Top = 1008
+  end
+  object tbl_pr_partsMaterials: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'pr_partsMaterials'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'ylNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'partsId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'productId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'productColor'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'materialsMemo'
+        DataType = datWideString
+        Size = 200
+      end
+      item
+        Name = 'isOwn'
+        DataType = datInteger
+      end
+      item
+        Name = 'qty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end>
+    LogicalName = 'pr_partsMaterials'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 240
+    Top = 1112
+  end
+  object ds_pr_partsMaterials: TDADataSource
+    DataSet = tbl_pr_partsMaterials.Dataset
+    DataTable = tbl_pr_partsMaterials
+    Left = 256
+    Top = 1056
+  end
+  object tbl_pr_partsPic: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'pr_partsPic'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'prOrderNum'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'picTitle'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'picMemo'
+        DataType = datWideString
+        Size = 200
+      end
+      item
+        Name = 'picUrl'
+        DataType = datWideString
+        Size = 200
+      end>
+    LogicalName = 'pr_partsPic'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 248
+    Top = 992
+  end
+  object ds_pr_partsPic: TDADataSource
+    DataSet = tbl_pr_partsPic.Dataset
+    DataTable = tbl_pr_partsPic
+    Left = 248
+    Top = 928
+  end
+  object tbl_pu_workDetailList: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'workNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'partnerNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'recordDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'deliveryDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'recordUser'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'auditUser'
+        DataType = datInteger
+      end
+      item
+        Name = 'memo'
+        DataType = datWideString
+        Size = 500
+      end
+      item
+        Name = 'titleName'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'titleCount'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'titleMemo'
+        DataType = datWideString
+        Size = 100
+      end
+      item
+        Name = 'bodyDescribe'
+        DataType = datWideString
+        Size = 150
+      end
+      item
+        Name = 'bodyPic'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'bodyMemo'
+        DataType = datWideString
+        Size = 150
+      end>
+    LogicalName = 'pu_workDetailList'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 576
+    Top = 1304
+  end
+  object ds_pu_workDetailList: TDADataSource
+    DataSet = tbl_pu_workDetailList.Dataset
+    DataTable = tbl_pu_workDetailList
+    Left = 576
+    Top = 1240
+  end
+  object tbl_pu_workDetailMaterial: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'workNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'name'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'material'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'isOwn'
+        DataType = datWideString
+        Size = 10
+      end>
+    LogicalName = 'pu_workDetailMaterial'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 456
+    Top = 1192
+  end
+  object ds_pu_workDetailMaterial: TDADataSource
+    DataSet = tbl_pu_workDetailMaterial.Dataset
+    DataTable = tbl_pu_workDetailMaterial
+    Left = 456
+    Top = 1136
+  end
+  object tbl_pu_workDetailPic: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'workNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'title'
+        DataType = datWideString
+        Size = 100
+      end
+      item
+        Name = 'body'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'memo'
+        DataType = datWideString
+        Size = 150
+      end
+      item
+        Name = 'pic'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'pu_workDetailPic'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 576
+    Top = 1184
+  end
+  object ds_pu_workDetailPic: TDADataSource
+    DataSet = tbl_pu_workDetailPic.Dataset
+    DataTable = tbl_pu_workDetailPic
+    Left = 576
+    Top = 1128
+  end
+  object tbl_pu_workDetailTitle: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'pu_workDetailTitle'
+        Required = True
+      end
+      item
+        Name = 'workNum'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'partOne'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'partTwo'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'partThree'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'partFour'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'partFive'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'pu_workDetailTitle'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 152
+    Top = 1176
+  end
+  object ds_pu_workDetailTitle: TDADataSource
+    DataSet = tbl_pu_workDetailTitle.Dataset
+    DataTable = tbl_pu_workDetailTitle
+    Left = 152
+    Top = 1128
   end
 end

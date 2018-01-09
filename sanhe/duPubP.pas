@@ -98,6 +98,34 @@ type
     ds_pu_seOrderPr: TDADataSource;
     tbl_pu_seOrderPrBe: TDAMemDataTable;
     ds_pu_seOrderPrBe: TDADataSource;
+    tbl_pu_orderState: TDAMemDataTable;
+    ds_pu_orderState: TDADataSource;
+    tbl_st_repertory: TDAMemDataTable;
+    ds_st_repertory: TDADataSource;
+    tbl_pu_material: TDAMemDataTable;
+    ds_pu_material: TDADataSource;
+    tbl_pu_materialDt: TDAMemDataTable;
+    ds_pu_materialDt: TDADataSource;
+    tbl_pu_materialDtPr: TDAMemDataTable;
+    ds_pu_materialDtPr: TDADataSource;
+    tbl_pr_order: TDAMemDataTable;
+    ds_pr_order: TDADataSource;
+    tbl_pr_partsClassified: TDAMemDataTable;
+    ds_pr_partsClassified: TDADataSource;
+    tbl_pr_partsList: TDAMemDataTable;
+    ds_pr_partsList: TDADataSource;
+    tbl_pr_partsMaterials: TDAMemDataTable;
+    ds_pr_partsMaterials: TDADataSource;
+    tbl_pr_partsPic: TDAMemDataTable;
+    ds_pr_partsPic: TDADataSource;
+    tbl_pu_workDetailList: TDAMemDataTable;
+    ds_pu_workDetailList: TDADataSource;
+    tbl_pu_workDetailMaterial: TDAMemDataTable;
+    ds_pu_workDetailMaterial: TDADataSource;
+    tbl_pu_workDetailPic: TDAMemDataTable;
+    ds_pu_workDetailPic: TDADataSource;
+    tbl_pu_workDetailTitle: TDAMemDataTable;
+    ds_pu_workDetailTitle: TDADataSource;
 
     procedure ClientChannel_OnLoginNeeded(Sender: TROTransportChannel; anException: Exception; var aRetry: Boolean);
     procedure DataModuleCreate(Sender: TObject);
@@ -129,6 +157,7 @@ type
     function showCompany(id : String) : String;
     function showProduct(id : String) : String;
     procedure showInsertNum(proName : String;getNum : String;editText : TEdit);
+    function getProductPrice(id : String) : String;
   end;
 
 var
@@ -319,6 +348,7 @@ begin
     lDynWhere.Expression := lDynWhere.NewBinaryExpression(
     lDynWhere.NewField(tableName,fieldName),lDynWhere.NewList(expressions),dboIn);
     table.Open;
+
 end;
 
 //获取自增长编号
@@ -377,7 +407,9 @@ var
  List : TStringList;
 begin
    List := TStringList.Create;
-  dupub.setSelectData(List,'productType',productType,dboEqual);
+   if productType <> '' then
+       dupub.setSelectData(List,'productType',productType,dboEqual);
+
   duPub.getSelectData(duPub.DAMemDataTable1,List,'st_product',dboAnd);
 
     box.Clear;
@@ -495,14 +527,14 @@ function TduPub.showPartner(id : String) : String;
 begin
      if id = '' then
       exit;
-     duPub.tbl_p_user.Close;
-     duPub.tbl_p_user.Open;
-     if duPub.tbl_p_user.Active then
+     duPub.tbl_p_partners.Close;
+     duPub.tbl_p_partners.Open;
+     if duPub.tbl_p_partners.Active then
      begin
-         duPub.tbl_p_user.Filter:='ID='+id;
-         duPub.tbl_p_user.Filtered := true;
-         result := duPub.tbl_p_user.fieldByName('fullName').AsString;
-         duPub.tbl_p_user.Filtered := false;
+         duPub.tbl_p_partners.Filter:='ID='+id;
+         duPub.tbl_p_partners.Filtered := true;
+         result := duPub.tbl_p_partners.fieldByName('name').AsString;
+         duPub.tbl_p_partners.Filtered := false;
      end;
 end;
 
@@ -547,6 +579,21 @@ begin
          duPub.tbl_st_product.Filter:='productId='+id;
          duPub.tbl_st_product.Filtered := true;
          result := duPub.tbl_st_product.fieldByName('productName').AsString;
+         duPub.tbl_st_product.Filtered := false;
+     end;
+end;
+
+function TduPub.getProductPrice(id : String) : String;
+begin
+     if id = '' then
+      exit;
+     duPub.tbl_st_product.Close;
+     duPub.tbl_st_product.Open;
+     if duPub.tbl_st_product.Active then
+     begin
+         duPub.tbl_st_product.Filter:='productId='+id;
+         duPub.tbl_st_product.Filtered := true;
+         result := duPub.tbl_st_product.fieldByName('price').AsString;
          duPub.tbl_st_product.Filtered := false;
      end;
 end;

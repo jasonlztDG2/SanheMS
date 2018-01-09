@@ -55,6 +55,21 @@ object fPU_OrderPayList: TfPU_OrderPayList
       TabOrder = 1
       OnClick = Button3Click
     end
+    object Button2: TButton
+      Left = 233
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #20840#36873
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = Button2Click
+    end
   end
   object cxGrid1: TcxGrid
     Left = 0
@@ -121,6 +136,9 @@ object fPU_OrderPayList: TfPU_OrderPayList
             FieldName = 'CompanyName'
           end>
         Properties.ListSource = duPub.ds_st_company
+      end
+      object cxGrid1DBTableView1idCardNum: TcxGridDBColumn
+        DataBinding.FieldName = 'idCardNum'
       end
       object cxGrid1DBTableView1state: TcxGridDBColumn
         DataBinding.FieldName = 'state'

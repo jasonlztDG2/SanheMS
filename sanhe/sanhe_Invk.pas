@@ -61,6 +61,10 @@ type
     procedure Invoke_getInCode(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
     procedure Invoke_getProduct(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
     procedure Invoke_checkSt(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
+    procedure Invoke_getRepertoryProduct(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
+    procedure Invoke_addOutStorage(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
+    procedure Invoke_getSCOrder(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
+    procedure Invoke_getOrderPr(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
   end;
 
 implementation
@@ -521,12 +525,14 @@ var
   l_checkNum: UnicodeString;
   l_checkUser: Integer;
   l_memo: UnicodeString;
-  l_repertoryIdStr: UnicodeString;
+  l_productIdStr: UnicodeString;
+  l_locationIdStr: UnicodeString;
+  l_companyIdStr: UnicodeString;
   l_checkdtQtyStr: UnicodeString;
   l_checkdtProfitStr: UnicodeString;
+  l_repertoryQtyStr: UnicodeString;
   l_idCardNumStr: UnicodeString;
   l_recordTypeStr: UnicodeString;
-  l_detailQtyStr: UnicodeString;
   lResult: string;
   __lintf: sanhe_Intf.IAndroidService;
 begin
@@ -539,16 +545,154 @@ begin
     __Message.Read('checkNum', System.TypeInfo(UnicodeString), l_checkNum, []);
     __Message.Read('checkUser', System.TypeInfo(Integer), l_checkUser, []);
     __Message.Read('memo', System.TypeInfo(UnicodeString), l_memo, []);
-    __Message.Read('repertoryIdStr', System.TypeInfo(UnicodeString), l_repertoryIdStr, []);
+    __Message.Read('productIdStr', System.TypeInfo(UnicodeString), l_productIdStr, []);
+    __Message.Read('locationIdStr', System.TypeInfo(UnicodeString), l_locationIdStr, []);
+    __Message.Read('companyIdStr', System.TypeInfo(UnicodeString), l_companyIdStr, []);
     __Message.Read('checkdtQtyStr', System.TypeInfo(UnicodeString), l_checkdtQtyStr, []);
     __Message.Read('checkdtProfitStr', System.TypeInfo(UnicodeString), l_checkdtProfitStr, []);
+    __Message.Read('repertoryQtyStr', System.TypeInfo(UnicodeString), l_repertoryQtyStr, []);
     __Message.Read('idCardNumStr', System.TypeInfo(UnicodeString), l_idCardNumStr, []);
     __Message.Read('recordTypeStr', System.TypeInfo(UnicodeString), l_recordTypeStr, []);
-    __Message.Read('detailQtyStr', System.TypeInfo(UnicodeString), l_detailQtyStr, []);
 
-    lResult := __lintf.checkSt(l_checkNum, l_checkUser, l_memo, l_repertoryIdStr, l_checkdtQtyStr, l_checkdtProfitStr, l_idCardNumStr, l_recordTypeStr, l_detailQtyStr);
+    lResult := __lintf.checkSt(l_checkNum, l_checkUser, l_memo, l_productIdStr, l_locationIdStr, l_companyIdStr, l_checkdtQtyStr, l_checkdtProfitStr, l_repertoryQtyStr, l_idCardNumStr, l_recordTypeStr);
 
     __Message.InitializeResponseMessage(__Transport, 'sanhe', 'AndroidService', 'checkStResponse');
+    __Message.Write('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+    __Message.Finalize();
+    __Message.UnsetAttributes(__Transport);
+
+  finally
+    __lintf := nil;
+  end;
+end;
+
+procedure TAndroidService_Invoker.Invoke_getRepertoryProduct(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
+var
+  l_productCode: UnicodeString;
+  l_productNum: UnicodeString;
+  l_idCardNum: UnicodeString;
+  lResult: string;
+  __lintf: sanhe_Intf.IAndroidService;
+begin
+  CheckRoles(__Instance, GetDefaultServiceRoles());
+  try
+    if not Supports(__Instance, IAndroidService, __lintf) then begin
+      raise EIntfCastError.Create('Critical error in TAndroidService_Invoker.Invoke_getRepertoryProduct: __Instance does not support AndroidService interface');
+    end;
+
+    __Message.Read('productCode', System.TypeInfo(UnicodeString), l_productCode, []);
+    __Message.Read('productNum', System.TypeInfo(UnicodeString), l_productNum, []);
+    __Message.Read('idCardNum', System.TypeInfo(UnicodeString), l_idCardNum, []);
+
+    lResult := __lintf.getRepertoryProduct(l_productCode, l_productNum, l_idCardNum);
+
+    __Message.InitializeResponseMessage(__Transport, 'sanhe', 'AndroidService', 'getRepertoryProductResponse');
+    __Message.Write('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+    __Message.Finalize();
+    __Message.UnsetAttributes(__Transport);
+
+  finally
+    __lintf := nil;
+  end;
+end;
+
+procedure TAndroidService_Invoker.Invoke_addOutStorage(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
+var
+  l_outCode: UnicodeString;
+  l_outType: UnicodeString;
+  l_outUser: UnicodeString;
+  l_operatorId: UnicodeString;
+  l_outState: UnicodeString;
+  l_memo: UnicodeString;
+  l_productIdStr: UnicodeString;
+  l_locationIdStr: UnicodeString;
+  l_companyIdStr: UnicodeString;
+  l_qtyStr: UnicodeString;
+  l_priceStr: UnicodeString;
+  l_stateStr: UnicodeString;
+  l_partnersId: UnicodeString;
+  l_oddDtIdStr: UnicodeString;
+  l_idCardNumStr: UnicodeString;
+  lResult: string;
+  __lintf: sanhe_Intf.IAndroidService;
+begin
+  CheckRoles(__Instance, GetDefaultServiceRoles());
+  try
+    if not Supports(__Instance, IAndroidService, __lintf) then begin
+      raise EIntfCastError.Create('Critical error in TAndroidService_Invoker.Invoke_addOutStorage: __Instance does not support AndroidService interface');
+    end;
+
+    __Message.Read('outCode', System.TypeInfo(UnicodeString), l_outCode, []);
+    __Message.Read('outType', System.TypeInfo(UnicodeString), l_outType, []);
+    __Message.Read('outUser', System.TypeInfo(UnicodeString), l_outUser, []);
+    __Message.Read('operatorId', System.TypeInfo(UnicodeString), l_operatorId, []);
+    __Message.Read('outState', System.TypeInfo(UnicodeString), l_outState, []);
+    __Message.Read('memo', System.TypeInfo(UnicodeString), l_memo, []);
+    __Message.Read('productIdStr', System.TypeInfo(UnicodeString), l_productIdStr, []);
+    __Message.Read('locationIdStr', System.TypeInfo(UnicodeString), l_locationIdStr, []);
+    __Message.Read('companyIdStr', System.TypeInfo(UnicodeString), l_companyIdStr, []);
+    __Message.Read('qtyStr', System.TypeInfo(UnicodeString), l_qtyStr, []);
+    __Message.Read('priceStr', System.TypeInfo(UnicodeString), l_priceStr, []);
+    __Message.Read('stateStr', System.TypeInfo(UnicodeString), l_stateStr, []);
+    __Message.Read('partnersId', System.TypeInfo(UnicodeString), l_partnersId, []);
+    __Message.Read('oddDtIdStr', System.TypeInfo(UnicodeString), l_oddDtIdStr, []);
+    __Message.Read('idCardNumStr', System.TypeInfo(UnicodeString), l_idCardNumStr, []);
+
+    lResult := __lintf.addOutStorage(l_outCode, l_outType, l_outUser, l_operatorId, l_outState, l_memo, l_productIdStr, l_locationIdStr, l_companyIdStr, l_qtyStr, l_priceStr, l_stateStr, l_partnersId, l_oddDtIdStr, l_idCardNumStr);
+
+    __Message.InitializeResponseMessage(__Transport, 'sanhe', 'AndroidService', 'addOutStorageResponse');
+    __Message.Write('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+    __Message.Finalize();
+    __Message.UnsetAttributes(__Transport);
+
+  finally
+    __lintf := nil;
+  end;
+end;
+
+procedure TAndroidService_Invoker.Invoke_getSCOrder(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
+var
+  l_status: UnicodeString;
+  lResult: string;
+  __lintf: sanhe_Intf.IAndroidService;
+begin
+  CheckRoles(__Instance, GetDefaultServiceRoles());
+  try
+    if not Supports(__Instance, IAndroidService, __lintf) then begin
+      raise EIntfCastError.Create('Critical error in TAndroidService_Invoker.Invoke_getSCOrder: __Instance does not support AndroidService interface');
+    end;
+
+    __Message.Read('status', System.TypeInfo(UnicodeString), l_status, []);
+
+    lResult := __lintf.getSCOrder(l_status);
+
+    __Message.InitializeResponseMessage(__Transport, 'sanhe', 'AndroidService', 'getSCOrderResponse');
+    __Message.Write('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+    __Message.Finalize();
+    __Message.UnsetAttributes(__Transport);
+
+  finally
+    __lintf := nil;
+  end;
+end;
+
+procedure TAndroidService_Invoker.Invoke_getOrderPr(const __Instance: IInterface; const __Message: IROMessage; const __Transport: IROTransport; out __oResponseOptions: TROResponseOptions);
+var
+  l_orderNum: UnicodeString;
+  lResult: string;
+  __lintf: sanhe_Intf.IAndroidService;
+begin
+  CheckRoles(__Instance, GetDefaultServiceRoles());
+  try
+    if not Supports(__Instance, IAndroidService, __lintf) then begin
+      raise EIntfCastError.Create('Critical error in TAndroidService_Invoker.Invoke_getOrderPr: __Instance does not support AndroidService interface');
+    end;
+
+    __Message.Read('orderNum', System.TypeInfo(UnicodeString), l_orderNum, []);
+
+    lResult := __lintf.getOrderPr(l_orderNum);
+
+    __Message.InitializeResponseMessage(__Transport, 'sanhe', 'AndroidService', 'getOrderPrResponse');
     __Message.Write('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
     __Message.Finalize();
     __Message.UnsetAttributes(__Transport);

@@ -52,6 +52,7 @@ inherited fBA_User: TfBA_User
   inherited cxGrid1: TcxGrid
     inherited cxGrid1DBTableView1: TcxGridDBTableView
       DataController.DataSource = duPub.ds_p_user
+      OptionsData.Editing = False
       OptionsSelection.CellSelect = True
       object cxGrid1DBTableView1RecID: TcxGridDBColumn
         DataBinding.FieldName = 'RecID'

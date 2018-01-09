@@ -24,13 +24,14 @@ uses
   cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, uDAFields,
   uDADataTable, cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.ComCtrls, Vcl.ToolWin;
+  Vcl.ComCtrls, Vcl.ToolWin, cxDropDownEdit, cxColorComboBox, cxMemo;
 
 type
   TfBA_Location = class(Tfbase1)
     cxGrid1DBTableView1RecID: TcxGridDBColumn;
     cxGrid1DBTableView1locationNum: TcxGridDBColumn;
     cxGrid1DBTableView1locationName: TcxGridDBColumn;
+    cxGrid1DBTableView1Column1: TcxGridDBColumn;
     procedure FormCreate(Sender: TObject);
     procedure Tb_EditClick(Sender: TObject);
     procedure tb_AppendClick(Sender: TObject);

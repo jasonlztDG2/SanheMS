@@ -16,56 +16,6 @@ object fPU_OrderDetail: TfPU_OrderDetail
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object cxGrid1: TcxGrid
-    Left = 0
-    Top = 277
-    Width = 584
-    Height = 179
-    Align = alClient
-    TabOrder = 0
-    object cxGrid1DBTableView1: TcxGridDBTableView
-      Navigator.Buttons.CustomButtons = <>
-      DataController.DataSource = duPub.ds_pu_orderDetail
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      OptionsSelection.CellSelect = False
-      OptionsView.GroupByBox = False
-      object cxGrid1DBTableView1RecID: TcxGridDBColumn
-        DataBinding.FieldName = 'RecID'
-        Visible = False
-      end
-      object cxGrid1DBTableView1puOrderNum: TcxGridDBColumn
-        Caption = #35746#21333#32534#21495
-        DataBinding.FieldName = 'puOrderNum'
-      end
-      object cxGrid1DBTableView1productID: TcxGridDBColumn
-        Caption = #21830#21697#21517#31216
-        DataBinding.FieldName = 'productID'
-        PropertiesClassName = 'TcxLookupComboBoxProperties'
-        Properties.KeyFieldNames = 'productId'
-        Properties.ListColumns = <
-          item
-            FieldName = 'productName'
-          end>
-        Properties.ListSource = duPub.ds_st_product
-      end
-      object cxGrid1DBTableView1qty: TcxGridDBColumn
-        Caption = #36141#20080#25968#37327
-        DataBinding.FieldName = 'qty'
-      end
-      object cxGrid1DBTableView1price: TcxGridDBColumn
-        Caption = #36141#20080#20215#26684
-        DataBinding.FieldName = 'price'
-      end
-      object cxGrid1DBTableView1inQty: TcxGridDBColumn
-        DataBinding.FieldName = 'inQty'
-      end
-    end
-    object cxGrid1Level1: TcxGridLevel
-      GridView = cxGrid1DBTableView1
-    end
-  end
   object Panel1: TPanel
     Left = 0
     Top = 456
@@ -78,7 +28,7 @@ object fPU_OrderDetail: TfPU_OrderDetail
     Padding.Right = 3
     Padding.Bottom = 3
     ParentBackground = False
-    TabOrder = 1
+    TabOrder = 0
     object Panel3: TPanel
       Left = 2
       Top = 2
@@ -113,7 +63,7 @@ object fPU_OrderDetail: TfPU_OrderDetail
     Align = alTop
     Color = clGradientInactiveCaption
     ParentBackground = False
-    TabOrder = 2
+    TabOrder = 1
     object Label1: TLabel
       Left = 29
       Top = 16
@@ -383,13 +333,56 @@ object fPU_OrderDetail: TfPU_OrderDetail
     Align = alTop
     Color = clWhite
     ParentBackground = False
-    TabOrder = 3
+    TabOrder = 2
     object Label7: TLabel
       Left = 28
       Top = 8
       Width = 48
       Height = 13
       Caption = #26126#32454#21015#34920
+    end
+  end
+  object cxGrid1: TcxGrid
+    Left = 0
+    Top = 277
+    Width = 584
+    Height = 179
+    Align = alClient
+    TabOrder = 3
+    object cxGrid1DBTableView1: TcxGridDBTableView
+      Navigator.Buttons.CustomButtons = <>
+      OnCellDblClick = cxGrid1DBTableView1CellDblClick
+      DataController.DataSource = duPub.ds_pu_orderDetail
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsSelection.CellSelect = False
+      OptionsView.GroupByBox = False
+      object cxGrid1DBTableView1RecID: TcxGridDBColumn
+        DataBinding.FieldName = 'RecID'
+        Visible = False
+      end
+      object cxGrid1DBTableView1id: TcxGridDBColumn
+        DataBinding.FieldName = 'id'
+      end
+      object cxGrid1DBTableView1puOrderNum: TcxGridDBColumn
+        DataBinding.FieldName = 'puOrderNum'
+      end
+      object cxGrid1DBTableView1productID: TcxGridDBColumn
+        DataBinding.FieldName = 'productID'
+      end
+      object cxGrid1DBTableView1qty: TcxGridDBColumn
+        DataBinding.FieldName = 'qty'
+      end
+      object cxGrid1DBTableView1price: TcxGridDBColumn
+        DataBinding.FieldName = 'price'
+      end
+      object cxGrid1DBTableView1inQty: TcxGridDBColumn
+        DataBinding.FieldName = 'inQty'
+      end
+    end
+    object cxGrid1Level1: TcxGridLevel
+      GridView = cxGrid1DBTableView1
     end
   end
   object cxGrid2: TcxGrid
@@ -399,44 +392,38 @@ object fPU_OrderDetail: TfPU_OrderDetail
     Height = 179
     Align = alClient
     TabOrder = 4
-    ExplicitTop = 285
+    ExplicitTop = 336
+    ExplicitHeight = 120
     object cxGridDBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
+      OnCellDblClick = cxGridDBTableView1CellDblClick
       DataController.DataSource = duPub.ds_pu_orderDt
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
       OptionsSelection.CellSelect = False
       OptionsView.GroupByBox = False
-      object cxGridDBColumn1: TcxGridDBColumn
+      object cxGridDBTableView1RecID: TcxGridDBColumn
         DataBinding.FieldName = 'RecID'
         Visible = False
       end
-      object cxGridDBColumn2: TcxGridDBColumn
-        Caption = #35746#21333#32534#21495
+      object cxGridDBTableView1id: TcxGridDBColumn
+        DataBinding.FieldName = 'id'
+      end
+      object cxGridDBTableView1puOrderNum: TcxGridDBColumn
         DataBinding.FieldName = 'puOrderNum'
       end
-      object cxGridDBColumn3: TcxGridDBColumn
-        Caption = #21830#21697#21517#31216
+      object cxGridDBTableView1productID: TcxGridDBColumn
         DataBinding.FieldName = 'productID'
-        PropertiesClassName = 'TcxLookupComboBoxProperties'
-        Properties.KeyFieldNames = 'productId'
-        Properties.ListColumns = <
-          item
-            FieldName = 'productName'
-          end>
-        Properties.ListSource = duPub.ds_st_product
       end
-      object cxGridDBColumn4: TcxGridDBColumn
-        Caption = #36141#20080#25968#37327
+      object cxGridDBTableView1qty: TcxGridDBColumn
         DataBinding.FieldName = 'qty'
       end
-      object cxGridDBColumn5: TcxGridDBColumn
-        Caption = #36141#20080#20215#26684
+      object cxGridDBTableView1price: TcxGridDBColumn
         DataBinding.FieldName = 'price'
       end
-      object cxGridDBColumn6: TcxGridDBColumn
-        DataBinding.FieldName = 'inQty'
+      object cxGridDBTableView1Column1: TcxGridDBColumn
+        Caption = 'inQty'
       end
     end
     object cxGridLevel1: TcxGridLevel

@@ -81,6 +81,9 @@ object fPU_OrderPayAdd: TfPU_OrderPayAdd
       object cxGrid1DBTableView1oddDtId: TcxGridDBColumn
         DataBinding.FieldName = 'oddDtId'
       end
+      object cxGrid1DBTableView1idCardNum: TcxGridDBColumn
+        DataBinding.FieldName = 'idCardNum'
+      end
     end
     object cxGrid1Level1: TcxGridLevel
       GridView = cxGrid1DBTableView1

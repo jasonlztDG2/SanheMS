@@ -37,7 +37,7 @@ object ServerDataModule: TServerDataModule
   object ConnectionManager: TDAConnectionManager
     Connections = <
       item
-        Name = 'Connection to sanhe'
+        Name = 'connection to sanhe'
         ConnectionString = 
           'FireDAC?AuxDriver=MSSQL;Server=go2cap.com,4433;Database=sanhe;Us' +
           'erID=sa;Password=Dont9394;Port=3306;useUnicode=true&characterEnc' +

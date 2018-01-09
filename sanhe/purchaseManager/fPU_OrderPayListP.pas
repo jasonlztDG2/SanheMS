@@ -42,6 +42,8 @@ type
     cxGrid1DBTableView1state: TcxGridDBColumn;
     cxGrid1Level1: TcxGridLevel;
     cxGrid1DBTableView1Column1: TcxGridDBColumn;
+    cxGrid1DBTableView1idCardNum: TcxGridDBColumn;
+    Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure cxGrid1DBTableView1CellClick(Sender: TcxCustomGridTableView;
@@ -49,6 +51,7 @@ type
       AShift: TShiftState; var AHandled: Boolean);
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -122,6 +125,37 @@ begin
     duPub.getDobInData(duPub.tbl_st_instoragedt,orderPayList,'st_instoragedt','id');
     fPU_OrderPayAdd.updatePayCount();
     self.Close;
+end;
+
+procedure TfPU_OrderPayList.Button2Click(Sender: TObject);
+var
+I : Integer;
+S : String;
+begin
+      S := Button2.Caption;
+      duPub.tbl_st_instoragedt.First;
+
+          if S = '全选' then
+          begin
+               for I := 0 to duPub.tbl_st_instoragedt.RecordCount - 1 do
+                begin
+                  cxGrid1DBTableView1.ViewData.Records[i].Values[1] := true;
+                  getStoragedtId(duPub.tbl_st_instoragedt.FieldByName('id').AsString);
+                  duPub.tbl_st_instoragedt.Next;
+                end;
+                Button2.Caption := '全不选';
+          end else
+          if S = '全不选' then
+          begin
+               for I := 0 to duPub.tbl_st_instoragedt.RecordCount - 1 do
+                begin
+                  cxGrid1DBTableView1.ViewData.Records[i].Values[1] := false;
+                  delStoragedtId(duPub.tbl_st_instoragedt.FieldByName('id').AsString);
+                  duPub.tbl_st_instoragedt.Next;
+                end;
+                Button2.Caption := '全选';
+          end;
+
 end;
 
 procedure TfPU_OrderPayList.Button3Click(Sender: TObject);

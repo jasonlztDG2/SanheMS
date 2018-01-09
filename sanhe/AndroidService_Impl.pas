@@ -56,8 +56,14 @@ type
     function getInstorageDt(const inCode: UnicodeString): string;
     function getInCode(const idCardNum: UnicodeString): string;
     function getProduct: string;
-    function checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
-                     const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString): string;
+    function checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                     const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString): string;
+    function getRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString): string;
+    function addOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
+                           const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString;
+                           const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString): string;
+    function getSCOrder(const status: UnicodeString): string;
+    function getOrderPr(const orderNum: UnicodeString): string;
 
 
     function ToUTF8Encode(str: string): string;
@@ -344,7 +350,7 @@ begin
            ' dt.idCardNum!='''' and dt.inCode!=''''')
           else
             sql.Add('select * from st_repertoryDetail as dt where ' +
-           ' dt.idCardNum!=''' + idCardNum + '''  and dt.inCode!=''''');
+           ' dt.idCardNum=''' + idCardNum + '''  and dt.inCode!=''''');
           open;
      end;
      Setlength(A,adoquery1.RecordCount);
@@ -458,6 +464,7 @@ begin
          ob := TJSONObject.Create;
          ob.AddPair( TJSONPair.Create('productId',adoquery1.FieldByName('productId').AsString));
          ob.AddPair( TJSONPair.Create('productName',adoquery1.FieldByName('productName').AsString));
+         ob.AddPair( TJSONPair.Create('price',adoquery1.FieldByName('price').AsString));
          team.AddElement(ob);
          adoquery1.Next;
      end;
@@ -490,6 +497,78 @@ begin
          ob := TJSONObject.Create;
          ob.AddPair( TJSONPair.Create('id',adoquery1.FieldByName('id').AsString));
          ob.AddPair( TJSONPair.Create('fullName',adoquery1.FieldByName('fullName').AsString));
+         team.AddElement(ob);
+         adoquery1.Next;
+     end;
+     result := all.ToString;
+
+end;
+
+function TAndroidService.getSCOrder(const status: UnicodeString): string;
+var
+A : Array of String;//定义动态数组
+  all: TJSONObject;
+  team: TJSONArray;
+  ob: TJSONObject;
+begin
+     all := TJSONObject.Create;
+    team := TJSONArray.Create();
+    all.AddPair('data',team);
+
+    with self.adoquery1 do
+    begin
+          close;
+          sql.Add('select * from pu_seOrder left join st_product on '+
+          'pu_seOrder.productId=st_product.productId where seStatus=N'''+status+'''');
+          open;
+     end;
+     Setlength(A,adoquery1.RecordCount);
+     adoquery1.First;
+
+   While Not adoquery1.Eof Do
+     begin
+         ob := TJSONObject.Create;
+         ob.AddPair( TJSONPair.Create('seOrderNum',adoquery1.FieldByName('seOrderNum').AsString));
+         ob.AddPair( TJSONPair.Create('partnersId',adoquery1.FieldByName('partnersId').AsString));
+         ob.AddPair( TJSONPair.Create('structureNum',adoquery1.FieldByName('structureNum').AsString));
+         ob.AddPair( TJSONPair.Create('qty',adoquery1.FieldByName('qty').AsString));
+         ob.AddPair( TJSONPair.Create('productId',adoquery1.FieldByName('productId').AsString));
+         ob.AddPair( TJSONPair.Create('productName',adoquery1.FieldByName('productName').AsString));
+         team.AddElement(ob);
+         adoquery1.Next;
+     end;
+     result := all.ToString;
+
+end;
+
+function TAndroidService.getOrderPr(const orderNum: UnicodeString): string;
+ var
+A : Array of String;//定义动态数组
+  all: TJSONObject;
+  team: TJSONArray;
+  ob: TJSONObject;
+begin
+     all := TJSONObject.Create;
+    team := TJSONArray.Create();
+    all.AddPair('data',team);
+
+    with self.adoquery1 do
+    begin
+          close;
+          sql.Add('select * from pu_seOrderpr left join st_product on '+
+          'pu_seOrderpr.productId=st_product.productId where seOrderNum=N'''+orderNum+'''');
+          open;
+     end;
+     Setlength(A,adoquery1.RecordCount);
+     adoquery1.First;
+
+   While Not adoquery1.Eof Do
+     begin
+         ob := TJSONObject.Create;
+         ob.AddPair( TJSONPair.Create('seOrderNum',adoquery1.FieldByName('seOrderNum').AsString));
+         ob.AddPair( TJSONPair.Create('qty',adoquery1.FieldByName('qty').AsString));
+         ob.AddPair( TJSONPair.Create('productId',adoquery1.FieldByName('productId').AsString));
+         ob.AddPair( TJSONPair.Create('productName',adoquery1.FieldByName('productName').AsString));
          team.AddElement(ob);
          adoquery1.Next;
      end;
@@ -577,35 +656,129 @@ begin
      end;
 end;
 
-function TAndroidService.checkSt(const checkNum: UnicodeString; const checkUser: Integer;
-const memo: UnicodeString; const repertoryIdStr: UnicodeString;
-const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
-const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString;
-const detailQtyStr: UnicodeString): string;
+function TAndroidService.checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                     const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString): string;
 begin
      with self.adoquery1 do
      begin
         close;
         sql.Clear;
         parameters.Clear;
-        sql.Add( 'exec addCheck :@checkNum,:@checkUser,:@memo,:@repertoryIdStr,'
-         + ':@checkdtQtyStr,:@checkdtProfitStr,:@idCardNumStr,:recordTypeStr,'
-        + ':@repertoryQtyStr,:@successResult output'
+        sql.Add( 'exec addCheck :@checkNum,:@checkUser,:@memo,:@productIdStr,'
+         + ':@locationIdStr,:@companyIdStr,:@checkdtQtyStr,:@checkdtProfitStr,'
+        + ':@repertoryQtyStr,:@idCardNumStr,:@recordTypeStr,:@successResult output'
         );
 
         parameters.Items[0].Value := checkNum;
           parameters.Items[1].Value := checkUser;
           parameters.Items[2].Value := memo;
-          parameters.Items[3].Value := repertoryIdStr;
-          parameters.Items[4].Value := checkdtQtyStr;
-          parameters.Items[5].Value := checkdtProfitStr;
-          parameters.Items[6].Value := idCardNumStr;
-          parameters.Items[7].Value := recordTypeStr;
-          parameters.Items[8].Value := detailQtyStr;
+          parameters.Items[3].Value := productIdStr;
+          parameters.Items[4].Value := locationIdStr;
+          parameters.Items[5].Value := companyIdStr;
+          parameters.Items[6].Value := checkdtQtyStr;
+          parameters.Items[7].Value := checkdtProfitStr;
+          parameters.Items[8].Value := repertoryQtyStr;
+          parameters.Items[9].Value := idCardNumStr;
+          parameters.Items[10].Value := recordTypeStr;
           execsql;
-          result := parameters.Items[9].Value;
+          result := parameters.Items[11].Value;
      end;
 end;
+
+function TAndroidService.getRepertoryProduct(const productCode: UnicodeString;
+const productNum: UnicodeString; const idCardNum: UnicodeString): string;
+var
+A : Array of String;//定义动态数组
+  all: TJSONObject;
+  team: TJSONArray;
+  ob: TJSONObject;
+begin
+     all := TJSONObject.Create;
+    team := TJSONArray.Create();
+    all.AddPair('data',team);
+
+    with self.adoquery1 do
+    begin
+          close;
+          sql.Clear;
+          if idCardNum = '' then
+            sql.Add('select * from st_product as pr right join ' +
+           '(select SUM(qty) as qty,productId as pId,idCardNum,locationId,companyId '+
+           ' from st_repertoryDetail group by idCardNum,productId,locationId,companyId) ' +
+           ' as re on pr.productId=re.pId where re.idCardNum!='''' ' +
+           ' and pr.productName like N''%' + productNum + '%'' '
+           );
+           if productCode <> '' then
+           begin
+              sql.Add(' and pr.productCode=''' + productCode + '''')
+           end
+          else
+            sql.Add('select * from st_product as pr right join ' +
+           '(select SUM(qty) as qty,productId as pId,idCardNum,locationId,companyId '+
+           ' from st_repertoryDetail group by idCardNum,productId,locationId,companyId) ' +
+           ' as re on pr.productId=re.pId where re.idCardNum=''' + idCardNum + '''');
+          open;
+     end;
+     Setlength(A,adoquery1.RecordCount);
+     adoquery1.First;
+
+     While Not adoquery1.Eof Do
+     begin
+         ob := TJSONObject.Create;
+         ob.AddPair( TJSONPair.Create('productCode',adoquery1.FieldByName('productCode').AsString));
+         ob.AddPair( TJSONPair.Create('productName',adoquery1.FieldByName('productName').AsString));
+         ob.AddPair( TJSONPair.Create('price',adoquery1.FieldByName('price').AsString));
+         ob.AddPair( TJSONPair.Create('spec',adoquery1.FieldByName('spec').AsString));
+         ob.AddPair( TJSONPair.Create('color',adoquery1.FieldByName('color').AsString));
+         ob.AddPair( TJSONPair.Create('qty',adoquery1.FieldByName('qty').AsString));
+         ob.AddPair( TJSONPair.Create('productId',adoquery1.FieldByName('productId').AsString));
+         ob.AddPair( TJSONPair.Create('locationId',adoquery1.FieldByName('locationId').AsString));
+         ob.AddPair( TJSONPair.Create('companyId',adoquery1.FieldByName('companyId').AsString));
+         ob.AddPair( TJSONPair.Create('idCardNum',adoquery1.FieldByName('idCardNum').AsString));
+         team.AddElement(ob);
+         adoquery1.Next;
+     end;
+     result := all.ToString;
+
+end;
+
+function TAndroidService.addOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
+                           const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString;
+                           const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString): string;
+begin
+  with self.adoquery1 do
+     begin
+        close;
+        sql.Clear;
+        parameters.Clear;
+        sql.Add( 'exec addOutStorage :@outCode,:@outType,:@outUser,:@outDate,:@operator,'
+         + ':@outState,:@memo,:@productIdStr,:locationIdStr,:@companyIdStr,:@qtyStr,'
+        + ':@priceStr,:@stateStr,:@partnersId,:@oddDtIdStr,:@idCardNumStr,:@successResult output'
+        );
+
+        parameters.Items[0].Value := outCode;
+          parameters.Items[1].Value := outType;
+          parameters.Items[2].Value := outUser;
+          parameters.Items[3].Value := DateTimeToStr(now());
+          parameters.Items[4].Value := operatorId;
+          parameters.Items[5].Value := outState;
+          parameters.Items[6].Value := memo;
+          parameters.Items[7].Value := productIdStr;
+          parameters.Items[8].Value := locationIdStr;
+          parameters.Items[9].Value := companyIdStr;
+          parameters.Items[10].Value := qtyStr;
+          parameters.Items[11].Value := priceStr;
+          parameters.Items[12].Value := stateStr;
+          parameters.Items[13].Value := partnersId;
+          parameters.Items[14].Value := oddDtIdStr;
+          parameters.Items[15].Value := idCardNumStr;
+          execsql;
+          result := parameters.Items[16].Value;
+     end;
+end;
+
+
+
 
 initialization
   fClassFactory_AndroidService := TROClassFactory.Create(__ServiceName, {$IFDEF FPC}@{$ENDIF}Create_AndroidService, TAndroidService_Invoker);

@@ -170,6 +170,12 @@ type
     actBA_User: TAction;
     barST_StorageStatement: TdxNavBarItem;
     actST_StorageStatement: TAction;
+    barBA_Part: TdxNavBarItem;
+    actBA_Part: TAction;
+    barPR_WorkOrder: TdxNavBarItem;
+    actPR_WorkOrder: TAction;
+    actPR_VersionOrder: TAction;
+    barPR_VersionOrder: TdxNavBarItem;
     procedure New1Click(Sender: TObject);
     procedure createChildForm(a:Tclass);
     procedure Exit1Click(Sender: TObject);
@@ -198,6 +204,10 @@ type
     procedure actPR_StructureExecute(Sender: TObject);
     procedure actST_StorageInExecute(Sender: TObject);
     procedure actST_StorageOutExecute(Sender: TObject);
+    procedure actPR_MaterialExecute(Sender: TObject);
+    procedure actBA_PartExecute(Sender: TObject);
+    procedure actPR_WorkOrderExecute(Sender: TObject);
+    procedure actPR_VersionOrderExecute(Sender: TObject);
     
   public
     { Public declarations }
@@ -214,7 +224,7 @@ uses
    fPartnerP,fBA_SetKindP,fBA_CompanyP,fBA_LocationP,fPR_ProductInfoP,fPU_OrderP,
    fBA_UserP,fPU_OrderInP,fPU_OrderPayP,fST_StoageProductP,fPU_OrderBackP,fSY_UserManagerP,
    fST_StoageCheckP,fSE_OrderP,fPR_PlanP, fST_StorageStatementP,fPR_ProductStructureP,
-   fST_StoageInP,fST_StoageOutP,
+   fST_StoageInP,fST_StoageOutP,fPR_PickingListP,fBA_PartsListP,fPR_WorkOrderP,fPR_VersionOrderP,
    duPubP
    ;
 
@@ -229,6 +239,11 @@ begin
     createChildForm(TfPR_ProductInfo);
 end;
 
+procedure TfMain.actPR_MaterialExecute(Sender: TObject);
+begin
+     createChildForm(TfPR_PickingList);
+end;
+
 procedure TfMain.actPR_PlanExecute(Sender: TObject);
 begin
      createChildForm(TfPR_Plan);
@@ -237,6 +252,11 @@ end;
 procedure TfMain.actPR_StructureExecute(Sender: TObject);
 begin
     createChildForm(TfPR_ProductStructure);
+end;
+
+procedure TfMain.actPR_VersionOrderExecute(Sender: TObject);
+begin
+    createChildForm(TfPR_VersionOrder);
 end;
 
 procedure TfMain.actPU_ListDataExecute(Sender: TObject);
@@ -304,6 +324,11 @@ begin
     createChildForm(TfBA_Location);
 end;
 
+procedure TfMain.actBA_PartExecute(Sender: TObject);
+begin
+   createChildForm(TfBA_PartsList);
+end;
+
 procedure TfMain.actBA_SetKindExecute(Sender: TObject);
 begin
     createChildForm(TfBA_SetKind);
@@ -312,6 +337,11 @@ end;
 procedure TfMain.actBA_UserExecute(Sender: TObject);
 begin
     createChildForm(TfBA_User);
+end;
+
+procedure TfMain.actPR_WorkOrderExecute(Sender: TObject);
+begin
+     createChildForm(TfPR_WorkOrder);
 end;
 
 Procedure TfMain.createChildForm(a: Tclass);
@@ -344,6 +374,7 @@ begin
   end;
 
 end;
+
 
 
 

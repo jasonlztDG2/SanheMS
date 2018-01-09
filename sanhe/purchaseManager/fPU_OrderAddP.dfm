@@ -305,7 +305,7 @@ object fPU_OrderAdd: TfPU_OrderAdd
     object cxGrid1DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       OnEditChanged = cxGrid1DBTableView1EditChanged
-      DataController.DataSource = duPub.DADataSource1
+      DataController.DataSource = ds_st_product
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
@@ -427,5 +427,85 @@ object fPU_OrderAdd: TfPU_OrderAdd
       ShowHint = True
       TabOrder = 0
     end
+  end
+  object tbl_st_product: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'productId'
+        DataType = datAutoInc
+        GeneratorName = 'st_product'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'productCode'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'productName'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'price'
+        DataType = datWideString
+        Size = 20
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'kind'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'style'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'spec'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'color'
+        DataType = datWideString
+        Size = 10
+      end
+      item
+        Name = 'unit'
+        DataType = datWideString
+        Size = 10
+      end
+      item
+        Name = 'productType'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'tempNum'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'st_product'
+    Params = <>
+    RemoteDataAdapter = duPub.RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 72
+    Top = 320
+  end
+  object ds_st_product: TDADataSource
+    DataSet = tbl_st_product.Dataset
+    DataTable = tbl_st_product
+    Left = 72
+    Top = 248
   end
 end

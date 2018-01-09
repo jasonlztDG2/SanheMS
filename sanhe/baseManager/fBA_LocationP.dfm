@@ -6,35 +6,27 @@ inherited fBA_Location: TfBA_Location
   inherited ToolBar1: TToolBar
     inherited tb_Browse: TToolButton
       Visible = False
-      ExplicitWidth = 46
     end
     inherited Tb_Edit: TToolButton
       OnClick = Tb_EditClick
-      ExplicitWidth = 39
     end
     inherited tb_Append: TToolButton
       OnClick = tb_AppendClick
-      ExplicitWidth = 48
     end
     inherited tb_revise: TToolButton
       Visible = False
-      ExplicitWidth = 43
     end
     inherited tb_Copy: TToolButton
       Visible = False
-      ExplicitWidth = 39
     end
     inherited tb_Delete: TToolButton
       OnClick = tb_DeleteClick
-      ExplicitWidth = 42
     end
     inherited tb_Filter: TToolButton
       Visible = False
-      ExplicitWidth = 39
     end
     inherited tb_Unfilter: TToolButton
       Visible = False
-      ExplicitWidth = 46
     end
     inherited tb_Seperator2: TToolButton
       Visible = False
@@ -52,6 +44,7 @@ inherited fBA_Location: TfBA_Location
   inherited cxGrid1: TcxGrid
     inherited cxGrid1DBTableView1: TcxGridDBTableView
       DataController.DataSource = duPub.ds_st_location
+      OptionsData.Editing = False
       OptionsSelection.CellSelect = True
       object cxGrid1DBTableView1RecID: TcxGridDBColumn
         DataBinding.FieldName = 'RecID'
@@ -68,6 +61,9 @@ inherited fBA_Location: TfBA_Location
         DataBinding.FieldName = 'locationName'
         Options.Filtering = False
         Options.Sorting = False
+      end
+      object cxGrid1DBTableView1Column1: TcxGridDBColumn
+        DataBinding.ValueType = 'WideString'
       end
     end
   end

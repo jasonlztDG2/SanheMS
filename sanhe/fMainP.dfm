@@ -87,6 +87,12 @@ object fMain: TfMain
       TopVisibleLinkIndex = 0
       Links = <
         item
+          Item = barPR_VersionOrder
+        end
+        item
+          Item = barPR_WorkOrder
+        end
+        item
           Item = barPR_Plan
         end
         item
@@ -142,6 +148,7 @@ object fMain: TfMain
       Caption = #38144#21806#31649#29702
       SelectedLinkIndex = -1
       TopVisibleLinkIndex = 0
+      Visible = False
       OptionsExpansion.Expanded = False
       Links = <
         item
@@ -174,6 +181,9 @@ object fMain: TfMain
         end
         item
           Item = barBA_User
+        end
+        item
+          Item = barBA_Part
         end>
     end
     object barST_StorageIn: TdxNavBarItem
@@ -242,6 +252,7 @@ object fMain: TfMain
     end
     object barPR_Plan: TdxNavBarItem
       Action = actPR_Plan
+      Caption = #29983#20135#35746#21333
     end
     object barPR_WorkSheet: TdxNavBarItem
       Action = actPR_WorkSheet
@@ -263,6 +274,16 @@ object fMain: TfMain
     end
     object barST_StorageStatement: TdxNavBarItem
       Action = actST_StorageStatement
+      Caption = #26376#32467#25253#34920
+    end
+    object barBA_Part: TdxNavBarItem
+      Action = actBA_Part
+    end
+    object barPR_WorkOrder: TdxNavBarItem
+      Action = actPR_WorkOrder
+    end
+    object barPR_VersionOrder: TdxNavBarItem
+      Action = actPR_VersionOrder
     end
     object dxNavBar1StyleItem1: TdxNavBarStyleItem
       Style.BackColor = 14012886
@@ -707,6 +728,7 @@ object fMain: TfMain
       Category = 'Produce'
       Caption = #39046#26009#21333#23376
       ImageIndex = 17
+      OnExecute = actPR_MaterialExecute
     end
     object actPR_MaterialReturn: TAction
       Category = 'Produce'
@@ -734,12 +756,29 @@ object fMain: TfMain
       Caption = #26376#32467
       OnExecute = actST_StorageStatementExecute
     end
+    object actBA_Part: TAction
+      Category = 'Base'
+      Caption = #24125#23376#37096#20301
+      OnExecute = actBA_PartExecute
+    end
+    object actPR_WorkOrder: TAction
+      Category = 'Produce'
+      Caption = #29983#20135#21333
+      ImageIndex = 16
+      OnExecute = actPR_WorkOrderExecute
+    end
+    object actPR_VersionOrder: TAction
+      Category = 'Produce'
+      Caption = #29983#20135#29256#21333
+      ImageIndex = 16
+      OnExecute = actPR_VersionOrderExecute
+    end
   end
   object ModuleIcon: TImageList
     Left = 639
     Top = 245
     Bitmap = {
-      494C01011600D800400110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011600D8005C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000301010108010101090101
       0109010101090101010901010109010101090101010901010109010101090101

@@ -29,13 +29,13 @@ uses
 type
   TfST_StoageProduct = class(Tfbase1)
     cxGrid1DBTableView1RecID: TcxGridDBColumn;
-    cxGrid1DBTableView1id: TcxGridDBColumn;
     cxGrid1DBTableView1productId: TcxGridDBColumn;
     cxGrid1DBTableView1locationId: TcxGridDBColumn;
     cxGrid1DBTableView1companyId: TcxGridDBColumn;
     cxGrid1DBTableView1qty: TcxGridDBColumn;
     procedure FormCreate(Sender: TObject);
     procedure tb_BrowseClick(Sender: TObject);
+    procedure tbRefreshClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -63,8 +63,15 @@ begin
     duPub.tbl_st_company.Open;
     duPub.tbl_st_location.Close;
     duPub.tbl_st_location.Open;
+    duPub.tbl_st_repertory.Close;
+    duPub.tbl_st_repertory.Open;
 
+end;
 
+procedure TfST_StoageProduct.tbRefreshClick(Sender: TObject);
+begin
+  inherited;
+     duPub.tbl_st_repertory.ApplyUpdates(true,true);
 end;
 
 procedure TfST_StoageProduct.tb_BrowseClick(Sender: TObject);

@@ -69,11 +69,11 @@ type
   end;
 
   IDataService_Async = interface(DataAbstract4_intf.IDataAbstractService_Async)
-  ['{7ED110BA-B97C-4A74-9BFF-08FB4337015F}']
+  ['{7F1CCF63-82AE-4DD2-AB43-D6BB3FC52EC0}']
   end;
 
   IDataService_AsyncEx = interface(DataAbstract4_intf.IDataAbstractService_AsyncEx)
-  ['{9A9E022A-A3A7-4C25-A31E-3CC6F9798EFE}']
+  ['{B93A3FE5-7C60-46BF-91F0-6370427D7799}']
   end;
 
   CoDataService = class(System.TObject)
@@ -117,11 +117,11 @@ type
   end;
 
   ILoginService_Async = interface(DataAbstract4_intf.ISimpleLoginService_Async)
-  ['{8546AD8C-18FD-4106-8903-CF8F2CE3DAD9}']
+  ['{914C753E-5914-46A5-9949-D785952221ED}']
   end;
 
   ILoginService_AsyncEx = interface(DataAbstract4_intf.ISimpleLoginService_AsyncEx)
-  ['{35BB40DC-1022-47F1-B4E3-6A2784D54835}']
+  ['{0ABAFE75-10C7-458D-ADFF-FA86E976A864}']
   end;
 
   CoLoginService = class(System.TObject)
@@ -181,12 +181,18 @@ type
     function getInstorageDt(const inCode: UnicodeString): string;
     function getInCode(const idCardNum: UnicodeString): string;
     function getProduct: string;
-    function checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
-                     const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString): string;
+    function checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                     const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString): string;
+    function getRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString): string;
+    function addOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
+                           const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString;
+                           const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString): string;
+    function getSCOrder(const status: UnicodeString): string;
+    function getOrderPr(const orderNum: UnicodeString): string;
   end;
 
   IAndroidService_Async = interface(IROAsyncInterface)
-  ['{92EDBA4C-127A-4501-9EFB-5D79CB1E1920}']
+  ['{AEC57B5D-8FA1-4222-A50B-68582882147E}']
     procedure Invoke_sum(const a: Integer; const b: Integer);
     procedure Invoke_getNum(const proNum: UnicodeString; const intoNum: UnicodeString);
     procedure Invoke_getOrderData(const puStatus: UnicodeString);
@@ -206,8 +212,14 @@ type
     procedure Invoke_getInstorageDt(const inCode: UnicodeString);
     procedure Invoke_getInCode(const idCardNum: UnicodeString);
     procedure Invoke_getProduct;
-    procedure Invoke_checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
-                             const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString);
+    procedure Invoke_checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                             const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString);
+    procedure Invoke_getRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString);
+    procedure Invoke_addOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
+                                   const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString;
+                                   const stateStr: UnicodeString; const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString);
+    procedure Invoke_getSCOrder(const status: UnicodeString);
+    procedure Invoke_getOrderPr(const orderNum: UnicodeString);
     function Retrieve_sum: Integer;
     function Retrieve_getNum: string;
     function Retrieve_getOrderData: string;
@@ -222,10 +234,14 @@ type
     function Retrieve_getInCode: string;
     function Retrieve_getProduct: string;
     function Retrieve_checkSt: string;
+    function Retrieve_getRepertoryProduct: string;
+    function Retrieve_addOutStorage: string;
+    function Retrieve_getSCOrder: string;
+    function Retrieve_getOrderPr: string;
   end;
 
   IAndroidService_AsyncEx = interface(IROAsyncInterfaceEx)
-  ['{A09875E1-3391-44BC-952A-58B0960F509B}']
+  ['{E54D1E40-C9AC-4C66-9D82-23D02214D52B}']
     function Beginsum(const a: Integer; const b: Integer; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetNum(const proNum: UnicodeString; const intoNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetOrderData(const puStatus: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
@@ -246,8 +262,15 @@ type
     function BegingetInstorageDt(const inCode: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetInCode(const idCardNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetProduct(const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
-    function BegincheckSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
-                          const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegincheckSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                          const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString;
+                          const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BeginaddOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
+                                const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString;
+                                const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetSCOrder(const status: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetOrderPr(const orderNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function Endsum(const aRequest: IROAsyncRequest): Integer;
     function EndgetNum(const aRequest: IROAsyncRequest): string;
     function EndgetOrderData(const aRequest: IROAsyncRequest): string;
@@ -263,6 +286,10 @@ type
     function EndgetInCode(const aRequest: IROAsyncRequest): string;
     function EndgetProduct(const aRequest: IROAsyncRequest): string;
     function EndcheckSt(const aRequest: IROAsyncRequest): string;
+    function EndgetRepertoryProduct(const aRequest: IROAsyncRequest): string;
+    function EndaddOutStorage(const aRequest: IROAsyncRequest): string;
+    function EndgetSCOrder(const aRequest: IROAsyncRequest): string;
+    function EndgetOrderPr(const aRequest: IROAsyncRequest): string;
   end;
 
   CoAndroidService = class(System.TObject)
@@ -308,8 +335,14 @@ type
     function getInstorageDt(const inCode: UnicodeString): string;
     function getInCode(const idCardNum: UnicodeString): string;
     function getProduct: string;
-    function checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
-                     const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString): string;
+    function checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                     const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString): string;
+    function getRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString): string;
+    function addOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
+                           const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString;
+                           const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString): string;
+    function getSCOrder(const status: UnicodeString): string;
+    function getOrderPr(const orderNum: UnicodeString): string;
   end;
 
   TAndroidService_AsyncProxy = class(TROAsyncProxy, IAndroidService_Async)
@@ -334,8 +367,14 @@ type
     procedure Invoke_getInstorageDt(const inCode: UnicodeString);
     procedure Invoke_getInCode(const idCardNum: UnicodeString);
     procedure Invoke_getProduct;
-    procedure Invoke_checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
-                             const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString);
+    procedure Invoke_checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                             const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString);
+    procedure Invoke_getRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString);
+    procedure Invoke_addOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
+                                   const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString;
+                                   const stateStr: UnicodeString; const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString);
+    procedure Invoke_getSCOrder(const status: UnicodeString);
+    procedure Invoke_getOrderPr(const orderNum: UnicodeString);
     function Retrieve_sum: Integer;
     function Retrieve_getNum: string;
     function Retrieve_getOrderData: string;
@@ -350,6 +389,10 @@ type
     function Retrieve_getInCode: string;
     function Retrieve_getProduct: string;
     function Retrieve_checkSt: string;
+    function Retrieve_getRepertoryProduct: string;
+    function Retrieve_addOutStorage: string;
+    function Retrieve_getSCOrder: string;
+    function Retrieve_getOrderPr: string;
   end;
 
   TAndroidService_AsyncProxyEx = class(TROAsyncProxyEx, IAndroidService_AsyncEx)
@@ -375,8 +418,15 @@ type
     function BegingetInstorageDt(const inCode: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetInCode(const idCardNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function BegingetProduct(const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
-    function BegincheckSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
-                          const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegincheckSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                          const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString;
+                          const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BeginaddOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
+                                const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString; const stateStr: UnicodeString;
+                                const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetSCOrder(const status: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+    function BegingetOrderPr(const orderNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
     function Endsum(const aRequest: IROAsyncRequest): Integer;
     function EndgetNum(const aRequest: IROAsyncRequest): string;
     function EndgetOrderData(const aRequest: IROAsyncRequest): string;
@@ -392,6 +442,10 @@ type
     function EndgetInCode(const aRequest: IROAsyncRequest): string;
     function EndgetProduct(const aRequest: IROAsyncRequest): string;
     function EndcheckSt(const aRequest: IROAsyncRequest): string;
+    function EndgetRepertoryProduct(const aRequest: IROAsyncRequest): string;
+    function EndaddOutStorage(const aRequest: IROAsyncRequest): string;
+    function EndgetSCOrder(const aRequest: IROAsyncRequest): string;
+    function EndgetOrderPr(const aRequest: IROAsyncRequest): string;
   end;
 
 function DefaultNamespaces: String;
@@ -1038,8 +1092,8 @@ begin
   exit;
 end;
 
-function TAndroidService_Proxy.checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString;
-                                       const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString): string;
+function TAndroidService_Proxy.checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString;
+                                       const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString): string;
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -1053,12 +1107,140 @@ begin
     lMessage.Write('checkNum', System.TypeInfo(UnicodeString), checkNum, []);
     lMessage.Write('checkUser', System.TypeInfo(Integer), checkUser, []);
     lMessage.Write('memo', System.TypeInfo(UnicodeString), memo, []);
-    lMessage.Write('repertoryIdStr', System.TypeInfo(UnicodeString), repertoryIdStr, []);
+    lMessage.Write('productIdStr', System.TypeInfo(UnicodeString), productIdStr, []);
+    lMessage.Write('locationIdStr', System.TypeInfo(UnicodeString), locationIdStr, []);
+    lMessage.Write('companyIdStr', System.TypeInfo(UnicodeString), companyIdStr, []);
     lMessage.Write('checkdtQtyStr', System.TypeInfo(UnicodeString), checkdtQtyStr, []);
     lMessage.Write('checkdtProfitStr', System.TypeInfo(UnicodeString), checkdtProfitStr, []);
+    lMessage.Write('repertoryQtyStr', System.TypeInfo(UnicodeString), repertoryQtyStr, []);
     lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
     lMessage.Write('recordTypeStr', System.TypeInfo(UnicodeString), recordTypeStr, []);
-    lMessage.Write('detailQtyStr', System.TypeInfo(UnicodeString), detailQtyStr, []);
+    lMessage.Finalize();
+
+    lTransportChannel.Dispatch(lMessage);
+
+    lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage.FreeStream();
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_Proxy.getRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString): string;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getRepertoryProduct');
+    lMessage.Write('productCode', System.TypeInfo(UnicodeString), productCode, []);
+    lMessage.Write('productNum', System.TypeInfo(UnicodeString), productNum, []);
+    lMessage.Write('idCardNum', System.TypeInfo(UnicodeString), idCardNum, []);
+    lMessage.Finalize();
+
+    lTransportChannel.Dispatch(lMessage);
+
+    lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage.FreeStream();
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_Proxy.addOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString; const memo: UnicodeString;
+                                             const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString; const priceStr: UnicodeString;
+                                             const stateStr: UnicodeString; const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString): string;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'addOutStorage');
+    lMessage.Write('outCode', System.TypeInfo(UnicodeString), outCode, []);
+    lMessage.Write('outType', System.TypeInfo(UnicodeString), outType, []);
+    lMessage.Write('outUser', System.TypeInfo(UnicodeString), outUser, []);
+    lMessage.Write('operatorId', System.TypeInfo(UnicodeString), operatorId, []);
+    lMessage.Write('outState', System.TypeInfo(UnicodeString), outState, []);
+    lMessage.Write('memo', System.TypeInfo(UnicodeString), memo, []);
+    lMessage.Write('productIdStr', System.TypeInfo(UnicodeString), productIdStr, []);
+    lMessage.Write('locationIdStr', System.TypeInfo(UnicodeString), locationIdStr, []);
+    lMessage.Write('companyIdStr', System.TypeInfo(UnicodeString), companyIdStr, []);
+    lMessage.Write('qtyStr', System.TypeInfo(UnicodeString), qtyStr, []);
+    lMessage.Write('priceStr', System.TypeInfo(UnicodeString), priceStr, []);
+    lMessage.Write('stateStr', System.TypeInfo(UnicodeString), stateStr, []);
+    lMessage.Write('partnersId', System.TypeInfo(UnicodeString), partnersId, []);
+    lMessage.Write('oddDtIdStr', System.TypeInfo(UnicodeString), oddDtIdStr, []);
+    lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
+    lMessage.Finalize();
+
+    lTransportChannel.Dispatch(lMessage);
+
+    lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage.FreeStream();
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_Proxy.getSCOrder(const status: UnicodeString): string;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getSCOrder');
+    lMessage.Write('status', System.TypeInfo(UnicodeString), status, []);
+    lMessage.Finalize();
+
+    lTransportChannel.Dispatch(lMessage);
+
+    lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage.FreeStream();
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_Proxy.getOrderPr(const orderNum: UnicodeString): string;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getOrderPr');
+    lMessage.Write('orderNum', System.TypeInfo(UnicodeString), orderNum, []);
     lMessage.Finalize();
 
     lTransportChannel.Dispatch(lMessage);
@@ -1414,8 +1596,9 @@ begin
   end;
 end;
 
-procedure TAndroidService_AsyncProxy.Invoke_checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString;
-                                                    const checkdtProfitStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString);
+procedure TAndroidService_AsyncProxy.Invoke_checkSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
+                                                    const companyIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString;
+                                                    const recordTypeStr: UnicodeString);
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -1430,13 +1613,117 @@ begin
     lMessage.Write('checkNum', System.TypeInfo(UnicodeString), checkNum, []);
     lMessage.Write('checkUser', System.TypeInfo(Integer), checkUser, []);
     lMessage.Write('memo', System.TypeInfo(UnicodeString), memo, []);
-    lMessage.Write('repertoryIdStr', System.TypeInfo(UnicodeString), repertoryIdStr, []);
+    lMessage.Write('productIdStr', System.TypeInfo(UnicodeString), productIdStr, []);
+    lMessage.Write('locationIdStr', System.TypeInfo(UnicodeString), locationIdStr, []);
+    lMessage.Write('companyIdStr', System.TypeInfo(UnicodeString), companyIdStr, []);
     lMessage.Write('checkdtQtyStr', System.TypeInfo(UnicodeString), checkdtQtyStr, []);
     lMessage.Write('checkdtProfitStr', System.TypeInfo(UnicodeString), checkdtProfitStr, []);
+    lMessage.Write('repertoryQtyStr', System.TypeInfo(UnicodeString), repertoryQtyStr, []);
     lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
     lMessage.Write('recordTypeStr', System.TypeInfo(UnicodeString), recordTypeStr, []);
-    lMessage.Write('detailQtyStr', System.TypeInfo(UnicodeString), detailQtyStr, []);
     __DispatchAsyncRequest('checkSt', lMessage);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+end;
+
+procedure TAndroidService_AsyncProxy.Invoke_getRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString);
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    __AssertProxyNotBusy('getRepertoryProduct');
+
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getRepertoryProduct');
+    lMessage.Write('productCode', System.TypeInfo(UnicodeString), productCode, []);
+    lMessage.Write('productNum', System.TypeInfo(UnicodeString), productNum, []);
+    lMessage.Write('idCardNum', System.TypeInfo(UnicodeString), idCardNum, []);
+    __DispatchAsyncRequest('getRepertoryProduct', lMessage);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+end;
+
+procedure TAndroidService_AsyncProxy.Invoke_addOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString;
+                                                          const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString;
+                                                          const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString);
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    __AssertProxyNotBusy('addOutStorage');
+
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'addOutStorage');
+    lMessage.Write('outCode', System.TypeInfo(UnicodeString), outCode, []);
+    lMessage.Write('outType', System.TypeInfo(UnicodeString), outType, []);
+    lMessage.Write('outUser', System.TypeInfo(UnicodeString), outUser, []);
+    lMessage.Write('operatorId', System.TypeInfo(UnicodeString), operatorId, []);
+    lMessage.Write('outState', System.TypeInfo(UnicodeString), outState, []);
+    lMessage.Write('memo', System.TypeInfo(UnicodeString), memo, []);
+    lMessage.Write('productIdStr', System.TypeInfo(UnicodeString), productIdStr, []);
+    lMessage.Write('locationIdStr', System.TypeInfo(UnicodeString), locationIdStr, []);
+    lMessage.Write('companyIdStr', System.TypeInfo(UnicodeString), companyIdStr, []);
+    lMessage.Write('qtyStr', System.TypeInfo(UnicodeString), qtyStr, []);
+    lMessage.Write('priceStr', System.TypeInfo(UnicodeString), priceStr, []);
+    lMessage.Write('stateStr', System.TypeInfo(UnicodeString), stateStr, []);
+    lMessage.Write('partnersId', System.TypeInfo(UnicodeString), partnersId, []);
+    lMessage.Write('oddDtIdStr', System.TypeInfo(UnicodeString), oddDtIdStr, []);
+    lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
+    __DispatchAsyncRequest('addOutStorage', lMessage);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+end;
+
+procedure TAndroidService_AsyncProxy.Invoke_getSCOrder(const status: UnicodeString);
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    __AssertProxyNotBusy('getSCOrder');
+
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getSCOrder');
+    lMessage.Write('status', System.TypeInfo(UnicodeString), status, []);
+    __DispatchAsyncRequest('getSCOrder', lMessage);
+  finally
+    lMessage.UnsetAttributes(lTransportChannel);
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+end;
+
+procedure TAndroidService_AsyncProxy.Invoke_getOrderPr(const orderNum: UnicodeString);
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    __AssertProxyNotBusy('getOrderPr');
+
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getOrderPr');
+    lMessage.Write('orderNum', System.TypeInfo(UnicodeString), orderNum, []);
+    __DispatchAsyncRequest('getOrderPr', lMessage);
   finally
     lMessage.UnsetAttributes(lTransportChannel);
     lMessage := nil;
@@ -2200,6 +2487,222 @@ begin
   exit;
 end;
 
+function TAndroidService_AsyncProxy.Retrieve_getRepertoryProduct: string;
+var
+  __response: TStream;
+  tc: TMyTransportChannel;
+  lRetry: Boolean;
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lFreeStream: Boolean;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  lFreeStream := false;
+  try
+    __response := __RetrieveAsyncResponse('getRepertoryProduct');
+    try
+      try
+        try
+          lMessage.ReadFromStream(__response, lFreeStream);
+        except
+          on E: Exception do begin
+            lFreeStream := true;
+            raise;
+          end;
+        end;
+
+        lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+      except
+        on E: EROSessionNotFound do begin
+          tc := TMyTransportChannel(lTransportChannel.GetTransportObject());
+          lRetry := false;
+          tc.DoLoginNeeded(lMessage, E, lRetry);
+          if not lRetry then begin
+            raise;
+          end;
+        end;
+        on E: Exception do begin
+          raise;
+        end;
+      end;
+    finally
+      if lFreeStream then begin
+        __response.Free();
+      end;
+    end;
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxy.Retrieve_addOutStorage: string;
+var
+  __response: TStream;
+  tc: TMyTransportChannel;
+  lRetry: Boolean;
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lFreeStream: Boolean;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  lFreeStream := false;
+  try
+    __response := __RetrieveAsyncResponse('addOutStorage');
+    try
+      try
+        try
+          lMessage.ReadFromStream(__response, lFreeStream);
+        except
+          on E: Exception do begin
+            lFreeStream := true;
+            raise;
+          end;
+        end;
+
+        lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+      except
+        on E: EROSessionNotFound do begin
+          tc := TMyTransportChannel(lTransportChannel.GetTransportObject());
+          lRetry := false;
+          tc.DoLoginNeeded(lMessage, E, lRetry);
+          if not lRetry then begin
+            raise;
+          end;
+        end;
+        on E: Exception do begin
+          raise;
+        end;
+      end;
+    finally
+      if lFreeStream then begin
+        __response.Free();
+      end;
+    end;
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxy.Retrieve_getSCOrder: string;
+var
+  __response: TStream;
+  tc: TMyTransportChannel;
+  lRetry: Boolean;
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lFreeStream: Boolean;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  lFreeStream := false;
+  try
+    __response := __RetrieveAsyncResponse('getSCOrder');
+    try
+      try
+        try
+          lMessage.ReadFromStream(__response, lFreeStream);
+        except
+          on E: Exception do begin
+            lFreeStream := true;
+            raise;
+          end;
+        end;
+
+        lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+      except
+        on E: EROSessionNotFound do begin
+          tc := TMyTransportChannel(lTransportChannel.GetTransportObject());
+          lRetry := false;
+          tc.DoLoginNeeded(lMessage, E, lRetry);
+          if not lRetry then begin
+            raise;
+          end;
+        end;
+        on E: Exception do begin
+          raise;
+        end;
+      end;
+    finally
+      if lFreeStream then begin
+        __response.Free();
+      end;
+    end;
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxy.Retrieve_getOrderPr: string;
+var
+  __response: TStream;
+  tc: TMyTransportChannel;
+  lRetry: Boolean;
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lFreeStream: Boolean;
+  lResult: string;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  lFreeStream := false;
+  try
+    __response := __RetrieveAsyncResponse('getOrderPr');
+    try
+      try
+        try
+          lMessage.ReadFromStream(__response, lFreeStream);
+        except
+          on E: Exception do begin
+            lFreeStream := true;
+            raise;
+          end;
+        end;
+
+        lMessage.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+      except
+        on E: EROSessionNotFound do begin
+          tc := TMyTransportChannel(lTransportChannel.GetTransportObject());
+          lRetry := false;
+          tc.DoLoginNeeded(lMessage, E, lRetry);
+          if not lRetry then begin
+            raise;
+          end;
+        end;
+        on E: Exception do begin
+          raise;
+        end;
+      end;
+    finally
+      if lFreeStream then begin
+        __response.Free();
+      end;
+    end;
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
 function TAndroidService_AsyncProxyEx.__GetInterfaceName: String;
 begin
   result := 'AndroidService';
@@ -2541,9 +3044,9 @@ begin
   exit;
 end;
 
-function TAndroidService_AsyncProxyEx.BegincheckSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const repertoryIdStr: UnicodeString; const checkdtQtyStr: UnicodeString;
-                                                   const checkdtProfitStr: UnicodeString; const idCardNumStr: UnicodeString; const recordTypeStr: UnicodeString; const detailQtyStr: UnicodeString; const aCallback: TROAsyncCallback;
-                                                   const aUserData: Pointer = nil): IROAsyncRequest;
+function TAndroidService_AsyncProxyEx.BegincheckSt(const checkNum: UnicodeString; const checkUser: Integer; const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString;
+                                                   const companyIdStr: UnicodeString; const checkdtQtyStr: UnicodeString; const checkdtProfitStr: UnicodeString; const repertoryQtyStr: UnicodeString; const idCardNumStr: UnicodeString;
+                                                   const recordTypeStr: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
 var
   lMessage: IROMessage;
   lTransportChannel: IROTransportChannel;
@@ -2557,12 +3060,117 @@ begin
     lMessage.Write('checkNum', System.TypeInfo(UnicodeString), checkNum, []);
     lMessage.Write('checkUser', System.TypeInfo(Integer), checkUser, []);
     lMessage.Write('memo', System.TypeInfo(UnicodeString), memo, []);
-    lMessage.Write('repertoryIdStr', System.TypeInfo(UnicodeString), repertoryIdStr, []);
+    lMessage.Write('productIdStr', System.TypeInfo(UnicodeString), productIdStr, []);
+    lMessage.Write('locationIdStr', System.TypeInfo(UnicodeString), locationIdStr, []);
+    lMessage.Write('companyIdStr', System.TypeInfo(UnicodeString), companyIdStr, []);
     lMessage.Write('checkdtQtyStr', System.TypeInfo(UnicodeString), checkdtQtyStr, []);
     lMessage.Write('checkdtProfitStr', System.TypeInfo(UnicodeString), checkdtProfitStr, []);
+    lMessage.Write('repertoryQtyStr', System.TypeInfo(UnicodeString), repertoryQtyStr, []);
     lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
     lMessage.Write('recordTypeStr', System.TypeInfo(UnicodeString), recordTypeStr, []);
-    lMessage.Write('detailQtyStr', System.TypeInfo(UnicodeString), detailQtyStr, []);
+    lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.BegingetRepertoryProduct(const productCode: UnicodeString; const productNum: UnicodeString; const idCardNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: IROAsyncRequest;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getRepertoryProduct');
+    lMessage.Write('productCode', System.TypeInfo(UnicodeString), productCode, []);
+    lMessage.Write('productNum', System.TypeInfo(UnicodeString), productNum, []);
+    lMessage.Write('idCardNum', System.TypeInfo(UnicodeString), idCardNum, []);
+    lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.BeginaddOutStorage(const outCode: UnicodeString; const outType: UnicodeString; const outUser: UnicodeString; const operatorId: UnicodeString; const outState: UnicodeString;
+                                                         const memo: UnicodeString; const productIdStr: UnicodeString; const locationIdStr: UnicodeString; const companyIdStr: UnicodeString; const qtyStr: UnicodeString;
+                                                         const priceStr: UnicodeString; const stateStr: UnicodeString; const partnersId: UnicodeString; const oddDtIdStr: UnicodeString; const idCardNumStr: UnicodeString;
+                                                         const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: IROAsyncRequest;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'addOutStorage');
+    lMessage.Write('outCode', System.TypeInfo(UnicodeString), outCode, []);
+    lMessage.Write('outType', System.TypeInfo(UnicodeString), outType, []);
+    lMessage.Write('outUser', System.TypeInfo(UnicodeString), outUser, []);
+    lMessage.Write('operatorId', System.TypeInfo(UnicodeString), operatorId, []);
+    lMessage.Write('outState', System.TypeInfo(UnicodeString), outState, []);
+    lMessage.Write('memo', System.TypeInfo(UnicodeString), memo, []);
+    lMessage.Write('productIdStr', System.TypeInfo(UnicodeString), productIdStr, []);
+    lMessage.Write('locationIdStr', System.TypeInfo(UnicodeString), locationIdStr, []);
+    lMessage.Write('companyIdStr', System.TypeInfo(UnicodeString), companyIdStr, []);
+    lMessage.Write('qtyStr', System.TypeInfo(UnicodeString), qtyStr, []);
+    lMessage.Write('priceStr', System.TypeInfo(UnicodeString), priceStr, []);
+    lMessage.Write('stateStr', System.TypeInfo(UnicodeString), stateStr, []);
+    lMessage.Write('partnersId', System.TypeInfo(UnicodeString), partnersId, []);
+    lMessage.Write('oddDtIdStr', System.TypeInfo(UnicodeString), oddDtIdStr, []);
+    lMessage.Write('idCardNumStr', System.TypeInfo(UnicodeString), idCardNumStr, []);
+    lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.BegingetSCOrder(const status: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: IROAsyncRequest;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getSCOrder');
+    lMessage.Write('status', System.TypeInfo(UnicodeString), status, []);
+    lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
+  finally
+    lMessage := nil;
+    lTransportChannel := nil;
+  end;
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.BegingetOrderPr(const orderNum: UnicodeString; const aCallback: TROAsyncCallback; const aUserData: Pointer = nil): IROAsyncRequest;
+var
+  lMessage: IROMessage;
+  lTransportChannel: IROTransportChannel;
+  lResult: IROAsyncRequest;
+begin
+  lMessage := __GetMessage();
+  lMessage.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  lTransportChannel := __TransportChannel;
+  try
+    lMessage.InitializeRequestMessage(lTransportChannel, 'sanhe', __InterfaceName, 'getOrderPr');
+    lMessage.Write('orderNum', System.TypeInfo(UnicodeString), orderNum, []);
     lResult := __DispatchAsyncRequest(lMessage, aCallback, aUserData);
   finally
     lMessage := nil;
@@ -2722,6 +3330,50 @@ begin
 end;
 
 function TAndroidService_AsyncProxyEx.EndcheckSt(const aRequest: IROAsyncRequest): string;
+var
+  lResult: string;
+begin
+  aRequest.ReadResponse();
+  aRequest.Message.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  aRequest.Message.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.EndgetRepertoryProduct(const aRequest: IROAsyncRequest): string;
+var
+  lResult: string;
+begin
+  aRequest.ReadResponse();
+  aRequest.Message.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  aRequest.Message.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.EndaddOutStorage(const aRequest: IROAsyncRequest): string;
+var
+  lResult: string;
+begin
+  aRequest.ReadResponse();
+  aRequest.Message.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  aRequest.Message.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.EndgetSCOrder(const aRequest: IROAsyncRequest): string;
+var
+  lResult: string;
+begin
+  aRequest.ReadResponse();
+  aRequest.Message.SetAutoGeneratedNamespaces(DefaultNamespaces());
+  aRequest.Message.Read('Result', System.TypeInfo(string), lResult, [paAsUTF8String]);
+  result := lResult;
+  exit;
+end;
+
+function TAndroidService_AsyncProxyEx.EndgetOrderPr(const aRequest: IROAsyncRequest): string;
 var
   lResult: string;
 begin

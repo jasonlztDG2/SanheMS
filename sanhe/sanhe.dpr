@@ -1,7 +1,6 @@
 program sanhe;
 
 uses
-  uROComInit,
   Forms,
   fClientForm in 'fClientForm.pas' {ClientForm},
   fLogOnForm in 'fLogOnForm.pas' {LoginForm},
@@ -64,7 +63,18 @@ uses
   fPR_ProductListP in 'productionPlanManager\fPR_ProductListP.pas' {fPR_ProductList},
   fPR_ProductStructureDetailP in 'productionPlanManager\fPR_ProductStructureDetailP.pas' {fPR_ProductStructureDetail},
   fPR_ProductStructureListP in 'productionPlanManager\fPR_ProductStructureListP.pas' {fPR_ProductStructureList},
-  fSE_OrderAddListP in 'saleManager\fSE_OrderAddListP.pas' {fSE_OrderAddList};
+  fSE_OrderAddListP in 'productionPlanManager\fSE_OrderAddListP.pas' {fSE_OrderAddList},
+  fPU_OrderDtListP in 'purchaseManager\fPU_OrderDtListP.pas' {fPU_OrderDtList},
+  fPR_PickingListP in 'productionPlanManager\fPR_PickingListP.pas' {fPR_PickingList},
+  fPR_PickingListAddP in 'productionPlanManager\fPR_PickingListAddP.pas' {fPR_PickingListAdd},
+  fPR_PickingListAllP in 'productionPlanManager\fPR_PickingListAllP.pas' {fPR_PickingListAll},
+  fPR_PickingListDetailP in 'productionPlanManager\fPR_PickingListDetailP.pas' {fPR_PickingListDetail},
+  fBA_PartsListP in 'baseManager\fBA_PartsListP.pas' {fBA_PartsList},
+  fPR_WorkOrderP in 'productionPlanManager\fPR_WorkOrderP.pas' {fPR_WorkOrder},
+  fPR_WorkOrderAddP in 'productionPlanManager\fPR_WorkOrderAddP.pas' {fPR_WorkOrderAdd},
+  browserfolderu in 'browserfolderu.pas' {Form1},
+  fPR_VersionOrderP in 'productionPlanManager\fPR_VersionOrderP.pas' {fPR_VersionOrder},
+  fPR_VersionOrderAddP in 'productionPlanManager\fPR_VersionOrderAddP.pas' {fPR_VersionOrderAdd};
 
 {$R *.res}
 
@@ -73,11 +83,11 @@ begin
 Application.Initialize;
 Application.CreateForm(TduPub, duPub);
   {$IFDEF ShowLogin}               //{$
-fLogin:=TFlogin.Create(nil);
+fLogin:=TFlogin.Create(nil);
 if Flogin.ShowModal=mrOK  then
 begin
-Application.CreateForm(TfMain, fMain);
-  fmain.Show;
+AApplication.CreateForm(TfMain, fMain);
+  main.Show;
   application.Run;
 end
 else

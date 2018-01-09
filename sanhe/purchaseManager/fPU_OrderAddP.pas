@@ -68,6 +68,8 @@ type
     Panel4: TPanel;
     Label7: TLabel;
     cxDBNavigator1: TcxDBNavigator;
+    tbl_st_product: TDAMemDataTable;
+    ds_st_product: TDADataSource;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure cxDBNavigator1ButtonsButtonClick(Sender: TObject;
@@ -252,9 +254,9 @@ begin
                aDone:=true;
                if MessageDlg('确定删除该商品采购?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
                begin
-                   updateList(dupub.DAMemDataTable1.FieldByName('productId').AsString);
+                   updateList(self.tbl_st_product.FieldByName('productId').AsString);
 
-                   duPub.getDobInData(dupub.DAMemDataTable1,addList,'st_product','productId');
+                   duPub.getDobInData(self.tbl_st_product,addList,'st_product','productId');
                end;
 
          end;

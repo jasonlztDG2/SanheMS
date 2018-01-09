@@ -29,9 +29,6 @@ uses
 
 type
   TfPU_OrderDetail = class(TForm)
-    cxGrid1: TcxGrid;
-    cxGrid1DBTableView1: TcxGridDBTableView;
-    cxGrid1Level1: TcxGridLevel;
     Panel1: TPanel;
     Panel3: TPanel;
     Button1: TButton;
@@ -56,29 +53,41 @@ type
     cxDBTextEdit8: TcxDBTextEdit;
     Edit1: TEdit;
     Edit2: TEdit;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridLevel1: TcxGridLevel;
+    cxGridDBTableView1RecID: TcxGridDBColumn;
+    cxGridDBTableView1id: TcxGridDBColumn;
+    cxGridDBTableView1puOrderNum: TcxGridDBColumn;
+    cxGridDBTableView1productID: TcxGridDBColumn;
+    cxGridDBTableView1qty: TcxGridDBColumn;
+    cxGridDBTableView1price: TcxGridDBColumn;
     cxGrid1DBTableView1RecID: TcxGridDBColumn;
     cxGrid1DBTableView1puOrderNum: TcxGridDBColumn;
     cxGrid1DBTableView1productID: TcxGridDBColumn;
     cxGrid1DBTableView1qty: TcxGridDBColumn;
     cxGrid1DBTableView1price: TcxGridDBColumn;
     cxGrid1DBTableView1inQty: TcxGridDBColumn;
-    cxGrid2: TcxGrid;
-    cxGridDBTableView1: TcxGridDBTableView;
-    cxGridDBColumn1: TcxGridDBColumn;
-    cxGridDBColumn2: TcxGridDBColumn;
-    cxGridDBColumn3: TcxGridDBColumn;
-    cxGridDBColumn4: TcxGridDBColumn;
-    cxGridDBColumn5: TcxGridDBColumn;
-    cxGridDBColumn6: TcxGridDBColumn;
-    cxGridLevel1: TcxGridLevel;
+    cxGrid1DBTableView1id: TcxGridDBColumn;
+    cxGridDBTableView1Column1: TcxGridDBColumn;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cxGrid1DBTableView1CellDblClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure cxGridDBTableView1CellDblClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
   private
     { Private declarations }
   public
     { Public declarations }
     procedure initData();
+    procedure openData();
   end;
 
 var
@@ -88,7 +97,7 @@ implementation
 
 {$R *.dfm}
 uses
-duPubP
+duPubP,fPU_OrderDtListP
 ;
 procedure TfPU_OrderDetail.initData();
 var
@@ -99,11 +108,13 @@ begin
 
    if cxDBTextEdit6.Text = 'ÒÑÈë¿â' then
    begin
+       cxGrid2.Enabled := false;
        cxGrid2.Visible := false;
        duPub.getSelectData(duPub.tbl_pu_orderDetail,dataList,'pu_orderDetail',dboAnd);
    end
    else
    begin
+       cxGrid1.Enabled := false;
        cxGrid2.Visible := true;
        duPub.getSelectData(duPub.tbl_pu_orderdt,dataList,'pu_orderdt',dboAnd);
    end;
@@ -111,9 +122,39 @@ begin
 
 end;
 
+procedure TfPU_OrderDetail.openData();
+begin
+//    orderDtId := cxGrid1DBTableView1.DataController.Values[row,column];
+
+    fPU_OrderDtList := TfPU_OrderDtList.Create(self);
+    fPU_OrderDtList.ShowModal;
+end;
+
 procedure TfPU_OrderDetail.Button1Click(Sender: TObject);
 begin
     self.Close;
+end;
+
+procedure TfPU_OrderDetail.cxGrid1DBTableView1CellDblClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+  var
+  row : Integer;
+begin
+     Row := cxGrid1DBTableView1.DataController.FocusedRecordIndex;
+     orderDtId := cxGrid1DBTableView1.DataController.Values[row,1];
+     openData();
+end;
+
+procedure TfPU_OrderDetail.cxGridDBTableView1CellDblClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+ var
+  row : Integer;
+begin
+     Row := cxGridDBTableView1.DataController.FocusedRecordIndex;
+     orderDtId := cxGridDBTableView1.DataController.Values[row,1];
+     openData();
 end;
 
 procedure TfPU_OrderDetail.FormClose(Sender: TObject; var Action: TCloseAction);

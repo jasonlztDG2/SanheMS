@@ -77,9 +77,9 @@ end;
 procedure TfBA_Company.tb_DeleteClick(Sender: TObject);
 begin
   inherited;
-     if MessageDlg('确定删除该归属公司?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-         duPub.tbl_st_company.Delete;
-         duPub.tbl_st_company.ApplyUpdates(false,true);
+//     if MessageDlg('确定删除该归属公司?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+//         duPub.tbl_st_company.Delete;
+//         duPub.tbl_st_company.ApplyUpdates(false,true);
 end;
 
 procedure TfBA_Company.Tb_EditClick(Sender: TObject);

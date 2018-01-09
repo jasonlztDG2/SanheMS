@@ -358,8 +358,52 @@
             <Form>fPR_ProductStructureList</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="saleManager\fSE_OrderAddListP.pas">
+        <DCCReference Include="productionPlanManager\fSE_OrderAddListP.pas">
             <Form>fSE_OrderAddList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="purchaseManager\fPU_OrderDtListP.pas">
+            <Form>fPU_OrderDtList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_PickingListP.pas">
+            <Form>fPR_PickingList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_PickingListAddP.pas">
+            <Form>fPR_PickingListAdd</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_PickingListAllP.pas">
+            <Form>fPR_PickingListAll</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_PickingListDetailP.pas">
+            <Form>fPR_PickingListDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="baseManager\fBA_PartsListP.pas">
+            <Form>fBA_PartsList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_WorkOrderP.pas">
+            <Form>fPR_WorkOrder</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_WorkOrderAddP.pas">
+            <Form>fPR_WorkOrderAdd</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="browserfolderu.pas">
+            <Form>Form1</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_VersionOrderP.pas">
+            <Form>fPR_VersionOrder</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_VersionOrderAddP.pas">
+            <Form>fPR_VersionOrderAdd</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <None Include="sanhe.remoteRODL"/>

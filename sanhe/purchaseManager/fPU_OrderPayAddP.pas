@@ -63,6 +63,7 @@ type
     cxGrid1DBTableView1companyId: TcxGridDBColumn;
     cxGrid1DBTableView1state: TcxGridDBColumn;
     cxGrid1DBTableView1oddDtId: TcxGridDBColumn;
+    cxGrid1DBTableView1idCardNum: TcxGridDBColumn;
     procedure FormCreate(Sender: TObject);
     procedure cxDBNavigator1ButtonsButtonClick(Sender: TObject;
       AButtonIndex: Integer; var ADone: Boolean);
@@ -146,6 +147,7 @@ stateStr : String;
 status : String;
 memo : String;
 oddDtStr : String;
+idCardNumStr : String;
 
 
 i : Integer;
@@ -180,6 +182,7 @@ begin
          stateStr := stateStr + '已付款|';
          oddDtStr := oddDtStr + trim(cxGrid1DBTableView1.DataController.Values[i,8]) + '|';
          qtyStr := qtyStr + floatToStr(qty) + '|';
+         idCardNumStr := idCardNumStr + trim(cxGrid1DBTableView1.DataController.Values[i,9]) + '|';
      end;
 //      showmessage( payCode + #13#10 + partnerId + #13#10 + payUserId + #13#10 + payAmount + #13#10 +
 //            payNum + #13#10 + datetimeToStr(payDate) + #13#10 + payType + #13#10 + intToStr(operatorId) + #13#10 +
@@ -195,7 +198,7 @@ begin
           parameters.Clear;
           sql.Add('exec addOrderPay :@payCode,:@partnerId,:@payUser,:@payAmount,'
            + ':@payNum,:@payDate,:@payType,:@operator,:@oddNumStr,:@qtyStr,:@priceStr,'
-           + ':@totalAmountStr,:@stateStr,:@status,:@memo,:@oddDtStr,:@successResult output');//这就是调用存储过程
+           + ':@totalAmountStr,:@stateStr,:@status,:@memo,:@oddDtStr,:@idCardNumStr,:@successResult output');//这就是调用存储过程
 
           parameters.Items[0].Value := payCode;
           parameters.Items[1].Value := partnerId;
@@ -213,10 +216,10 @@ begin
           parameters.Items[13].Value := status;
           parameters.Items[14].Value := memo;
           parameters.Items[15].Value := oddDtStr;
-
+          parameters.Items[16].Value := idCardNumStr;
 
           execsql;
-          result := parameters.Items[16].Value;
+          result := parameters.Items[17].Value;
      end;
 
      if result = 'success' then

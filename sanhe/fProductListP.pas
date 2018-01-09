@@ -167,7 +167,7 @@ end;
 procedure TfProductList.Button2Click(Sender: TObject);
 begin
      setDataList();
-    duPub.getDobInData(dupub.DAMemDataTable1,tempList,'st_product','productId');
+    duPub.getDobInData(fPU_OrderAdd.tbl_st_product,tempList,'st_product','productId');
     self.Close;
 end;
 
