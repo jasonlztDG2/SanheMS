@@ -406,6 +406,10 @@
             <Form>fPR_VersionOrderAdd</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="productionPlanManager\fPR_WorkOrderDetailP.pas">
+            <Form>fPR_WorkOrderDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="sanhe.remoteRODL"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

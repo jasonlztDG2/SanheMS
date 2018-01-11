@@ -219,7 +219,7 @@ object duPub: TduPub
     Left = 142
     Top = 59
     Bitmap = {
-      494C01010C004400E80120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010C004400F40120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008000000001002000000000000000
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5042,6 +5042,12 @@ object duPub: TduPub
         Required = True
       end
       item
+        Name = 'versionOrderNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
         Name = 'recordDate'
         DataType = datDateTime
         Required = True
@@ -5082,19 +5088,9 @@ object duPub: TduPub
         Size = 100
       end
       item
-        Name = 'bodyDescribe'
+        Name = 'packaging'
         DataType = datWideString
-        Size = 150
-      end
-      item
-        Name = 'bodyPic'
-        DataType = datWideString
-        Size = 50
-      end
-      item
-        Name = 'bodyMemo'
-        DataType = datWideString
-        Size = 150
+        Size = 1000
       end>
     LogicalName = 'pu_workDetailList'
     Params = <>
@@ -5117,7 +5113,6 @@ object duPub: TduPub
         Name = 'workNum'
         DataType = datWideString
         Size = 50
-        Required = True
       end
       item
         Name = 'name'
@@ -5162,22 +5157,22 @@ object duPub: TduPub
       item
         Name = 'title'
         DataType = datWideString
-        Size = 100
+        Size = 150
       end
       item
         Name = 'body'
-        DataType = datWideString
-        Size = 50
-      end
-      item
-        Name = 'memo'
         DataType = datWideString
         Size = 150
       end
       item
         Name = 'pic'
         DataType = datWideString
-        Size = 50
+        Size = 150
+      end
+      item
+        Name = 'part'
+        DataType = datInteger
+        Required = True
       end>
     LogicalName = 'pu_workDetailPic'
     Params = <>
@@ -5226,11 +5221,6 @@ object duPub: TduPub
         Name = 'partFour'
         DataType = datWideString
         Size = 50
-      end
-      item
-        Name = 'partFive'
-        DataType = datWideString
-        Size = 50
       end>
     LogicalName = 'pu_workDetailTitle'
     Params = <>
@@ -5246,5 +5236,210 @@ object duPub: TduPub
     DataTable = tbl_pu_workDetailTitle
     Left = 152
     Top = 1128
+  end
+  object tbl_pu_versionOrder: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'versionOrderNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'partnerNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'recordDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'deliveryDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'recordUser'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'auditUser'
+        DataType = datInteger
+      end
+      item
+        Name = 'memo'
+        DataType = datWideString
+        Size = 500
+      end
+      item
+        Name = 'titleName'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'titleCount'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'titleMemo'
+        DataType = datWideString
+        Size = 100
+      end
+      item
+        Name = 'packaging'
+        DataType = datWideString
+        Size = 1000
+      end>
+    LogicalName = 'pu_versionOrder'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 192
+    Top = 1296
+  end
+  object ds_pu_versionOrder: TDADataSource
+    DataSet = tbl_pu_versionOrder.Dataset
+    DataTable = tbl_pu_versionOrder
+    Left = 208
+    Top = 1240
+  end
+  object tbl_pu_versionOrderMaterial: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'versionOrderNum'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'name'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'material'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'isOwn'
+        DataType = datWideString
+        Size = 10
+      end>
+    LogicalName = 'pu_versionOrderMaterial'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 112
+    Top = 1280
+  end
+  object ds_pu_versionOrderMaterial: TDADataSource
+    DataSet = tbl_pu_versionOrderMaterial.Dataset
+    DataTable = tbl_pu_versionOrderMaterial
+    Left = 112
+    Top = 1232
+  end
+  object tbl_pu_versionOrderPic: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'versionOrderNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'title'
+        DataType = datWideString
+        Size = 150
+      end
+      item
+        Name = 'body'
+        DataType = datWideString
+        Size = 150
+      end
+      item
+        Name = 'pic'
+        DataType = datWideString
+        Size = 150
+      end
+      item
+        Name = 'part'
+        DataType = datInteger
+        Required = True
+      end>
+    LogicalName = 'pu_versionOrderPic'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 24
+    Top = 1296
+  end
+  object ds_pu_versionOrderPic: TDADataSource
+    DataSet = tbl_pu_versionOrderPic.Dataset
+    DataTable = tbl_pu_versionOrderPic
+    Left = 24
+    Top = 1232
+  end
+  object tbl_pu_versionOrderTitle: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'id'
+        DataType = datAutoInc
+        GeneratorName = 'pu_versionOrderTitle'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'versionOrderNum'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'partOne'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'partTwo'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'partThree'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'partFour'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'pu_versionOrderTitle'
+    Params = <>
+    RemoteDataAdapter = RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 456
+    Top = 1312
+  end
+  object ds_pu_versionOrderTitle: TDADataSource
+    DataSet = tbl_pu_versionOrderTitle.Dataset
+    DataTable = tbl_pu_versionOrderTitle
+    Left = 464
+    Top = 1256
   end
 end

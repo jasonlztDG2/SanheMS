@@ -3903,12 +3903,12 @@ object DataService: TDataService
                 TableField = 'body'
               end
               item
-                DatasetField = 'memo'
-                TableField = 'memo'
-              end
-              item
                 DatasetField = 'pic'
                 TableField = 'pic'
+              end
+              item
+                DatasetField = 'part'
+                TableField = 'part'
               end>
           end>
         Name = 'pu_workDetailPic'
@@ -3924,77 +3924,22 @@ object DataService: TDataService
           item
             Name = 'title'
             DataType = datWideString
-            Size = 100
+            Size = 150
           end
           item
             Name = 'body'
-            DataType = datWideString
-            Size = 50
-          end
-          item
-            Name = 'memo'
             DataType = datWideString
             Size = 150
           end
           item
             Name = 'pic'
             DataType = datWideString
-            Size = 50
-          end>
-      end
-      item
-        Params = <>
-        Statements = <
-          item
-            Connection = 'Connection to sanhe'
-            ConnectionType = 'MSSQL'
-            Default = True
-            TargetTable = 'pu_workDetailMaterial'
-            StatementType = stAutoSQL
-            ColumnMappings = <
-              item
-                DatasetField = 'workNum'
-                TableField = 'workNum'
-              end
-              item
-                DatasetField = 'name'
-                TableField = 'name'
-              end
-              item
-                DatasetField = 'material'
-                TableField = 'material'
-              end
-              item
-                DatasetField = 'isOwn'
-                TableField = 'isOwn'
-              end>
-          end>
-        Name = 'pu_workDetailMaterial'
-        BusinessRulesClient.CompileOnServer = False
-        BusinessRulesClient.RunOnClientAndServer = False
-        Fields = <
-          item
-            Name = 'workNum'
-            DataType = datWideString
-            Size = 50
-            Required = True
+            Size = 150
           end
           item
-            Name = 'name'
-            DataType = datWideString
-            Size = 20
+            Name = 'part'
+            DataType = datInteger
             Required = True
-          end
-          item
-            Name = 'material'
-            DataType = datWideString
-            Size = 50
-            Required = True
-          end
-          item
-            Name = 'isOwn'
-            DataType = datWideString
-            Size = 10
           end>
       end
       item
@@ -4010,6 +3955,204 @@ object DataService: TDataService
               item
                 DatasetField = 'workNum'
                 TableField = 'workNum'
+              end
+              item
+                DatasetField = 'partnerNum'
+                TableField = 'partnerNum'
+              end
+              item
+                DatasetField = 'versionOrderNum'
+                TableField = 'versionOrderNum'
+              end
+              item
+                DatasetField = 'recordDate'
+                TableField = 'recordDate'
+              end
+              item
+                DatasetField = 'deliveryDate'
+                TableField = 'deliveryDate'
+              end
+              item
+                DatasetField = 'recordUser'
+                TableField = 'recordUser'
+              end
+              item
+                DatasetField = 'auditUser'
+                TableField = 'auditUser'
+              end
+              item
+                DatasetField = 'memo'
+                TableField = 'memo'
+              end
+              item
+                DatasetField = 'titleName'
+                TableField = 'titleName'
+              end
+              item
+                DatasetField = 'titleCount'
+                TableField = 'titleCount'
+              end
+              item
+                DatasetField = 'titleMemo'
+                TableField = 'titleMemo'
+              end
+              item
+                DatasetField = 'packaging'
+                TableField = 'packaging'
+              end>
+          end>
+        Name = 'pu_workDetailList'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'workNum'
+            DataType = datWideString
+            Size = 50
+            Required = True
+          end
+          item
+            Name = 'partnerNum'
+            DataType = datWideString
+            Size = 50
+            Required = True
+          end
+          item
+            Name = 'versionOrderNum'
+            DataType = datWideString
+            Size = 50
+            Required = True
+          end
+          item
+            Name = 'recordDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'deliveryDate'
+            DataType = datDateTime
+            Required = True
+          end
+          item
+            Name = 'recordUser'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'auditUser'
+            DataType = datInteger
+          end
+          item
+            Name = 'memo'
+            DataType = datWideString
+            Size = 500
+          end
+          item
+            Name = 'titleName'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'titleCount'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'titleMemo'
+            DataType = datWideString
+            Size = 100
+          end
+          item
+            Name = 'packaging'
+            DataType = datWideString
+            Size = 1000
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_workDetailTitle'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'id'
+                TableField = 'id'
+              end
+              item
+                DatasetField = 'workNum'
+                TableField = 'workNum'
+              end
+              item
+                DatasetField = 'partOne'
+                TableField = 'partOne'
+              end
+              item
+                DatasetField = 'partTwo'
+                TableField = 'partTwo'
+              end
+              item
+                DatasetField = 'partThree'
+                TableField = 'partThree'
+              end
+              item
+                DatasetField = 'partFour'
+                TableField = 'partFour'
+              end>
+          end>
+        Name = 'pu_workDetailTitle'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'id'
+            DataType = datAutoInc
+            GeneratorName = 'pu_workDetailTitle'
+            Required = True
+          end
+          item
+            Name = 'workNum'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'partOne'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'partTwo'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'partThree'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'partFour'
+            DataType = datWideString
+            Size = 50
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_versionOrder'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'versionOrderNum'
+                TableField = 'versionOrderNum'
               end
               item
                 DatasetField = 'partnerNum'
@@ -4048,24 +4191,16 @@ object DataService: TDataService
                 TableField = 'titleMemo'
               end
               item
-                DatasetField = 'bodyDescribe'
-                TableField = 'bodyDescribe'
-              end
-              item
-                DatasetField = 'bodyPic'
-                TableField = 'bodyPic'
-              end
-              item
-                DatasetField = 'bodyMemo'
-                TableField = 'bodyMemo'
+                DatasetField = 'packaging'
+                TableField = 'packaging'
               end>
           end>
-        Name = 'pu_workDetailList'
+        Name = 'pu_versionOrder'
         BusinessRulesClient.CompileOnServer = False
         BusinessRulesClient.RunOnClientAndServer = False
         Fields = <
           item
-            Name = 'workNum'
+            Name = 'versionOrderNum'
             DataType = datWideString
             Size = 50
             Required = True
@@ -4117,19 +4252,9 @@ object DataService: TDataService
             Size = 100
           end
           item
-            Name = 'bodyDescribe'
+            Name = 'packaging'
             DataType = datWideString
-            Size = 150
-          end
-          item
-            Name = 'bodyPic'
-            DataType = datWideString
-            Size = 50
-          end
-          item
-            Name = 'bodyMemo'
-            DataType = datWideString
-            Size = 150
+            Size = 1000
           end>
       end
       item
@@ -4139,7 +4264,7 @@ object DataService: TDataService
             Connection = 'connection to sanhe'
             ConnectionType = 'MSSQL'
             Default = True
-            TargetTable = 'pu_workDetailTitle'
+            TargetTable = 'pu_versionOrderTitle'
             StatementType = stAutoSQL
             ColumnMappings = <
               item
@@ -4147,8 +4272,8 @@ object DataService: TDataService
                 TableField = 'id'
               end
               item
-                DatasetField = 'workNum'
-                TableField = 'workNum'
+                DatasetField = 'versionOrderNum'
+                TableField = 'versionOrderNum'
               end
               item
                 DatasetField = 'partOne'
@@ -4165,24 +4290,21 @@ object DataService: TDataService
               item
                 DatasetField = 'partFour'
                 TableField = 'partFour'
-              end
-              item
-                DatasetField = 'partFive'
-                TableField = 'partFive'
               end>
           end>
-        Name = 'pu_workDetailTitle'
+        Name = 'pu_versionOrderTitle'
         BusinessRulesClient.CompileOnServer = False
         BusinessRulesClient.RunOnClientAndServer = False
         Fields = <
           item
             Name = 'id'
             DataType = datAutoInc
-            GeneratorName = 'pu_workDetailTitle'
+            GeneratorName = 'pu_versionOrderTitle'
             Required = True
+            InPrimaryKey = True
           end
           item
-            Name = 'workNum'
+            Name = 'versionOrderNum'
             DataType = datWideString
             Size = 50
           end
@@ -4205,11 +4327,176 @@ object DataService: TDataService
             Name = 'partFour'
             DataType = datWideString
             Size = 50
-          end
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
           item
-            Name = 'partFive'
+            Connection = 'connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_versionOrderPic'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'versionOrderNum'
+                TableField = 'versionOrderNum'
+              end
+              item
+                DatasetField = 'title'
+                TableField = 'title'
+              end
+              item
+                DatasetField = 'body'
+                TableField = 'body'
+              end
+              item
+                DatasetField = 'pic'
+                TableField = 'pic'
+              end
+              item
+                DatasetField = 'part'
+                TableField = 'part'
+              end>
+          end>
+        Name = 'pu_versionOrderPic'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'versionOrderNum'
             DataType = datWideString
             Size = 50
+            Required = True
+          end
+          item
+            Name = 'title'
+            DataType = datWideString
+            Size = 150
+          end
+          item
+            Name = 'body'
+            DataType = datWideString
+            Size = 150
+          end
+          item
+            Name = 'pic'
+            DataType = datWideString
+            Size = 150
+          end
+          item
+            Name = 'part'
+            DataType = datInteger
+            Required = True
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_versionOrderMaterial'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'versionOrderNum'
+                TableField = 'versionOrderNum'
+              end
+              item
+                DatasetField = 'name'
+                TableField = 'name'
+              end
+              item
+                DatasetField = 'material'
+                TableField = 'material'
+              end
+              item
+                DatasetField = 'isOwn'
+                TableField = 'isOwn'
+              end>
+          end>
+        Name = 'pu_versionOrderMaterial'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'versionOrderNum'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'name'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'material'
+            DataType = datWideString
+            Size = 50
+            Required = True
+          end
+          item
+            Name = 'isOwn'
+            DataType = datWideString
+            Size = 10
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_workDetailMaterial'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'workNum'
+                TableField = 'workNum'
+              end
+              item
+                DatasetField = 'name'
+                TableField = 'name'
+              end
+              item
+                DatasetField = 'material'
+                TableField = 'material'
+              end
+              item
+                DatasetField = 'isOwn'
+                TableField = 'isOwn'
+              end>
+          end>
+        Name = 'pu_workDetailMaterial'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'workNum'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'name'
+            DataType = datWideString
+            Size = 20
+            Required = True
+          end
+          item
+            Name = 'material'
+            DataType = datWideString
+            Size = 50
+            Required = True
+          end
+          item
+            Name = 'isOwn'
+            DataType = datWideString
+            Size = 10
           end>
       end>
     JoinDataTables = <>

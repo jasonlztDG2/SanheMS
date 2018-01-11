@@ -74,7 +74,8 @@ uses
   fPR_WorkOrderAddP in 'productionPlanManager\fPR_WorkOrderAddP.pas' {fPR_WorkOrderAdd},
   browserfolderu in 'browserfolderu.pas' {Form1},
   fPR_VersionOrderP in 'productionPlanManager\fPR_VersionOrderP.pas' {fPR_VersionOrder},
-  fPR_VersionOrderAddP in 'productionPlanManager\fPR_VersionOrderAddP.pas' {fPR_VersionOrderAdd};
+  fPR_VersionOrderAddP in 'productionPlanManager\fPR_VersionOrderAddP.pas' {fPR_VersionOrderAdd},
+  fPR_WorkOrderDetailP in 'productionPlanManager\fPR_WorkOrderDetailP.pas' {fPR_WorkOrderDetail};
 
 {$R *.res}
 
@@ -83,11 +84,11 @@ begin
 Application.Initialize;
 Application.CreateForm(TduPub, duPub);
   {$IFDEF ShowLogin}               //{$
-fLogin:=TFlogin.Create(nil);
+fLogin:=TFlogin.Create(nil);
 if Flogin.ShowModal=mrOK  then
 begin
 AApplication.CreateForm(TfMain, fMain);
-  main.Show;
+  fmain.Show;
   application.Run;
 end
 else

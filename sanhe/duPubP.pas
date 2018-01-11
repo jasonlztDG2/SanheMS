@@ -126,6 +126,14 @@ type
     ds_pu_workDetailPic: TDADataSource;
     tbl_pu_workDetailTitle: TDAMemDataTable;
     ds_pu_workDetailTitle: TDADataSource;
+    tbl_pu_versionOrder: TDAMemDataTable;
+    ds_pu_versionOrder: TDADataSource;
+    tbl_pu_versionOrderMaterial: TDAMemDataTable;
+    ds_pu_versionOrderMaterial: TDADataSource;
+    tbl_pu_versionOrderPic: TDAMemDataTable;
+    ds_pu_versionOrderPic: TDADataSource;
+    tbl_pu_versionOrderTitle: TDAMemDataTable;
+    ds_pu_versionOrderTitle: TDADataSource;
 
     procedure ClientChannel_OnLoginNeeded(Sender: TROTransportChannel; anException: Exception; var aRetry: Boolean);
     procedure DataModuleCreate(Sender: TObject);

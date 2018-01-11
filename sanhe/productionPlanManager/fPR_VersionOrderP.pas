@@ -28,7 +28,19 @@ uses
 
 type
   TfPR_VersionOrder = class(Tfbase1)
+    cxGrid1DBTableView1RecID: TcxGridDBColumn;
+    cxGrid1DBTableView1versionOrderNum: TcxGridDBColumn;
+    cxGrid1DBTableView1partnerNum: TcxGridDBColumn;
+    cxGrid1DBTableView1recordDate: TcxGridDBColumn;
+    cxGrid1DBTableView1deliveryDate: TcxGridDBColumn;
+    cxGrid1DBTableView1recordUser: TcxGridDBColumn;
+    cxGrid1DBTableView1auditUser: TcxGridDBColumn;
+    cxGrid1DBTableView1titleName: TcxGridDBColumn;
+    cxGrid1DBTableView1titleCount: TcxGridDBColumn;
+    cxGrid1DBTableView1titleMemo: TcxGridDBColumn;
     procedure tb_AppendClick(Sender: TObject);
+    procedure tb_BrowseClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,12 +55,29 @@ implementation
 {$R *.dfm}
 
 uses
-fPR_VersionOrderAddP
+fPR_VersionOrderAddP,
+duPubP
 ;
+
+procedure TfPR_VersionOrder.FormCreate(Sender: TObject);
+begin
+  inherited;
+   duPub.tbl_pu_versionOrder.close;
+   duPub.tbl_pu_versionOrder.open;
+end;
 
 procedure TfPR_VersionOrder.tb_AppendClick(Sender: TObject);
 begin
   inherited;
+    intoType := 1;
+    fPR_VersionOrderAdd := TfPR_VersionOrderAdd.Create(self);
+    fPR_VersionOrderAdd.ShowModal;
+end;
+
+procedure TfPR_VersionOrder.tb_BrowseClick(Sender: TObject);
+begin
+  inherited;
+    intoType := 2;
     fPR_VersionOrderAdd := TfPR_VersionOrderAdd.Create(self);
     fPR_VersionOrderAdd.ShowModal;
 end;

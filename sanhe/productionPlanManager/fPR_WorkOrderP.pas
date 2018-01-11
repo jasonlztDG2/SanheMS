@@ -31,18 +31,17 @@ type
     cxGrid1DBTableView1RecID: TcxGridDBColumn;
     cxGrid1DBTableView1workNum: TcxGridDBColumn;
     cxGrid1DBTableView1partnerNum: TcxGridDBColumn;
+    cxGrid1DBTableView1versionOrderNum: TcxGridDBColumn;
     cxGrid1DBTableView1recordDate: TcxGridDBColumn;
     cxGrid1DBTableView1deliveryDate: TcxGridDBColumn;
     cxGrid1DBTableView1recordUser: TcxGridDBColumn;
     cxGrid1DBTableView1auditUser: TcxGridDBColumn;
-    cxGrid1DBTableView1memo: TcxGridDBColumn;
     cxGrid1DBTableView1titleName: TcxGridDBColumn;
     cxGrid1DBTableView1titleCount: TcxGridDBColumn;
     cxGrid1DBTableView1titleMemo: TcxGridDBColumn;
-    cxGrid1DBTableView1bodyDescribe: TcxGridDBColumn;
-    cxGrid1DBTableView1bodyPic: TcxGridDBColumn;
-    cxGrid1DBTableView1bodyMemo: TcxGridDBColumn;
     procedure tb_AppendClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure tb_BrowseClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,14 +55,28 @@ implementation
 
 {$R *.dfm}
 uses
- fPR_WorkOrderAddP,
+ fPR_WorkOrderAddP,fPR_WorkOrderDetailP,
 duPubP;
+
+procedure TfPR_WorkOrder.FormCreate(Sender: TObject);
+begin
+  inherited;
+      duPub.tbl_pu_workDetailList.Close;
+      duPub.tbl_pu_workDetailList.Open;
+end;
 
 procedure TfPR_WorkOrder.tb_AppendClick(Sender: TObject);
 begin
   inherited;
       fPR_WorkOrderAdd := TfPR_WorkOrderAdd.Create(self);
       fPR_WorkOrderAdd.ShowModal;
+end;
+
+procedure TfPR_WorkOrder.tb_BrowseClick(Sender: TObject);
+begin
+  inherited;
+     fPR_WorkOrderDetail := TfPR_WorkOrderDetail.Create(self);
+     fPR_WorkOrderDetail.ShowModal;
 end;
 
 end.
