@@ -30,9 +30,7 @@ type
   TfBA_PartsList = class(Tfbase1)
     cxGrid1DBTableView1RecID: TcxGridDBColumn;
     cxGrid1DBTableView1partName: TcxGridDBColumn;
-    procedure FormCreate(Sender: TObject);
     procedure tb_AppendClick(Sender: TObject);
-    procedure tb_SaveClick(Sender: TObject);
     procedure Tb_EditClick(Sender: TObject);
     procedure tbCancelClick(Sender: TObject);
     procedure tb_DeleteClick(Sender: TObject);
@@ -51,18 +49,10 @@ implementation
 uses
 duPubP;
 
-procedure TfBA_PartsList.FormCreate(Sender: TObject);
-begin
-  inherited;
-     duPub.tbl_pr_partsList.Close;
-     duPub.tbl_pr_partsList.open;
-end;
-
 procedure TfBA_PartsList.tbCancelClick(Sender: TObject);
 begin
   inherited;
-    duPub.tbl_pr_partsList.Close;
-    duPub.tbl_pr_partsList.Open;
+
     cxGrid1DBTableView1.OptionsData.Editing:=false;
 end;
 
@@ -70,7 +60,7 @@ procedure TfBA_PartsList.tb_AppendClick(Sender: TObject);
 begin
   inherited;
      cxGrid1DBTableView1.OptionsData.Editing:=true;
-    duPub.tbl_pr_partsList.Append;
+
 end;
 
 procedure TfBA_PartsList.tb_DeleteClick(Sender: TObject);
@@ -85,16 +75,6 @@ procedure TfBA_PartsList.Tb_EditClick(Sender: TObject);
 begin
   inherited;
     self.cxGrid1DBTableView1.OptionsData.Editing:=true;
-end;
-
-procedure TfBA_PartsList.tb_SaveClick(Sender: TObject);
-begin
-  inherited;
-      duPub.tbl_pr_partsList.DisableControls;
-      cxGrid1DBTableView1.DataController.UpdateData;
-      duPub.tbl_pr_partsList.ApplyUpdates(false,true);
-      duPub.tbl_pr_partsList.EnableControls;
-      cxGrid1DBTableView1.OptionsData.Editing:=false;
 end;
 
 end.

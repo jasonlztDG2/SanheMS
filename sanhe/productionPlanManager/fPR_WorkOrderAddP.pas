@@ -25,7 +25,8 @@ uses
   cxFilter, cxData, cxDataStorage, cxNavigator, Data.DB, cxDBData, cxGridLevel,uDADataTable,
   cxClasses, cxGridCustomView, cxGridCustomTableView, cxGridTableView, FileCtrl,
   cxGridDBTableView, cxGrid, cxDBNavigator, cxMemo, dxGDIPlusClasses,
-  Vcl.ExtDlgs, cxDBEdit;
+  Vcl.ExtDlgs, cxDBEdit, uRODynamicRequest, uDAFields, uDADelta, uROComponent,
+  uDAScriptingProvider, uDAMemDataTable;
 
 type
   TfPR_WorkOrderAdd = class(TForm)
@@ -107,6 +108,40 @@ type
     Edit3: TEdit;
     ComboBox1: TComboBox;
     Button5: TButton;
+    Label7: TLabel;
+    TabSheet5: TTabSheet;
+    Panel18: TPanel;
+    Panel19: TPanel;
+    cxGrid4: TcxGrid;
+    cxGridDBTableView3: TcxGridDBTableView;
+    cxGridLevel3: TcxGridLevel;
+    tbl_st_product: TDAMemDataTable;
+    ds_st_product: TDADataSource;
+    cxGridDBTableView3RecID: TcxGridDBColumn;
+    cxGridDBTableView3productName: TcxGridDBColumn;
+    cxGridDBTableView3price: TcxGridDBColumn;
+    cxGridDBTableView3style: TcxGridDBColumn;
+    cxGridDBTableView3spec: TcxGridDBColumn;
+    cxGridDBTableView3color: TcxGridDBColumn;
+    cxGridDBTableView3unit: TcxGridDBColumn;
+    cxGridDBTableView3productType: TcxGridDBColumn;
+    Edit2: TEdit;
+    Label8: TLabel;
+    Button6: TButton;
+    Label10: TLabel;
+    Edit13: TEdit;
+    Button7: TButton;
+    cxGrid3DBTableView1: TcxGridDBTableView;
+    cxGrid3Level1: TcxGridLevel;
+    cxGrid3: TcxGrid;
+    cxGrid3DBTableView1RecID: TcxGridDBColumn;
+    cxGrid3DBTableView1needQty: TcxGridDBColumn;
+    cxGrid3DBTableView1isOwn: TcxGridDBColumn;
+    cxGrid3DBTableView1productName: TcxGridDBColumn;
+    cxGrid3DBTableView1price: TcxGridDBColumn;
+    cxGrid3DBTableView1color: TcxGridDBColumn;
+    tbl_pu_versionOrder: TDAMemDataTable;
+    ds_pu_versionOrder: TDADataSource;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ComboBox1Change(Sender: TObject);
@@ -120,9 +155,14 @@ type
     procedure Image5DblClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure cxGridDBTableView3CellDblClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
   private
     { Private declarations }
-    procedure getData(str : String);
+    procedure getData(str : String; showType : Integer);
     procedure loadData(versionOrderNum : String);
     procedure loadPic(part : String;title: String;body: String;pic : String);
     procedure initPic(part : String;title: String;body: String;pic : String);
@@ -156,22 +196,24 @@ picBodyStr : String;
 picStr : String;
 
 
-procedure TfPR_WorkOrderAdd.getData(str : String);
+procedure TfPR_WorkOrderAdd.getData(str : String; showType : Integer);
 var
 dataList : TStringList;
 begin
      dataList := TStringList.Create;
-     dupub.setSelectData(dataList,'versionOrderNum','%'+str+'%',dboLike);
-     duPub.getSelectData(duPub.tbl_pu_versionOrder,dataList,'pu_versionOrder',dboAnd);
+     if showType = 1 then
+          dupub.setSelectData(dataList,'versionOrderNum','%'+str+'%',dboLike);
+
+     duPub.getSelectData(self.tbl_pu_versionOrder,dataList,'pu_versionOrder',dboAnd);
 //     ComboBox1.Clear;
      ComboBox1.items.Text := '';
      ComboBox1.SelStart:=Length(ComboBox1.Text);
-     if duPub.tbl_pu_versionOrder.RecordCount > 0 then
+     if self.tbl_pu_versionOrder.RecordCount > 0 then
      begin
-          while not duPub.tbl_pu_versionOrder.eof do
+          while not self.tbl_pu_versionOrder.eof do
            begin
-                ComboBox1.Items.Add(duPub.tbl_pu_versionOrder.fieldByName('versionOrderNum').AsString);
-                duPub.tbl_pu_versionOrder.Next;
+                ComboBox1.Items.Add(self.tbl_pu_versionOrder.fieldByName('versionOrderNum').AsString);
+                self.tbl_pu_versionOrder.Next;
            end;
      end;
 end;
@@ -184,24 +226,25 @@ dataList : TStringList;
 begin
      dataList := TStringList.Create;
    dupub.setSelectData(dataList,'versionOrderNum',versionOrderNum,dboEqual);
-   duPub.getSelectData(duPub.tbl_pu_versionOrder,dataList,'pu_versionOrder',dboAnd);
+   duPub.getSelectData(self.tbl_pu_versionOrder,dataList,'pu_versionOrder',dboAnd);
    duPub.getSelectData(duPub.tbl_pu_versionOrderTitle,dataList,'pu_versionOrderTitle',dboAnd);
    duPub.getSelectData(duPub.tbl_pu_versionOrderMaterial,dataList,'pu_versionOrderMaterial',dboAnd);
    duPub.getSelectData(duPub.tbl_pu_versionOrderPic,dataList,'pu_versionOrderPic',dboAnd);
 
-   if duPub.tbl_pu_versionOrder.RecordCount < 1 then
+
+   if self.tbl_pu_versionOrder.RecordCount < 1 then
    begin
      clearData();
      exit;
    end;
 //   Edit1.Text := cxDBTextEdit1.Text;
-   Edit3.Text := duPub.tbl_pu_versionOrder.FieldByName('partnerNum').AsString;
-   cxDateEdit2.Text := duPub.tbl_pu_versionOrder.FieldByName('deliveryDate').AsString;
-   Edit4.Text := duPub.tbl_pu_versionOrder.FieldByName('titleName').AsString;
-   Edit17.Text := duPub.tbl_pu_versionOrder.FieldByName('titleCount').AsString;
-   Memo1.Text := duPub.tbl_pu_versionOrder.FieldByName('titleMemo').AsString;
-   Memo2.Text := duPub.tbl_pu_versionOrder.FieldByName('memo').AsString;
-   RichEdit1.Text := duPub.tbl_pu_versionOrder.FieldByName('packaging').AsString;
+   Edit3.Text := self.tbl_pu_versionOrder.FieldByName('partnerNum').AsString;
+   cxDateEdit2.Text := self.tbl_pu_versionOrder.FieldByName('deliveryDate').AsString;
+   Edit4.Text := self.tbl_pu_versionOrder.FieldByName('titleName').AsString;
+   Edit17.Text := self.tbl_pu_versionOrder.FieldByName('titleCount').AsString;
+   Memo1.Text := self.tbl_pu_versionOrder.FieldByName('titleMemo').AsString;
+   Memo2.Text := self.tbl_pu_versionOrder.FieldByName('memo').AsString;
+   RichEdit1.Text := self.tbl_pu_versionOrder.FieldByName('packaging').AsString;
 
    if duPub.tbl_pu_versionOrderPic.RecordCount > 0 then
    begin
@@ -217,6 +260,8 @@ begin
       end;
 
    end;
+
+
 
 end;
 
@@ -346,6 +391,10 @@ titleFourStr : String;
 nameStr : String;
 materialStr : String;
 ownStr : String;
+
+productIdStr : String;
+needQtyStr : String;
+isOwnStr : String;
 successResult : String;
 
 titleOne : String;
@@ -371,6 +420,10 @@ begin
       picTitleStr := '';
       picBodyStr := '';
       picStr := '';
+
+      productIdStr := '';
+      needQtyStr := '';
+      isOwnStr := '';
 
       workNum := Edit1.Text;
       partnerNum := Edit3.Text;
@@ -410,6 +463,8 @@ begin
            begin
                nameStr := nameStr + name + '|';
                materialStr := materialStr + material + '|';
+               if own = '' then
+                      own := 'Y';
                ownStr := ownStr + own + '|';
            end;
        end;
@@ -419,7 +474,21 @@ begin
        initPic('4',Edit11.Text,Edit12.Text,pic4);
        initPic('5',Memo3.Text,Memo4.Text,pic5);
 
-
+//       for I := 0 to cxGrid3DBTableView1.DataController.RowCount - 1 do
+//       begin
+//           productIdStr := productIdStr + vartostr(cxGrid3DBTableView1.DataController.Values[i,1]) + '|';
+//           needQtyStr := needQtyStr + vartostr(cxGrid3DBTableView1.DataController.Values[i,4]) + '|';
+//           isOwnStr := isOwnStr + vartostr(cxGrid3DBTableView1.DataController.Values[i,5]) + '|';
+//       end;
+       duPub.tbl_pu_workMaterial.First;
+       while not duPub.tbl_pu_workMaterial.Eof do
+       begin
+            productIdStr := productIdStr + duPub.tbl_pu_workMaterial.FieldByName('productId').AsString + '|';
+           needQtyStr := needQtyStr + duPub.tbl_pu_workMaterial.FieldByName('needQty').AsString + '|';
+           isOwnStr := isOwnStr + duPub.tbl_pu_workMaterial.FieldByName('isOwn').AsString + '|';
+           duPub.tbl_pu_workMaterial.Next;
+       end;
+       showmessage(productIdStr + '---' + needQtyStr + '---' + isOwnStr);
 
        with duPub.adoquery1 do
         begin
@@ -430,7 +499,8 @@ begin
                       + ':@auditUser,:@titleName,:@titleCount,:@titleMemo,:@memo,:@packaging,'
                       + ':@titleOneStr,:@titleTwoStr,:@titleThreeStr,:@titleFourStr,:@picPartStr,'
                       + ':@picTitleStr,:@picBodyStr,:@picStr,:@nameStr,'
-                      + ':@materialStr,:@ownStr,:@workNum,:@successResult output'
+                      + ':@materialStr,:@ownStr,:@workNum,:@productIdStr,:@needQtyStr,'
+                      + ':@isOwnStr,:@successResult output'
                       );//这就是调用存储过程
               parameters.Items[0].Value := versionOrderNum;
               parameters.Items[1].Value := partnerNum;
@@ -453,9 +523,12 @@ begin
               parameters.Items[18].Value := nameStr;
               parameters.Items[19].Value := materialStr;
               parameters.Items[20].Value := ownStr;
-                parameters.Items[21].Value := workNum;
+              parameters.Items[21].Value := workNum;
+              parameters.Items[22].Value := productIdStr;
+              parameters.Items[23].Value := needQtyStr;
+              parameters.Items[24].Value := isOwnStr;
               execsql;
-              successResult := parameters.Items[22].Value;
+              successResult := parameters.Items[25].Value;
 
          end;
 
@@ -486,13 +559,47 @@ begin
      loadData(versionOrderNum);
 end;
 
+procedure TfPR_WorkOrderAdd.Button6Click(Sender: TObject);
+var
+productName : String;
+dataList : TStringList;
+begin
+     productName := Edit2.Text;
+     dataList := TStringList.Create;
+     dupub.setSelectData(dataList,'productName','%'+productName+'%',dboLike);
+     duPub.getSelectData(self.tbl_st_product,dataList,'st_product',dboAnd);
+end;
+
+procedure TfPR_WorkOrderAdd.Button7Click(Sender: TObject);
+var
+I : Integer;
+qty : float;
+price : float;
+isOwn : String;
+count : float;
+begin
+      count := 0;
+   for I := 0 to cxGrid3DBTableView1.DataController.RowCount - 1 do
+       begin
+           price := strToFloat(vartostr(cxGrid3DBTableView1.DataController.Values[i,3]));
+           qty := strToFloat(vartostr(cxGrid3DBTableView1.DataController.Values[i,4]));
+           isOwn := vartostr(cxGrid3DBTableView1.DataController.Values[i,5]);
+           if isOwn = 'Y' then
+           begin
+                count := count + price * qty;
+           end;
+       end;
+
+       Edit13.Text := floatToStr(count);
+end;
+
 procedure TfPR_WorkOrderAdd.ComboBox1Change(Sender: TObject);
 var
 versionOrderNum : String;
 begin
      versionOrderNum := ComboBox1.Text;
      if selectType = 0 then
-        getData(versionOrderNum)
+        getData(versionOrderNum,1)
      else
         selectType := 0;
 end;
@@ -505,6 +612,31 @@ end;
 procedure TfPR_WorkOrderAdd.ComboBox1Select(Sender: TObject);
 begin
      selectType := 1;
+end;
+
+procedure TfPR_WorkOrderAdd.cxGridDBTableView3CellDblClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+  var
+  Row : Integer;
+  name : String;
+  color : String;
+  price : string;
+  productId : Integer;
+begin
+    Row := cxGridDBTableView3.DataController.FocusedRecordIndex;
+    name := cxGridDBTableView3.DataController.Values[Row,1];
+     color := cxGridDBTableView3.DataController.Values[Row,2];
+     price := cxGridDBTableView3.DataController.Values[Row,3];
+     productId := self.tbl_st_product.FieldByName('productId').AsInteger;
+     duPub.tbl_pu_workMaterial.Append;
+      duPub.tbl_pu_workMaterial.FieldByName('workNum').AsString := 'workNum';
+      duPub.tbl_pu_workMaterial.FieldByName('productId').AsInteger := productId;
+      duPub.tbl_pu_workMaterial.FieldByName('productName').AsString := name;
+      duPub.tbl_pu_workMaterial.FieldByName('color').AsString := color;
+      duPub.tbl_pu_workMaterial.FieldByName('needQty').AsString := '1';
+      duPub.tbl_pu_workMaterial.FieldByName('price').AsString := price;
+      duPub.tbl_pu_workMaterial.FieldByName('isOwn').AsString := 'Y';
 end;
 
 procedure TfPR_WorkOrderAdd.Image1DblClick(Sender: TObject);
@@ -541,16 +673,24 @@ procedure TfPR_WorkOrderAdd.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
 //   duPub.delNum(Edit1.Text);
+duPub.tbl_pu_versionOrderTitle.Close;
+duPub.tbl_pu_versionOrderMaterial.Close;
 end;
 
 procedure TfPR_WorkOrderAdd.FormCreate(Sender: TObject);
+var
+dataList : TStringList;
 begin
+     dataList := TStringList.Create;
+   dupub.setSelectData(dataList,'workNum','',dboEqual);
+   duPub.getSelectData(duPub.tbl_pu_workMaterial,dataList,'pu_workMaterial',dboAnd);
 //     duPub.tbl_pu_workDetailTitle.Close;
 //     duPub.tbl_pu_workDetailTitle.open;
 //     duPub.tbl_pu_workDetailMaterial.Close;
 //     duPub.tbl_pu_workDetailMaterial.open;
 //     duPUb.showInsertNum('puWorkGetNum','SHNG',Edit1);
 //        duPub.getProduct(ComboBox1,'材料');
+         getData('',0);
 selectType:=0;
 end;
 

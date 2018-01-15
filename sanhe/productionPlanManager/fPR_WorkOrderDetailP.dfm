@@ -1,7 +1,7 @@
-object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
+object fPR_WorkOrderDetail: TfPR_WorkOrderDetail
   Left = 0
   Top = 0
-  Caption = #26032#24314#29256#21333
+  Caption = #29983#20135#35746#21333
   ClientHeight = 512
   ClientWidth = 784
   Color = clBtnFace
@@ -12,11 +12,48 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
-  ShowHint = True
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 459
+    Width = 784
+    Height = 53
+    Align = alBottom
+    Color = clBtnHighlight
+    Padding.Left = 1
+    Padding.Top = 1
+    Padding.Right = 3
+    Padding.Bottom = 3
+    ParentBackground = False
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 2
+      Top = 2
+      Width = 778
+      Height = 47
+      Align = alClient
+      Color = clGradientInactiveCaption
+      ParentBackground = False
+      TabOrder = 1
+    end
+    object Button1: TButton
+      Left = 29
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = #30830#23450
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+  end
   object Panel2: TPanel
     Left = 0
     Top = 0
@@ -25,7 +62,7 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
     Align = alTop
     Color = clGradientInactiveCaption
     ParentBackground = False
-    TabOrder = 0
+    TabOrder = 1
     object Label1: TLabel
       Left = 29
       Top = 16
@@ -58,6 +95,19 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
       Width = 75
       Height = 16
       Caption = #20986#36135#26085#26399#65306
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 462
+      Top = 16
+      Width = 60
+      Height = 16
+      Caption = #29256#21333#21495#65306
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -106,10 +156,10 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
       Width = 116
     end
     object cxDBTextEdit1: TcxDBTextEdit
-      Left = 515
-      Top = 26
-      DataBinding.DataField = 'versionOrderNum'
-      DataBinding.DataSource = duPub.ds_pu_versionOrder
+      Left = 29
+      Top = 38
+      DataBinding.DataField = 'workNum'
+      DataBinding.DataSource = duPub.ds_pu_workDetailList
       Enabled = False
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
@@ -119,62 +169,64 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
       Style.Font.Style = []
       Style.IsFontAssigned = True
       TabOrder = 3
-      Visible = False
-      Width = 158
+      Width = 116
     end
-  end
-  object Panel1: TPanel
-    Left = 0
-    Top = 459
-    Width = 784
-    Height = 53
-    Align = alBottom
-    Color = clBtnHighlight
-    Padding.Left = 1
-    Padding.Top = 1
-    Padding.Right = 3
-    Padding.Bottom = 3
-    ParentBackground = False
-    TabOrder = 1
-    object Panel3: TPanel
-      Left = 2
-      Top = 2
-      Width = 778
-      Height = 47
-      Align = alClient
-      Color = clGradientInactiveCaption
-      ParentBackground = False
-      TabOrder = 2
+    object ComboBox1: TComboBox
+      Left = 462
+      Top = 38
+      Width = 116
+      Height = 21
+      AutoDropDown = True
+      Enabled = False
+      TabOrder = 4
     end
-    object Button1: TButton
-      Left = 29
-      Top = 16
-      Width = 75
-      Height = 25
-      Caption = #30830#23450
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
+    object cxDBTextEdit2: TcxDBTextEdit
+      Left = 173
+      Top = 38
+      DataBinding.DataField = 'partnerNum'
+      DataBinding.DataSource = duPub.ds_pu_workDetailList
+      Enabled = False
       ParentFont = False
-      TabOrder = 0
-      OnClick = Button1Click
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -13
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 5
+      Width = 116
     end
-    object Button2: TButton
-      Left = 133
-      Top = 16
-      Width = 75
-      Height = 25
-      Caption = #21462#28040
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
+    object cxDBTextEdit3: TcxDBTextEdit
+      Left = 317
+      Top = 38
+      DataBinding.DataField = 'deliveryDate'
+      DataBinding.DataSource = duPub.ds_pu_workDetailList
+      Enabled = False
       ParentFont = False
-      TabOrder = 1
-      OnClick = Button2Click
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -13
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 6
+      Width = 116
+    end
+    object cxDBTextEdit4: TcxDBTextEdit
+      Left = 462
+      Top = 38
+      DataBinding.DataField = 'versionOrderNum'
+      DataBinding.DataSource = duPub.ds_pu_workDetailList
+      Enabled = False
+      ParentFont = False
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -13
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 7
+      Width = 116
     end
   end
   object Panel4: TPanel
@@ -191,7 +243,7 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
       Top = 1
       Width = 782
       Height = 381
-      ActivePage = TabSheet3
+      ActivePage = TabSheet5
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet
@@ -257,7 +309,7 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
               Font.Style = []
               ParentFont = False
             end
-            object Label6: TLabel
+            object Label7: TLabel
               Left = 263
               Top = 13
               Width = 15
@@ -303,6 +355,55 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
               Height = 273
               TabOrder = 2
             end
+            object cxDBTextEdit5: TcxDBTextEdit
+              Left = 49
+              Top = 10
+              DataBinding.DataField = 'titleName'
+              DataBinding.DataSource = duPub.ds_pu_workDetailList
+              Enabled = False
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -13
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = []
+              Style.IsFontAssigned = True
+              TabOrder = 3
+              Width = 96
+            end
+            object cxDBTextEdit6: TcxDBTextEdit
+              Left = 209
+              Top = 10
+              DataBinding.DataField = 'titleCount'
+              DataBinding.DataSource = duPub.ds_pu_workDetailList
+              Enabled = False
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -13
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = []
+              Style.IsFontAssigned = True
+              TabOrder = 4
+              Width = 48
+            end
+            object cxDBTextEdit7: TcxDBTextEdit
+              Left = 46
+              Top = 40
+              DataBinding.DataField = 'titleMemo'
+              DataBinding.DataSource = duPub.ds_pu_workDetailList
+              Enabled = False
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -13
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = []
+              Style.IsFontAssigned = True
+              TabOrder = 5
+              Visible = False
+              Width = 259
+            end
           end
           object Panel17: TPanel
             Left = 1
@@ -317,57 +418,16 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
             Padding.Bottom = 2
             ParentBackground = False
             TabOrder = 1
-            object cxDBNavigator1: TcxDBNavigator
-              Left = 10
-              Top = 12
-              Width = 86
-              Height = 25
-              Buttons.CustomButtons = <>
-              Buttons.First.Visible = False
-              Buttons.PriorPage.Enabled = False
-              Buttons.PriorPage.Visible = False
-              Buttons.Prior.Enabled = False
-              Buttons.Prior.Visible = False
-              Buttons.Next.Enabled = False
-              Buttons.Next.Visible = False
-              Buttons.NextPage.Enabled = False
-              Buttons.NextPage.Visible = False
-              Buttons.Last.Enabled = False
-              Buttons.Last.Visible = False
-              Buttons.Insert.Enabled = False
-              Buttons.Insert.Visible = False
-              Buttons.Append.Hint = #28155#21152
-              Buttons.Append.Visible = True
-              Buttons.Delete.Hint = #21024#38500
-              Buttons.Edit.Hint = #20462#25913
-              Buttons.Edit.Visible = False
-              Buttons.Post.Hint = #20445#23384
-              Buttons.Post.Visible = False
-              Buttons.Cancel.Hint = #21462#28040
-              Buttons.Cancel.Visible = False
-              Buttons.Refresh.Hint = #21047#26032
-              Buttons.Refresh.Visible = False
-              Buttons.SaveBookmark.Enabled = False
-              Buttons.SaveBookmark.Visible = False
-              Buttons.GotoBookmark.Enabled = False
-              Buttons.GotoBookmark.Visible = False
-              Buttons.Filter.Enabled = False
-              Buttons.Filter.Visible = False
-              DataSource = duPub.ds_pu_versionOrderTitle
-              ParentShowHint = False
-              ShowHint = True
-              TabOrder = 0
-            end
             object cxGrid1: TcxGrid
               Left = 3
               Top = 43
               Width = 444
               Height = 305
               Align = alBottom
-              TabOrder = 1
+              TabOrder = 0
               object cxGrid1DBTableView1: TcxGridDBTableView
                 Navigator.Buttons.CustomButtons = <>
-                DataController.DataSource = duPub.ds_pu_versionOrderTitle
+                DataController.DataSource = duPub.ds_pu_workDetailTitle
                 DataController.Summary.DefaultGroupSummaryItems = <>
                 DataController.Summary.FooterSummaryItems = <>
                 DataController.Summary.SummaryGroups = <>
@@ -436,7 +496,6 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
               Hint = #21452#20987#36873#25321#22270#29255
               Proportional = True
               Stretch = True
-              OnDblClick = Image3DblClick
             end
             object Image1: TImage
               Left = 186
@@ -446,7 +505,6 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
               Hint = #21452#20987#36873#25321#22270#29255
               Proportional = True
               Stretch = True
-              OnDblClick = Image1DblClick
             end
             object Edit9: TEdit
               Left = 3
@@ -522,7 +580,6 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
               Hint = #21452#20987#36873#25321#22270#29255
               Proportional = True
               Stretch = True
-              OnDblClick = Image4DblClick
             end
             object Image2: TImage
               Left = 3
@@ -534,7 +591,6 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
               Proportional = True
               ShowHint = True
               Stretch = True
-              OnDblClick = Image2DblClick
             end
             object Edit5: TEdit
               Left = 3
@@ -639,7 +695,6 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
               Align = alClient
               Proportional = True
               Stretch = True
-              OnDblClick = Image5DblClick
               ExplicitLeft = 90
               ExplicitTop = 121
               ExplicitWidth = 161
@@ -682,58 +737,16 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
             Padding.Bottom = 3
             ParentBackground = False
             TabOrder = 0
-            object cxDBNavigator2: TcxDBNavigator
-              Left = 10
-              Top = 12
-              Width = 86
-              Height = 25
-              Buttons.OnButtonClick = cxDBNavigator2ButtonsButtonClick
-              Buttons.CustomButtons = <>
-              Buttons.First.Visible = False
-              Buttons.PriorPage.Enabled = False
-              Buttons.PriorPage.Visible = False
-              Buttons.Prior.Enabled = False
-              Buttons.Prior.Visible = False
-              Buttons.Next.Enabled = False
-              Buttons.Next.Visible = False
-              Buttons.NextPage.Enabled = False
-              Buttons.NextPage.Visible = False
-              Buttons.Last.Enabled = False
-              Buttons.Last.Visible = False
-              Buttons.Insert.Enabled = False
-              Buttons.Insert.Visible = False
-              Buttons.Append.Hint = #28155#21152
-              Buttons.Append.Visible = True
-              Buttons.Delete.Hint = #21024#38500
-              Buttons.Edit.Hint = #20462#25913
-              Buttons.Edit.Visible = False
-              Buttons.Post.Hint = #20445#23384
-              Buttons.Post.Visible = False
-              Buttons.Cancel.Hint = #21462#28040
-              Buttons.Cancel.Visible = False
-              Buttons.Refresh.Hint = #21047#26032
-              Buttons.Refresh.Visible = False
-              Buttons.SaveBookmark.Enabled = False
-              Buttons.SaveBookmark.Visible = False
-              Buttons.GotoBookmark.Enabled = False
-              Buttons.GotoBookmark.Visible = False
-              Buttons.Filter.Enabled = False
-              Buttons.Filter.Visible = False
-              DataSource = duPub.ds_pu_versionOrderMaterial
-              ParentShowHint = False
-              ShowHint = True
-              TabOrder = 0
-            end
             object cxGrid2: TcxGrid
               Left = 2
               Top = 43
               Width = 370
               Height = 304
               Align = alBottom
-              TabOrder = 1
+              TabOrder = 0
               object cxGridDBTableView1: TcxGridDBTableView
                 Navigator.Buttons.CustomButtons = <>
-                DataController.DataSource = duPub.ds_pu_versionOrderMaterial
+                DataController.DataSource = duPub.ds_pu_workDetailMaterial
                 DataController.Summary.DefaultGroupSummaryItems = <>
                 DataController.Summary.FooterSummaryItems = <>
                 DataController.Summary.SummaryGroups = <>
@@ -813,7 +826,6 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
               Font.Style = []
               ParentFont = False
               TabOrder = 1
-              OnClick = Button3Click
             end
             object Button4: TButton
               Left = 142
@@ -828,7 +840,23 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
               Font.Style = []
               ParentFont = False
               TabOrder = 2
-              OnClick = Button4Click
+            end
+            object cxDBTextEdit9: TcxDBTextEdit
+              Left = 94
+              Top = 152
+              DataBinding.DataField = 'packaging'
+              DataBinding.DataSource = duPub.ds_pu_workDetailList
+              Enabled = False
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -13
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = []
+              Style.IsFontAssigned = True
+              TabOrder = 3
+              Visible = False
+              Width = 259
             end
           end
         end
@@ -857,12 +885,198 @@ object fPR_VersionOrderAdd: TfPR_VersionOrderAdd
             Align = alClient
             TabOrder = 0
           end
+          object cxDBTextEdit8: TcxDBTextEdit
+            Left = 86
+            Top = 144
+            DataBinding.DataField = 'memo'
+            DataBinding.DataSource = duPub.ds_pu_workDetailList
+            Enabled = False
+            ParentFont = False
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -13
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = []
+            Style.IsFontAssigned = True
+            TabOrder = 1
+            Visible = False
+            Width = 259
+          end
+        end
+      end
+      object TabSheet5: TTabSheet
+        Caption = #29983#20135#29992#26009
+        ImageIndex = 4
+        object Panel18: TPanel
+          Left = 0
+          Top = 0
+          Width = 774
+          Height = 48
+          Align = alClient
+          Color = clGradientInactiveCaption
+          ParentBackground = False
+          TabOrder = 1
+          object Label10: TLabel
+            Left = 8
+            Top = 18
+            Width = 75
+            Height = 16
+            Caption = #26448#26009#25104#26412#65306
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+        end
+        object cxGrid3: TcxGrid
+          Left = 0
+          Top = 48
+          Width = 774
+          Height = 305
+          Align = alBottom
+          TabOrder = 0
+          object cxGrid3DBTableView1: TcxGridDBTableView
+            Navigator.Buttons.CustomButtons = <>
+            DataController.DataSource = ds_pu_workMaterial
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            OptionsView.ColumnAutoWidth = True
+            OptionsView.GroupByBox = False
+            object cxGrid3DBTableView1RecID: TcxGridDBColumn
+              DataBinding.FieldName = 'RecID'
+              Visible = False
+            end
+            object cxGrid3DBTableView1productName: TcxGridDBColumn
+              DataBinding.FieldName = 'productName'
+            end
+            object cxGrid3DBTableView1color: TcxGridDBColumn
+              DataBinding.FieldName = 'color'
+            end
+            object cxGrid3DBTableView1price: TcxGridDBColumn
+              DataBinding.FieldName = 'price'
+            end
+            object cxGrid3DBTableView1needQty: TcxGridDBColumn
+              DataBinding.FieldName = 'needQty'
+            end
+            object cxGrid3DBTableView1receiveQty: TcxGridDBColumn
+              DataBinding.FieldName = 'receiveQty'
+            end
+            object cxGrid3DBTableView1isOwn: TcxGridDBColumn
+              DataBinding.FieldName = 'isOwn'
+            end
+          end
+          object cxGrid3Level1: TcxGridLevel
+            GridView = cxGrid3DBTableView1
+          end
         end
       end
     end
   end
   object OpenPictureDialog1: TOpenPictureDialog
-    Left = 232
-    Top = 160
+    Left = 272
+    Top = 128
+  end
+  object tbl_pu_workMaterial: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'workNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'productId'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'needQty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'receiveQty'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+      end
+      item
+        Name = 'isOwn'
+        DataType = datWideString
+        Size = 10
+      end
+      item
+        Name = 'productId_1'
+        DataType = datAutoInc
+      end
+      item
+        Name = 'productCode'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'productName'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'price'
+        DataType = datDecimal
+        DecimalPrecision = 19
+        DecimalScale = 4
+      end
+      item
+        Name = 'kind'
+        DataType = datInteger
+      end
+      item
+        Name = 'style'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'spec'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'color'
+        DataType = datWideString
+        Size = 10
+      end
+      item
+        Name = 'unit'
+        DataType = datWideString
+        Size = 10
+      end
+      item
+        Name = 'productType'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'tempNum'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'pu_workMaterial'
+    Params = <>
+    RemoteDataAdapter = duPub.RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 168
+    Top = 484
+  end
+  object ds_pu_workMaterial: TDADataSource
+    DataSet = tbl_pu_workMaterial.Dataset
+    DataTable = tbl_pu_workMaterial
+    Left = 176
+    Top = 484
   end
 end

@@ -104,6 +104,7 @@ type
     Label4: TLabel;
     cxDateEdit2: TcxDateEdit;
     cxDBTextEdit1: TcxDBTextEdit;
+    Label6: TLabel;
     procedure Image2DblClick(Sender: TObject);
     procedure Image4DblClick(Sender: TObject);
     procedure Image3DblClick(Sender: TObject);
@@ -115,6 +116,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure cxDBNavigator2ButtonsButtonClick(Sender: TObject;
+      AButtonIndex: Integer; var ADone: Boolean);
 
   private
     { Private declarations }
@@ -359,6 +362,8 @@ begin
                begin
                    nameStr := nameStr + name + '|';
                    materialStr := materialStr + material + '|';
+                   if own = '' then
+                      own := 'Y';
                    ownStr := ownStr + own + '|';
                end;
            end;
@@ -448,6 +453,24 @@ procedure TfPR_VersionOrderAdd.Button4Click(Sender: TObject);
 begin
      RichEdit1.Lines.Text := '';
      RichEdit1.SetFocus;
+end;
+
+procedure TfPR_VersionOrderAdd.cxDBNavigator2ButtonsButtonClick(Sender: TObject;
+  AButtonIndex: Integer; var ADone: Boolean);
+begin
+    case  AButtonindex of
+        NBDI_APPEND:
+         begin
+             duPub.tbl_pu_versionOrderMaterial.Append;
+             duPub.tbl_pu_versionOrderMaterial.FieldByName('isOwn').AsString := 'Y';
+         end;
+         NBDI_DELETE:
+         begin
+
+         end;
+    end;
+
+
 end;
 
 procedure TfPR_VersionOrderAdd.FormClose(Sender: TObject;

@@ -110,14 +110,6 @@ type
     ds_pu_materialDtPr: TDADataSource;
     tbl_pr_order: TDAMemDataTable;
     ds_pr_order: TDADataSource;
-    tbl_pr_partsClassified: TDAMemDataTable;
-    ds_pr_partsClassified: TDADataSource;
-    tbl_pr_partsList: TDAMemDataTable;
-    ds_pr_partsList: TDADataSource;
-    tbl_pr_partsMaterials: TDAMemDataTable;
-    ds_pr_partsMaterials: TDADataSource;
-    tbl_pr_partsPic: TDAMemDataTable;
-    ds_pr_partsPic: TDADataSource;
     tbl_pu_workDetailList: TDAMemDataTable;
     ds_pu_workDetailList: TDADataSource;
     tbl_pu_workDetailMaterial: TDAMemDataTable;
@@ -134,6 +126,8 @@ type
     ds_pu_versionOrderPic: TDADataSource;
     tbl_pu_versionOrderTitle: TDAMemDataTable;
     ds_pu_versionOrderTitle: TDADataSource;
+    tbl_pu_workMaterial: TDAMemDataTable;
+    ds_pu_workMaterial: TDADataSource;
 
     procedure ClientChannel_OnLoginNeeded(Sender: TROTransportChannel; anException: Exception; var aRetry: Boolean);
     procedure DataModuleCreate(Sender: TObject);

@@ -295,13 +295,12 @@ object DataService: TDataService
           item
             Name = 'productName'
             DataType = datWideString
-            Size = 20
+            Size = 50
             Required = True
           end
           item
             Name = 'price'
-            DataType = datWideString
-            Size = 20
+            DataType = datDecimal
             DecimalPrecision = 18
             DecimalScale = 4
             Required = True
@@ -4398,51 +4397,163 @@ object DataService: TDataService
             Connection = 'connection to sanhe'
             ConnectionType = 'MSSQL'
             Default = True
-            TargetTable = 'pu_versionOrderMaterial'
-            StatementType = stAutoSQL
+            TargetTable = 'pu_workMaterial'
+            SQL = 
+              'select * from pu_workMaterial left join st_product on pu_workMat' +
+              'erial.productId=st_product.productId'#10'WHERE '#10#9'{WHERE} '
+            StatementType = stSQL
             ColumnMappings = <
               item
-                DatasetField = 'versionOrderNum'
-                TableField = 'versionOrderNum'
+                DatasetField = 'workNum'
+                TableField = 'workNum'
               end
               item
-                DatasetField = 'name'
-                TableField = 'name'
+                DatasetField = 'productId'
+                TableField = 'productId'
               end
               item
-                DatasetField = 'material'
-                TableField = 'material'
+                DatasetField = 'needQty'
+                TableField = 'needQty'
+              end
+              item
+                DatasetField = 'receiveQty'
+                TableField = 'receiveQty'
               end
               item
                 DatasetField = 'isOwn'
                 TableField = 'isOwn'
+              end
+              item
+                DatasetField = 'productId_1'
+                SQLOrigin = 'productId_1'
+              end
+              item
+                DatasetField = 'productCode'
+                SQLOrigin = 'productCode'
+              end
+              item
+                DatasetField = 'productName'
+                SQLOrigin = 'productName'
+              end
+              item
+                DatasetField = 'price'
+                SQLOrigin = 'price'
+              end
+              item
+                DatasetField = 'kind'
+                SQLOrigin = 'kind'
+              end
+              item
+                DatasetField = 'style'
+                SQLOrigin = 'style'
+              end
+              item
+                DatasetField = 'spec'
+                SQLOrigin = 'spec'
+              end
+              item
+                DatasetField = 'color'
+                SQLOrigin = 'color'
+              end
+              item
+                DatasetField = 'unit'
+                SQLOrigin = 'unit'
+              end
+              item
+                DatasetField = 'productType'
+                SQLOrigin = 'productType'
+              end
+              item
+                DatasetField = 'tempNum'
+                SQLOrigin = 'tempNum'
               end>
           end>
-        Name = 'pu_versionOrderMaterial'
+        Name = 'pu_workMaterial'
         BusinessRulesClient.CompileOnServer = False
         BusinessRulesClient.RunOnClientAndServer = False
         Fields = <
           item
-            Name = 'versionOrderNum'
-            DataType = datWideString
-            Size = 50
-          end
-          item
-            Name = 'name'
-            DataType = datWideString
-            Size = 20
-            Required = True
-          end
-          item
-            Name = 'material'
+            Name = 'workNum'
             DataType = datWideString
             Size = 50
             Required = True
+          end
+          item
+            Name = 'productId'
+            DataType = datInteger
+            Required = True
+          end
+          item
+            Name = 'needQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
+            Required = True
+          end
+          item
+            Name = 'receiveQty'
+            DataType = datDecimal
+            DecimalPrecision = 18
+            DecimalScale = 4
           end
           item
             Name = 'isOwn'
             DataType = datWideString
             Size = 10
+          end
+          item
+            Name = 'productId_1'
+            DataType = datAutoInc
+          end
+          item
+            Name = 'productCode'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'productName'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'price'
+            DataType = datDecimal
+            DecimalPrecision = 19
+            DecimalScale = 4
+          end
+          item
+            Name = 'kind'
+            DataType = datInteger
+          end
+          item
+            Name = 'style'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'spec'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'color'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'unit'
+            DataType = datWideString
+            Size = 10
+          end
+          item
+            Name = 'productType'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'tempNum'
+            DataType = datWideString
+            Size = 50
           end>
       end
       item
@@ -4485,13 +4596,63 @@ object DataService: TDataService
             Name = 'name'
             DataType = datWideString
             Size = 20
-            Required = True
           end
           item
             Name = 'material'
             DataType = datWideString
             Size = 50
-            Required = True
+          end
+          item
+            Name = 'isOwn'
+            DataType = datWideString
+            Size = 10
+          end>
+      end
+      item
+        Params = <>
+        Statements = <
+          item
+            Connection = 'connection to sanhe'
+            ConnectionType = 'MSSQL'
+            Default = True
+            TargetTable = 'pu_versionOrderMaterial'
+            StatementType = stAutoSQL
+            ColumnMappings = <
+              item
+                DatasetField = 'versionOrderNum'
+                TableField = 'versionOrderNum'
+              end
+              item
+                DatasetField = 'name'
+                TableField = 'name'
+              end
+              item
+                DatasetField = 'material'
+                TableField = 'material'
+              end
+              item
+                DatasetField = 'isOwn'
+                TableField = 'isOwn'
+              end>
+          end>
+        Name = 'pu_versionOrderMaterial'
+        BusinessRulesClient.CompileOnServer = False
+        BusinessRulesClient.RunOnClientAndServer = False
+        Fields = <
+          item
+            Name = 'versionOrderNum'
+            DataType = datWideString
+            Size = 50
+          end
+          item
+            Name = 'name'
+            DataType = datWideString
+            Size = 20
+          end
+          item
+            Name = 'material'
+            DataType = datWideString
+            Size = 50
           end
           item
             Name = 'isOwn'

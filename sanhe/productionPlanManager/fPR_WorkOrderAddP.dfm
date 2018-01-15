@@ -223,7 +223,7 @@ object fPR_WorkOrderAdd: TfPR_WorkOrderAdd
       Top = 1
       Width = 782
       Height = 381
-      ActivePage = TabSheet2
+      ActivePage = TabSheet5
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet
@@ -265,7 +265,7 @@ object fPR_WorkOrderAdd: TfPR_WorkOrderAdd
             end
             object Label5: TLabel
               Left = 6
-              Top = 100
+              Top = 43
               Width = 45
               Height = 16
               Caption = #22791#27880#65306
@@ -277,8 +277,8 @@ object fPR_WorkOrderAdd: TfPR_WorkOrderAdd
               ParentFont = False
             end
             object Label34: TLabel
-              Left = 6
-              Top = 56
+              Left = 166
+              Top = 13
               Width = 45
               Height = 16
               Caption = #25968#37327#65306
@@ -289,10 +289,23 @@ object fPR_WorkOrderAdd: TfPR_WorkOrderAdd
               Font.Style = []
               ParentFont = False
             end
+            object Label7: TLabel
+              Left = 263
+              Top = 13
+              Width = 15
+              Height = 16
+              Caption = #39030
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+            end
             object Edit4: TEdit
               Left = 48
               Top = 10
-              Width = 257
+              Width = 97
               Height = 24
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
@@ -303,9 +316,9 @@ object fPR_WorkOrderAdd: TfPR_WorkOrderAdd
               TabOrder = 0
             end
             object Edit17: TEdit
-              Left = 48
-              Top = 53
-              Width = 257
+              Left = 208
+              Top = 10
+              Width = 49
               Height = 24
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
@@ -317,9 +330,9 @@ object fPR_WorkOrderAdd: TfPR_WorkOrderAdd
             end
             object Memo1: TMemo
               Left = 48
-              Top = 99
+              Top = 40
               Width = 257
-              Height = 214
+              Height = 273
               TabOrder = 2
             end
           end
@@ -875,10 +888,352 @@ object fPR_WorkOrderAdd: TfPR_WorkOrderAdd
           end
         end
       end
+      object TabSheet5: TTabSheet
+        Caption = #29983#20135#29992#26009
+        ImageIndex = 4
+        object Panel18: TPanel
+          Left = 0
+          Top = 0
+          Width = 376
+          Height = 353
+          Align = alLeft
+          Color = clGradientInactiveCaption
+          Padding.Left = 1
+          Padding.Top = 1
+          Padding.Right = 3
+          Padding.Bottom = 3
+          ParentBackground = False
+          TabOrder = 0
+          object Label10: TLabel
+            Left = 8
+            Top = 18
+            Width = 75
+            Height = 16
+            Caption = #26448#26009#25104#26412#65306
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Edit13: TEdit
+            Left = 87
+            Top = 15
+            Width = 116
+            Height = 24
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+          end
+          object Button7: TButton
+            Left = 216
+            Top = 14
+            Width = 41
+            Height = 25
+            Caption = #35745#31639
+            TabOrder = 1
+            OnClick = Button7Click
+          end
+          object cxGrid3: TcxGrid
+            Left = 2
+            Top = 45
+            Width = 370
+            Height = 304
+            Align = alBottom
+            TabOrder = 2
+            object cxGrid3DBTableView1: TcxGridDBTableView
+              Navigator.Buttons.CustomButtons = <>
+              DataController.DataSource = duPub.ds_pu_workMaterial
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsView.ColumnAutoWidth = True
+              OptionsView.GroupByBox = False
+              object cxGrid3DBTableView1RecID: TcxGridDBColumn
+                DataBinding.FieldName = 'RecID'
+                Visible = False
+              end
+              object cxGrid3DBTableView1productName: TcxGridDBColumn
+                DataBinding.FieldName = 'productName'
+              end
+              object cxGrid3DBTableView1color: TcxGridDBColumn
+                DataBinding.FieldName = 'color'
+              end
+              object cxGrid3DBTableView1price: TcxGridDBColumn
+                DataBinding.FieldName = 'price'
+              end
+              object cxGrid3DBTableView1needQty: TcxGridDBColumn
+                DataBinding.FieldName = 'needQty'
+              end
+              object cxGrid3DBTableView1isOwn: TcxGridDBColumn
+                DataBinding.FieldName = 'isOwn'
+              end
+            end
+            object cxGrid3Level1: TcxGridLevel
+              GridView = cxGrid3DBTableView1
+            end
+          end
+        end
+        object Panel19: TPanel
+          Left = 376
+          Top = 0
+          Width = 401
+          Height = 353
+          Align = alLeft
+          Color = clGradientInactiveCaption
+          Padding.Left = 1
+          Padding.Top = 1
+          Padding.Right = 3
+          Padding.Bottom = 3
+          ParentBackground = False
+          TabOrder = 1
+          object Label8: TLabel
+            Left = 6
+            Top = 15
+            Width = 75
+            Height = 16
+            Caption = #26448#26009#21517#31216#65306
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+          object cxGrid4: TcxGrid
+            Left = 2
+            Top = 45
+            Width = 395
+            Height = 304
+            Align = alBottom
+            TabOrder = 0
+            object cxGridDBTableView3: TcxGridDBTableView
+              Navigator.Buttons.CustomButtons = <>
+              OnCellDblClick = cxGridDBTableView3CellDblClick
+              DataController.DataSource = ds_st_product
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsSelection.CellSelect = False
+              OptionsView.CellAutoHeight = True
+              OptionsView.GroupByBox = False
+              object cxGridDBTableView3RecID: TcxGridDBColumn
+                DataBinding.FieldName = 'RecID'
+                Visible = False
+              end
+              object cxGridDBTableView3productName: TcxGridDBColumn
+                DataBinding.FieldName = 'productName'
+              end
+              object cxGridDBTableView3color: TcxGridDBColumn
+                DataBinding.FieldName = 'color'
+              end
+              object cxGridDBTableView3price: TcxGridDBColumn
+                DataBinding.FieldName = 'price'
+                Width = 95
+              end
+              object cxGridDBTableView3style: TcxGridDBColumn
+                DataBinding.FieldName = 'style'
+              end
+              object cxGridDBTableView3spec: TcxGridDBColumn
+                DataBinding.FieldName = 'spec'
+              end
+              object cxGridDBTableView3unit: TcxGridDBColumn
+                DataBinding.FieldName = 'unit'
+              end
+              object cxGridDBTableView3productType: TcxGridDBColumn
+                DataBinding.FieldName = 'productType'
+              end
+            end
+            object cxGridLevel3: TcxGridLevel
+              GridView = cxGridDBTableView3
+            end
+          end
+          object Edit2: TEdit
+            Left = 85
+            Top = 12
+            Width = 116
+            Height = 24
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+          end
+          object Button6: TButton
+            Left = 216
+            Top = 12
+            Width = 41
+            Height = 25
+            Caption = #26597#25214
+            TabOrder = 2
+            OnClick = Button6Click
+          end
+        end
+      end
     end
   end
   object OpenPictureDialog1: TOpenPictureDialog
     Left = 272
     Top = 128
+  end
+  object tbl_st_product: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'productId'
+        DataType = datAutoInc
+        GeneratorName = 'st_product'
+        Required = True
+        InPrimaryKey = True
+      end
+      item
+        Name = 'productCode'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'productName'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'price'
+        DataType = datDecimal
+        DecimalPrecision = 18
+        DecimalScale = 4
+        Required = True
+      end
+      item
+        Name = 'kind'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'style'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'spec'
+        DataType = datWideString
+        Size = 20
+      end
+      item
+        Name = 'color'
+        DataType = datWideString
+        Size = 10
+      end
+      item
+        Name = 'unit'
+        DataType = datWideString
+        Size = 10
+      end
+      item
+        Name = 'productType'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'tempNum'
+        DataType = datWideString
+        Size = 50
+      end>
+    LogicalName = 'st_product'
+    Params = <>
+    RemoteDataAdapter = duPub.RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 408
+    Top = 376
+  end
+  object ds_st_product: TDADataSource
+    DataSet = tbl_st_product.Dataset
+    DataTable = tbl_st_product
+    Left = 464
+    Top = 368
+  end
+  object tbl_pu_versionOrder: TDAMemDataTable
+    Fields = <
+      item
+        Name = 'versionOrderNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'partnerNum'
+        DataType = datWideString
+        Size = 50
+        Required = True
+      end
+      item
+        Name = 'recordDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'deliveryDate'
+        DataType = datDateTime
+        Required = True
+      end
+      item
+        Name = 'recordUser'
+        DataType = datInteger
+        Required = True
+      end
+      item
+        Name = 'auditUser'
+        DataType = datInteger
+      end
+      item
+        Name = 'memo'
+        DataType = datWideString
+        Size = 500
+      end
+      item
+        Name = 'titleName'
+        DataType = datWideString
+        Size = 20
+        Required = True
+      end
+      item
+        Name = 'titleCount'
+        DataType = datWideString
+        Size = 50
+      end
+      item
+        Name = 'titleMemo'
+        DataType = datWideString
+        Size = 100
+      end
+      item
+        Name = 'packaging'
+        DataType = datWideString
+        Size = 1000
+      end>
+    LogicalName = 'pu_versionOrder'
+    Params = <>
+    RemoteDataAdapter = duPub.RemoteDataAdapter
+    RemoteUpdatesOptions = []
+    StreamingOptions = [soDisableEventsWhileStreaming, soDisableFiltering]
+    IndexDefs = <>
+    Left = 408
+    Top = 484
+  end
+  object ds_pu_versionOrder: TDADataSource
+    DataSet = tbl_pu_versionOrder.Dataset
+    DataTable = tbl_pu_versionOrder
+    Left = 416
+    Top = 484
   end
 end
